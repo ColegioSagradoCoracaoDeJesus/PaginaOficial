@@ -51,15 +51,15 @@ export const Header: React.FC = () => {
           <div className="flex items-center gap-4 flex-wrap justify-center sm:justify-start">
             <span className="flex items-center gap-1.5 font-medium">
               <Phone className="w-3.5 h-3.5 text-amber-400" />
-              <a href="tel:4133337000" className="hover:underline">(41) 3333-7000</a>
+              <a href="tel:5332325531" className="hover:underline">(53) 3232-5531</a>
             </span>
             <span className="hidden md:inline-flex items-center gap-1.5 font-medium">
               <Clock className="w-3.5 h-3.5 text-amber-400" />
-              <span>Atendimento: 07h30 às 18h30</span>
+              <span>Atendimento: 07h30 às 17h30</span>
             </span>
             <span className="flex items-center gap-1.5 font-medium text-emerald-300">
               <MessageSquare className="w-3.5 h-3.5" />
-              <a href="https://wa.me/5541999997000" target="_blank" rel="noreferrer" className="hover:underline">
+              <a href="https://wa.me/55533232-5531" target="_blank" rel="noreferrer" className="hover:underline">
                 WhatsApp Secretaria
               </a>
             </span>
@@ -80,12 +80,16 @@ export const Header: React.FC = () => {
       <div className={`max-w-[1280px] mx-auto px-4 py-3 flex items-center justify-between transition-all ${isScrolled ? 'py-2.5' : 'py-4'}`}>
         {/* Brand Logo */}
         <Link href="/" className="flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-amber-500 rounded-md p-1">
-          <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-lg bg-gradient-to-br from-[#1E3A5F] to-[#152A47] text-white flex items-center justify-center font-display text-xl font-bold shadow-md border-2 border-[#B8860B] group-hover:scale-105 transition-transform">
-            SCJ
+          <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-lg bg-white overflow-hidden flex items-center justify-center shadow-md border-2 border-[#B8860B] group-hover:scale-105 transition-transform p-0.5">
+            <img
+              src="/logotipo.png"
+              alt="Logotipo Colégio Sagrado Coração de Jesus"
+              className="w-full h-full object-contain"
+            />
           </div>
           <div className="flex flex-col">
             <span className="font-display font-bold text-slate-900 text-base sm:text-lg leading-tight tracking-tight group-hover:text-[#1E3A5F] transition-colors">
-              Colégio Sagrado Coração
+              Colégio Sagrado Coração de Jesus
             </span>
             <div className="flex items-center gap-1.5">
               <span className="text-xs font-semibold text-[#5C7A99] tracking-wider uppercase">de Jesus</span>
@@ -178,7 +182,7 @@ export const Header: React.FC = () => {
                 <Calendar className="w-4 h-4" />
                 <span>Agende uma Visita Guiada</span>
               </Botao>
-              <Botao href="https://wa.me/5541999997000" external variant="outline" fullWidth size="md">
+              <Botao href="https://wa.me/55533232-5531" external variant="outline" fullWidth size="md">
                 <MessageSquare className="w-4 h-4 text-emerald-600" />
                 <span>Falar com a Secretaria</span>
               </Botao>

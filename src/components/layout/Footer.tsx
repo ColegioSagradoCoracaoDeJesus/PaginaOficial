@@ -12,12 +12,14 @@ export const Footer: React.FC = () => {
           {/* Col 1: Colégio Info & 70 Anos Seal */}
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-lg bg-[#1E3A5F] text-white flex items-center justify-center font-display text-xl font-bold border-2 border-[#B8860B] shadow">
-                SCJ
-              </div>
+              <img
+                src="/logotipo.png"
+                alt="Logotipo Colégio Sagrado Coração de Jesus"
+                className="w-12 h-12 rounded-lg object-contain bg-[#1E3A5F] text-white flex items-center justify-center font-display text-xl font-bold border-2 border-[#B8860B] shadow"
+              />
               <div>
                 <h2 className="font-display text-lg font-bold text-white leading-tight">
-                  Colégio Sagrado Coração
+                  Colégio Sagrado Coração de Jesus
                 </h2>
                 <p className="text-xs text-amber-400 font-semibold tracking-wider uppercase">de Jesus — 70 Anos</p>
               </div>

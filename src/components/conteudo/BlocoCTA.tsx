@@ -38,7 +38,7 @@ export const BlocoCTA: React.FC<BlocoCTAProps> = ({
             <Calendar className="w-5 h-5" />
             <span>Agendar Visita Guiada</span>
           </Botao>
-          <Botao href="https://wa.me/5541999997000" external variant="white" size="lg">
+          <Botao href="https://wa.me/555332325531" external variant="white" size="lg">
             <PhoneCall className="w-5 h-5 text-emerald-600" />
             <span>Falar com a Secretaria</span>
           </Botao>
