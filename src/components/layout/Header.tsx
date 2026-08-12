@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Menu, X, Phone, MessageSquare, Calendar, GraduationCap, ChevronDown, Clock, Sparkles, BookOpen, Building2, PhoneCall } from 'lucide-react'
+import { Menu, X, Phone, MessageSquare, Calendar, GraduationCap, ChevronDown, Clock, Sparkles, BookOpen, PhoneCall } from 'lucide-react'
 import { Botao } from '../ui/Botao'
 
 export const Header: React.FC = () => {
@@ -14,7 +14,7 @@ export const Header: React.FC = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 20) {
+      if (window.scrollY > 30) {
         setIsScrolled(true)
       } else {
         setIsScrolled(false)
@@ -34,15 +34,15 @@ export const Header: React.FC = () => {
 
   return (
     <header className="sticky top-0 z-40 w-full bg-white shadow-md transition-all duration-300">
-      {/* Top Header Bar */}
-      <div className="bg-[#1E3A5F] text-white text-xs py-2 px-4 border-b border-[#152A47]">
+      {/* Top Bar (Info & Utility Links) */}
+      <div className="bg-[#152A47] text-white text-xs py-1.5 px-4 border-b border-[#1A3356]">
         <div className="max-w-[1280px] mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
           <div className="flex items-center gap-4 flex-wrap justify-center sm:justify-start">
-            <span className="flex items-center gap-1.5 font-medium">
+            <span className="flex items-center gap-1.5 font-medium text-slate-200">
               <Phone className="w-3.5 h-3.5 text-amber-400" />
-              <a href="tel:5332325531" className="hover:underline">(53) 3232-5531</a>
+              <a href="tel:5332325531" className="hover:underline hover:text-white">(53) 3232-5531</a>
             </span>
-            <span className="hidden md:inline-flex items-center gap-1.5 font-medium">
+            <span className="hidden md:inline-flex items-center gap-1.5 font-medium text-slate-200">
               <Clock className="w-3.5 h-3.5 text-amber-400" />
               <span>Atendimento: 07h30 às 17h30</span>
             </span>
@@ -58,175 +58,190 @@ export const Header: React.FC = () => {
             <span className="hidden lg:inline-block bg-[#B8860B]/20 text-amber-200 border border-[#B8860B]/40 px-2.5 py-0.5 rounded text-[11px] font-semibold">
               ✨ 70 Anos Formando Gerações (1956 - 2026)
             </span>
-            <Link href="/tecnologia-educacional" className="text-white hover:text-amber-300 underline font-medium text-xs">
+            <Link href="/tecnologia-educacional" className="text-slate-200 hover:text-amber-300 underline font-medium text-xs">
               Portal do Aluno / Plataformas
             </Link>
           </div>
         </div>
       </div>
 
-      {/* Main Navigation Header */}
-      <div className={`max-w-[1280px] mx-auto px-4 flex items-center justify-between transition-all duration-300 ${isScrolled ? 'py-2' : 'py-3 sm:py-4'}`}>
-        {/* Brand Logo - Extra Large High Resolution */}
-        <Link href="/" className="flex items-center group focus:outline-none focus:ring-2 focus:ring-amber-500 rounded-md py-1 shrink-0">
+      {/* Tier 1: Main Branding Row (Giant Logo + Quick CTAs) */}
+      <div className={`max-w-[1280px] mx-auto px-4 flex items-center justify-between transition-all duration-300 ${
+        isScrolled ? 'py-1.5 sm:py-2' : 'py-3 sm:py-5'
+      }`}>
+        {/* GIANT OFFICIAL LOGO PNG */}
+        <Link href="/" className="flex items-center group focus:outline-none focus:ring-2 focus:ring-amber-500 rounded-md shrink-0 py-1">
           <img
-            src="/logotipo.png"
+            src="/logotipo.png?v=3"
             alt="Colégio Sagrado Coração de Jesus - 70 Anos"
-            className={`w-auto transition-all duration-300 object-contain group-hover:scale-[1.02] ${
+            className={`w-auto transition-all duration-300 object-contain group-hover:scale-[1.01] ${
               isScrolled
-                ? 'h-16 sm:h-20 md:h-24 max-w-[240px] sm:max-w-[320px] md:max-w-[400px]'
-                : 'h-24 sm:h-32 md:h-36 lg:h-40 max-w-[300px] sm:max-w-[440px] md:max-w-[540px]'
+                ? 'h-14 sm:h-18 md:h-22 max-w-[260px] sm:max-w-[360px] md:max-w-[440px]'
+                : 'h-24 sm:h-32 md:h-40 lg:h-44 max-w-[320px] sm:max-w-[480px] md:max-w-[600px]'
             }`}
           />
         </Link>
 
-        {/* Ultra-Clean Desktop Categorized Navigation (3 Main Dropdowns + CTA) */}
-        <nav aria-label="Navegação Principal" className="hidden lg:flex items-center gap-3 xl:gap-6">
-          {/* Dropdown 1: Institucional */}
-          <div className="relative group">
-            <button
-              className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm md:text-base font-semibold transition-colors ${
-                ['/nossa-historia', '/70-anos', '/diferenciais', '/vivencie-o-sagrado'].includes(pathname)
-                  ? 'text-[#1E3A5F] bg-slate-100'
-                  : 'text-slate-700 hover:text-[#1E3A5F] hover:bg-slate-100'
-              }`}
-            >
-              <GraduationCap className="w-4 h-4 text-amber-500" />
-              <span>Institucional</span>
-              <ChevronDown className="w-4 h-4 transition-transform group-hover:rotate-180 text-slate-400" />
-            </button>
-            <div className="absolute left-0 top-full pt-2 hidden group-hover:block w-64 z-50 animate-fadeIn">
-              <div className="bg-white rounded-xl shadow-2xl border border-slate-100 p-2 space-y-1">
-                <Link
-                  href="/nossa-historia"
-                  className="block px-3.5 py-2.5 rounded-lg text-sm text-slate-700 hover:bg-slate-50 hover:text-[#1E3A5F] font-medium"
-                >
-                  Nossa História
-                </Link>
-                <Link
-                  href="/70-anos"
-                  className="flex items-center justify-between px-3.5 py-2.5 rounded-lg text-sm text-[#B8860B] font-semibold hover:bg-amber-50"
-                >
-                  <span>70 Anos (1956 - 2026)</span>
-                  <Sparkles className="w-4 h-4 text-amber-500" />
-                </Link>
-                <Link
-                  href="/diferenciais"
-                  className="block px-3.5 py-2.5 rounded-lg text-sm text-slate-700 hover:bg-slate-50 hover:text-[#1E3A5F] font-medium"
-                >
-                  Diferenciais Pedagógicos
-                </Link>
-                <Link
-                  href="/vivencie-o-sagrado"
-                  className="block px-3.5 py-2.5 rounded-lg text-sm text-slate-700 hover:bg-slate-50 hover:text-[#1E3A5F] font-medium"
-                >
-                  Vivencie o Sagrado
-                </Link>
-              </div>
-            </div>
-          </div>
+        {/* CTAs on Tier 1 (Desktop) */}
+        <div className="hidden lg:flex items-center gap-3">
+          <Botao href="/contato#agendar-visita" variant="accent" size="md">
+            <Calendar className="w-4 h-4" />
+            <span>Agende uma Visita</span>
+          </Botao>
 
-          {/* Dropdown 2: Ensino & Câmpus */}
-          <div className="relative group">
-            <button
-              className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm md:text-base font-semibold transition-colors ${
-                ['/ensino', '/nossa-estrutura', '/locacao-de-espacos'].includes(pathname)
-                  ? 'text-[#1E3A5F] bg-slate-100'
-                  : 'text-slate-700 hover:text-[#1E3A5F] hover:bg-slate-100'
-              }`}
-            >
-              <BookOpen className="w-4 h-4 text-amber-500" />
-              <span>Ensino & Câmpus</span>
-              <ChevronDown className="w-4 h-4 transition-transform group-hover:rotate-180 text-slate-400" />
-            </button>
-            <div className="absolute left-0 top-full pt-2 hidden group-hover:block w-72 z-50 animate-fadeIn">
-              <div className="bg-white rounded-xl shadow-2xl border border-slate-100 p-2 space-y-1">
-                <Link
-                  href="/ensino"
-                  className="block px-3.5 py-2.5 rounded-lg text-sm text-slate-700 hover:bg-slate-50 hover:text-[#1E3A5F] font-medium"
-                >
-                  Modalidades de Ensino
-                </Link>
-                <Link
-                  href="/nossa-estrutura"
-                  className="block px-3.5 py-2.5 rounded-lg text-sm text-slate-700 hover:bg-slate-50 hover:text-[#1E3A5F] font-medium"
-                >
-                  Nossa Estrutura & Câmpus
-                </Link>
-                <Link
-                  href="/locacao-de-espacos"
-                  className="block px-3.5 py-2.5 rounded-lg text-sm text-slate-700 hover:bg-slate-50 hover:text-[#1E3A5F] font-medium"
-                >
-                  Locação de Ginásio & Auditório
-                </Link>
-              </div>
-            </div>
-          </div>
-
-          {/* Dropdown 3: Notícias & Contato */}
-          <div className="relative group">
-            <button
-              className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm md:text-base font-semibold transition-colors ${
-                ['/noticias', '/contato'].includes(pathname)
-                  ? 'text-[#1E3A5F] bg-slate-100'
-                  : 'text-slate-700 hover:text-[#1E3A5F] hover:bg-slate-100'
-              }`}
-            >
-              <PhoneCall className="w-4 h-4 text-amber-500" />
-              <span>Comunicação</span>
-              <ChevronDown className="w-4 h-4 transition-transform group-hover:rotate-180 text-slate-400" />
-            </button>
-            <div className="absolute left-0 top-full pt-2 hidden group-hover:block w-64 z-50 animate-fadeIn">
-              <div className="bg-white rounded-xl shadow-2xl border border-slate-100 p-2 space-y-1">
-                <Link
-                  href="/noticias"
-                  className="block px-3.5 py-2.5 rounded-lg text-sm text-slate-700 hover:bg-slate-50 hover:text-[#1E3A5F] font-medium"
-                >
-                  Aconteceu no Sagrado (Notícias)
-                </Link>
-                <Link
-                  href="/contato"
-                  className="block px-3.5 py-2.5 rounded-lg text-sm text-slate-700 hover:bg-slate-50 hover:text-[#1E3A5F] font-medium"
-                >
-                  Fale Conosco & Localização
-                </Link>
-              </div>
-            </div>
-          </div>
-
-          {/* Matrículas Button */}
           <Link
             href="/matriculas"
-            className="px-4 py-2 rounded-lg text-sm md:text-base font-bold bg-[#1E3A5F] text-white hover:bg-[#152A47] transition-all shadow-md hover:shadow-lg"
+            className="px-5 py-2.5 rounded-lg text-sm font-bold bg-[#1E3A5F] text-white hover:bg-[#152A47] transition-all shadow-md hover:shadow-lg flex items-center gap-2"
           >
-            Matrículas 2026
+            <GraduationCap className="w-4 h-4 text-amber-400" />
+            <span>Matrículas 2026</span>
           </Link>
-        </nav>
+        </div>
 
-        {/* CTA Button & Mobile Toggle */}
-        <div className="flex items-center gap-3">
-          <div className="hidden sm:block lg:hidden xl:block">
-            <Botao href="/contato#agendar-visita" variant="accent" size="sm">
-              <Calendar className="w-4 h-4" />
-              <span>Agende uma Visita</span>
-            </Botao>
+        {/* Mobile Sandwich Button */}
+        <button
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          aria-expanded={isMenuOpen}
+          aria-label={isMenuOpen ? 'Fechar menu de navegação' : 'Abrir menu de navegação'}
+          className="lg:hidden p-2.5 text-slate-800 hover:text-[#1E3A5F] hover:bg-slate-100 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500"
+        >
+          {isMenuOpen ? <X className="w-8 h-8" /> : <Menu className="w-8 h-8" />}
+        </button>
+      </div>
+
+      {/* Tier 2: Dedicated Navigation Bar (Desktop) */}
+      <div className="hidden lg:block bg-[#1E3A5F] text-white border-t border-[#152A47]">
+        <div className="max-w-[1280px] mx-auto px-4 flex items-center justify-between">
+          <nav aria-label="Navegação Principal" className="flex items-center gap-1 xl:gap-2 py-1">
+            <Link
+              href="/"
+              className={`px-4 py-2.5 rounded-md text-sm font-medium transition-colors ${
+                pathname === '/' ? 'bg-[#152A47] text-white font-bold' : 'text-slate-100 hover:bg-[#152A47] hover:text-amber-300'
+              }`}
+            >
+              Início
+            </Link>
+
+            {/* Dropdown 1: Institucional */}
+            <div className="relative group">
+              <button
+                className={`flex items-center gap-1.5 px-4 py-2.5 rounded-md text-sm font-medium transition-colors ${
+                  ['/nossa-historia', '/70-anos', '/diferenciais', '/vivencie-o-sagrado'].includes(pathname)
+                    ? 'bg-[#152A47] text-white font-bold'
+                    : 'text-slate-100 hover:bg-[#152A47] hover:text-amber-300'
+                }`}
+              >
+                <span>Institucional</span>
+                <ChevronDown className="w-4 h-4 transition-transform group-hover:rotate-180 text-amber-400" />
+              </button>
+              <div className="absolute left-0 top-full pt-1 hidden group-hover:block w-64 z-50 animate-fadeIn">
+                <div className="bg-white text-slate-900 rounded-xl shadow-2xl border border-slate-200 p-2 space-y-1">
+                  <Link
+                    href="/nossa-historia"
+                    className="block px-3.5 py-2.5 rounded-lg text-sm text-slate-700 hover:bg-slate-100 hover:text-[#1E3A5F] font-medium"
+                  >
+                    Nossa História
+                  </Link>
+                  <Link
+                    href="/70-anos"
+                    className="flex items-center justify-between px-3.5 py-2.5 rounded-lg text-sm text-[#B8860B] font-semibold hover:bg-amber-50"
+                  >
+                    <span>70 Anos (1956 - 2026)</span>
+                    <Sparkles className="w-4 h-4 text-amber-500" />
+                  </Link>
+                  <Link
+                    href="/diferenciais"
+                    className="block px-3.5 py-2.5 rounded-lg text-sm text-slate-700 hover:bg-slate-100 hover:text-[#1E3A5F] font-medium"
+                  >
+                    Diferenciais Pedagógicos
+                  </Link>
+                  <Link
+                    href="/vivencie-o-sagrado"
+                    className="block px-3.5 py-2.5 rounded-lg text-sm text-slate-700 hover:bg-slate-100 hover:text-[#1E3A5F] font-medium"
+                  >
+                    Vivencie o Sagrado
+                  </Link>
+                </div>
+              </div>
+            </div>
+
+            {/* Dropdown 2: Ensino & Câmpus */}
+            <div className="relative group">
+              <button
+                className={`flex items-center gap-1.5 px-4 py-2.5 rounded-md text-sm font-medium transition-colors ${
+                  ['/ensino', '/nossa-estrutura', '/locacao-de-espacos'].includes(pathname)
+                    ? 'bg-[#152A47] text-white font-bold'
+                    : 'text-slate-100 hover:bg-[#152A47] hover:text-amber-300'
+                }`}
+              >
+                <span>Ensino & Câmpus</span>
+                <ChevronDown className="w-4 h-4 transition-transform group-hover:rotate-180 text-amber-400" />
+              </button>
+              <div className="absolute left-0 top-full pt-1 hidden group-hover:block w-72 z-50 animate-fadeIn">
+                <div className="bg-white text-slate-900 rounded-xl shadow-2xl border border-slate-200 p-2 space-y-1">
+                  <Link
+                    href="/ensino"
+                    className="block px-3.5 py-2.5 rounded-lg text-sm text-slate-700 hover:bg-slate-100 hover:text-[#1E3A5F] font-medium"
+                  >
+                    Modalidades de Ensino
+                  </Link>
+                  <Link
+                    href="/nossa-estrutura"
+                    className="block px-3.5 py-2.5 rounded-lg text-sm text-slate-700 hover:bg-slate-100 hover:text-[#1E3A5F] font-medium"
+                  >
+                    Nossa Estrutura & Câmpus
+                  </Link>
+                  <Link
+                    href="/locacao-de-espacos"
+                    className="block px-3.5 py-2.5 rounded-lg text-sm text-slate-700 hover:bg-slate-100 hover:text-[#1E3A5F] font-medium"
+                  >
+                    Locação de Ginásio & Auditório
+                  </Link>
+                </div>
+              </div>
+            </div>
+
+            {/* Dropdown 3: Comunicação */}
+            <div className="relative group">
+              <button
+                className={`flex items-center gap-1.5 px-4 py-2.5 rounded-md text-sm font-medium transition-colors ${
+                  ['/noticias', '/contato'].includes(pathname)
+                    ? 'bg-[#152A47] text-white font-bold'
+                    : 'text-slate-100 hover:bg-[#152A47] hover:text-amber-300'
+                }`}
+              >
+                <span>Comunicação</span>
+                <ChevronDown className="w-4 h-4 transition-transform group-hover:rotate-180 text-amber-400" />
+              </button>
+              <div className="absolute left-0 top-full pt-1 hidden group-hover:block w-64 z-50 animate-fadeIn">
+                <div className="bg-white text-slate-900 rounded-xl shadow-2xl border border-slate-200 p-2 space-y-1">
+                  <Link
+                    href="/noticias"
+                    className="block px-3.5 py-2.5 rounded-lg text-sm text-slate-700 hover:bg-slate-100 hover:text-[#1E3A5F] font-medium"
+                  >
+                    Aconteceu no Sagrado (Notícias)
+                  </Link>
+                  <Link
+                    href="/contato"
+                    className="block px-3.5 py-2.5 rounded-lg text-sm text-slate-700 hover:bg-slate-100 hover:text-[#1E3A5F] font-medium"
+                  >
+                    Fale Conosco & Localização
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </nav>
+
+          <div className="text-xs text-amber-300 font-semibold flex items-center gap-2">
+            <Sparkles className="w-4 h-4 text-amber-400" />
+            <span>Formando com excelência desde 1956</span>
           </div>
-
-          {/* Mobile Sandwich Button */}
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-expanded={isMenuOpen}
-            aria-label={isMenuOpen ? 'Fechar menu de navegação' : 'Abrir menu de navegação'}
-            className="lg:hidden p-2.5 text-slate-800 hover:text-[#1E3A5F] hover:bg-slate-100 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500"
-          >
-            {isMenuOpen ? <X className="w-8 h-8" /> : <Menu className="w-8 h-8" />}
-          </button>
         </div>
       </div>
 
       {/* Mobile Drawer Navigation */}
       {isMenuOpen && (
-        <div className="lg:hidden fixed inset-x-0 top-[115px] bottom-0 bg-slate-900/60 backdrop-blur-sm z-50 flex justify-end animate-fadeIn">
+        <div className="lg:hidden fixed inset-x-0 top-[125px] bottom-0 bg-slate-900/60 backdrop-blur-sm z-50 flex justify-end animate-fadeIn">
           <div className="w-full max-w-sm bg-white h-full shadow-2xl overflow-y-auto p-6 flex flex-col justify-between">
             <div>
               <div className="flex items-center justify-between border-b pb-4 mb-4">
