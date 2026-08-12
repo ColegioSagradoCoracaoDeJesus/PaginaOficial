@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Menu, X, Phone, MessageSquare, Calendar, GraduationCap, ChevronDown, Clock, Sparkles } from 'lucide-react'
+import { Menu, X, Phone, MessageSquare, Calendar, GraduationCap, ChevronDown, Clock, Sparkles, BookOpen, Building2, PhoneCall } from 'lucide-react'
 import { Botao } from '../ui/Botao'
 
 export const Header: React.FC = () => {
@@ -67,111 +67,58 @@ export const Header: React.FC = () => {
 
       {/* Main Navigation Header */}
       <div className={`max-w-[1280px] mx-auto px-4 flex items-center justify-between transition-all duration-300 ${isScrolled ? 'py-2' : 'py-3 sm:py-4'}`}>
-        {/* Brand Logo - High Resolution & Enlarged */}
+        {/* Brand Logo - Extra Large High Resolution */}
         <Link href="/" className="flex items-center group focus:outline-none focus:ring-2 focus:ring-amber-500 rounded-md py-1 shrink-0">
           <img
             src="/logotipo.png"
             alt="Colégio Sagrado Coração de Jesus - 70 Anos"
             className={`w-auto transition-all duration-300 object-contain group-hover:scale-[1.02] ${
               isScrolled
-                ? 'h-14 sm:h-16 md:h-20 max-w-[220px] sm:max-w-[280px] md:max-w-[340px]'
-                : 'h-20 sm:h-24 md:h-28 max-w-[260px] sm:max-w-[340px] md:max-w-[420px]'
+                ? 'h-16 sm:h-20 md:h-24 max-w-[240px] sm:max-w-[320px] md:max-w-[400px]'
+                : 'h-24 sm:h-32 md:h-36 lg:h-40 max-w-[300px] sm:max-w-[440px] md:max-w-[540px]'
             }`}
           />
         </Link>
 
-        {/* Desktop Categorized Navigation */}
-        <nav aria-label="Navegação Principal" className="hidden lg:flex items-center gap-1 xl:gap-2">
-          <Link
-            href="/"
-            className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-              pathname === '/' ? 'bg-[#1E3A5F] text-white font-semibold shadow-sm' : 'text-slate-700 hover:text-[#1E3A5F] hover:bg-slate-100'
-            }`}
-          >
-            Início
-          </Link>
-
-          {/* Dropdown Institucional */}
+        {/* Ultra-Clean Desktop Categorized Navigation (3 Main Dropdowns + CTA) */}
+        <nav aria-label="Navegação Principal" className="hidden lg:flex items-center gap-3 xl:gap-6">
+          {/* Dropdown 1: Institucional */}
           <div className="relative group">
             <button
-              className={`flex items-center gap-1 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                ['/nossa-historia', '/diferenciais', '/nossa-estrutura'].includes(pathname)
-                  ? 'text-[#1E3A5F] font-semibold bg-slate-100'
+              className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm md:text-base font-semibold transition-colors ${
+                ['/nossa-historia', '/70-anos', '/diferenciais', '/vivencie-o-sagrado'].includes(pathname)
+                  ? 'text-[#1E3A5F] bg-slate-100'
                   : 'text-slate-700 hover:text-[#1E3A5F] hover:bg-slate-100'
               }`}
             >
+              <GraduationCap className="w-4 h-4 text-amber-500" />
               <span>Institucional</span>
-              <ChevronDown className="w-4 h-4 transition-transform group-hover:rotate-180 text-slate-500" />
+              <ChevronDown className="w-4 h-4 transition-transform group-hover:rotate-180 text-slate-400" />
             </button>
-            <div className="absolute left-0 top-full pt-1.5 hidden group-hover:block w-60 z-50 animate-fadeIn">
-              <div className="bg-white rounded-xl shadow-xl border border-slate-100 p-2 space-y-1">
+            <div className="absolute left-0 top-full pt-2 hidden group-hover:block w-64 z-50 animate-fadeIn">
+              <div className="bg-white rounded-xl shadow-2xl border border-slate-100 p-2 space-y-1">
                 <Link
                   href="/nossa-historia"
-                  className="block px-3 py-2 rounded-lg text-sm text-slate-700 hover:bg-slate-50 hover:text-[#1E3A5F] font-medium"
+                  className="block px-3.5 py-2.5 rounded-lg text-sm text-slate-700 hover:bg-slate-50 hover:text-[#1E3A5F] font-medium"
                 >
                   Nossa História
                 </Link>
                 <Link
+                  href="/70-anos"
+                  className="flex items-center justify-between px-3.5 py-2.5 rounded-lg text-sm text-[#B8860B] font-semibold hover:bg-amber-50"
+                >
+                  <span>70 Anos (1956 - 2026)</span>
+                  <Sparkles className="w-4 h-4 text-amber-500" />
+                </Link>
+                <Link
                   href="/diferenciais"
-                  className="block px-3 py-2 rounded-lg text-sm text-slate-700 hover:bg-slate-50 hover:text-[#1E3A5F] font-medium"
+                  className="block px-3.5 py-2.5 rounded-lg text-sm text-slate-700 hover:bg-slate-50 hover:text-[#1E3A5F] font-medium"
                 >
                   Diferenciais Pedagógicos
                 </Link>
                 <Link
-                  href="/nossa-estrutura"
-                  className="block px-3 py-2 rounded-lg text-sm text-slate-700 hover:bg-slate-50 hover:text-[#1E3A5F] font-medium"
-                >
-                  Nossa Estrutura
-                </Link>
-              </div>
-            </div>
-          </div>
-
-          <Link
-            href="/ensino"
-            className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-              pathname === '/ensino' ? 'bg-[#1E3A5F] text-white font-semibold shadow-sm' : 'text-slate-700 hover:text-[#1E3A5F] hover:bg-slate-100'
-            }`}
-          >
-            Ensino
-          </Link>
-
-          {/* Special 70 Anos Link */}
-          <Link
-            href="/70-anos"
-            className={`px-3 py-2 rounded-md text-sm font-semibold transition-all flex items-center gap-1.5 ${
-              pathname === '/70-anos'
-                ? 'bg-[#B8860B] text-white shadow'
-                : 'bg-amber-50 text-[#B8860B] border border-amber-300/60 hover:bg-[#B8860B] hover:text-white'
-            }`}
-          >
-            <Sparkles className="w-3.5 h-3.5 text-amber-500 group-hover:text-white" />
-            <span>70 Anos</span>
-          </Link>
-
-          {/* Dropdown Estrutura & Espaços */}
-          <div className="relative group">
-            <button
-              className={`flex items-center gap-1 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                ['/locacao-de-espacos', '/vivencie-o-sagrado'].includes(pathname)
-                  ? 'text-[#1E3A5F] font-semibold bg-slate-100'
-                  : 'text-slate-700 hover:text-[#1E3A5F] hover:bg-slate-100'
-              }`}
-            >
-              <span>Estrutura & Espaços</span>
-              <ChevronDown className="w-4 h-4 transition-transform group-hover:rotate-180 text-slate-500" />
-            </button>
-            <div className="absolute left-0 top-full pt-1.5 hidden group-hover:block w-64 z-50 animate-fadeIn">
-              <div className="bg-white rounded-xl shadow-xl border border-slate-100 p-2 space-y-1">
-                <Link
-                  href="/locacao-de-espacos"
-                  className="block px-3 py-2 rounded-lg text-sm text-slate-700 hover:bg-slate-50 hover:text-[#1E3A5F] font-medium"
-                >
-                  Locação de Auditório & Ginásio
-                </Link>
-                <Link
                   href="/vivencie-o-sagrado"
-                  className="block px-3 py-2 rounded-lg text-sm text-slate-700 hover:bg-slate-50 hover:text-[#1E3A5F] font-medium"
+                  className="block px-3.5 py-2.5 rounded-lg text-sm text-slate-700 hover:bg-slate-50 hover:text-[#1E3A5F] font-medium"
                 >
                   Vivencie o Sagrado
                 </Link>
@@ -179,37 +126,86 @@ export const Header: React.FC = () => {
             </div>
           </div>
 
-          <Link
-            href="/noticias"
-            className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-              pathname === '/noticias' ? 'bg-[#1E3A5F] text-white font-semibold shadow-sm' : 'text-slate-700 hover:text-[#1E3A5F] hover:bg-slate-100'
-            }`}
-          >
-            Notícias
-          </Link>
+          {/* Dropdown 2: Ensino & Câmpus */}
+          <div className="relative group">
+            <button
+              className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm md:text-base font-semibold transition-colors ${
+                ['/ensino', '/nossa-estrutura', '/locacao-de-espacos'].includes(pathname)
+                  ? 'text-[#1E3A5F] bg-slate-100'
+                  : 'text-slate-700 hover:text-[#1E3A5F] hover:bg-slate-100'
+              }`}
+            >
+              <BookOpen className="w-4 h-4 text-amber-500" />
+              <span>Ensino & Câmpus</span>
+              <ChevronDown className="w-4 h-4 transition-transform group-hover:rotate-180 text-slate-400" />
+            </button>
+            <div className="absolute left-0 top-full pt-2 hidden group-hover:block w-72 z-50 animate-fadeIn">
+              <div className="bg-white rounded-xl shadow-2xl border border-slate-100 p-2 space-y-1">
+                <Link
+                  href="/ensino"
+                  className="block px-3.5 py-2.5 rounded-lg text-sm text-slate-700 hover:bg-slate-50 hover:text-[#1E3A5F] font-medium"
+                >
+                  Modalidades de Ensino
+                </Link>
+                <Link
+                  href="/nossa-estrutura"
+                  className="block px-3.5 py-2.5 rounded-lg text-sm text-slate-700 hover:bg-slate-50 hover:text-[#1E3A5F] font-medium"
+                >
+                  Nossa Estrutura & Câmpus
+                </Link>
+                <Link
+                  href="/locacao-de-espacos"
+                  className="block px-3.5 py-2.5 rounded-lg text-sm text-slate-700 hover:bg-slate-50 hover:text-[#1E3A5F] font-medium"
+                >
+                  Locação de Ginásio & Auditório
+                </Link>
+              </div>
+            </div>
+          </div>
 
+          {/* Dropdown 3: Notícias & Contato */}
+          <div className="relative group">
+            <button
+              className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm md:text-base font-semibold transition-colors ${
+                ['/noticias', '/contato'].includes(pathname)
+                  ? 'text-[#1E3A5F] bg-slate-100'
+                  : 'text-slate-700 hover:text-[#1E3A5F] hover:bg-slate-100'
+              }`}
+            >
+              <PhoneCall className="w-4 h-4 text-amber-500" />
+              <span>Comunicação</span>
+              <ChevronDown className="w-4 h-4 transition-transform group-hover:rotate-180 text-slate-400" />
+            </button>
+            <div className="absolute left-0 top-full pt-2 hidden group-hover:block w-64 z-50 animate-fadeIn">
+              <div className="bg-white rounded-xl shadow-2xl border border-slate-100 p-2 space-y-1">
+                <Link
+                  href="/noticias"
+                  className="block px-3.5 py-2.5 rounded-lg text-sm text-slate-700 hover:bg-slate-50 hover:text-[#1E3A5F] font-medium"
+                >
+                  Aconteceu no Sagrado (Notícias)
+                </Link>
+                <Link
+                  href="/contato"
+                  className="block px-3.5 py-2.5 rounded-lg text-sm text-slate-700 hover:bg-slate-50 hover:text-[#1E3A5F] font-medium"
+                >
+                  Fale Conosco & Localização
+                </Link>
+              </div>
+            </div>
+          </div>
+
+          {/* Matrículas Button */}
           <Link
             href="/matriculas"
-            className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-              pathname === '/matriculas' ? 'bg-[#1E3A5F] text-white font-semibold shadow-sm' : 'text-slate-700 hover:text-[#1E3A5F] hover:bg-slate-100'
-            }`}
+            className="px-4 py-2 rounded-lg text-sm md:text-base font-bold bg-[#1E3A5F] text-white hover:bg-[#152A47] transition-all shadow-md hover:shadow-lg"
           >
-            Matrículas
-          </Link>
-
-          <Link
-            href="/contato"
-            className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-              pathname === '/contato' ? 'bg-[#1E3A5F] text-white font-semibold shadow-sm' : 'text-slate-700 hover:text-[#1E3A5F] hover:bg-slate-100'
-            }`}
-          >
-            Contato
+            Matrículas 2026
           </Link>
         </nav>
 
         {/* CTA Button & Mobile Toggle */}
         <div className="flex items-center gap-3">
-          <div className="hidden sm:block">
+          <div className="hidden sm:block lg:hidden xl:block">
             <Botao href="/contato#agendar-visita" variant="accent" size="sm">
               <Calendar className="w-4 h-4" />
               <span>Agende uma Visita</span>
@@ -223,7 +219,7 @@ export const Header: React.FC = () => {
             aria-label={isMenuOpen ? 'Fechar menu de navegação' : 'Abrir menu de navegação'}
             className="lg:hidden p-2.5 text-slate-800 hover:text-[#1E3A5F] hover:bg-slate-100 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500"
           >
-            {isMenuOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
+            {isMenuOpen ? <X className="w-8 h-8" /> : <Menu className="w-8 h-8" />}
           </button>
         </div>
       </div>
@@ -241,7 +237,7 @@ export const Header: React.FC = () => {
                 <span className="text-xs font-bold bg-[#B8860B] text-white px-2 py-0.5 rounded">70 Anos</span>
               </div>
 
-              <nav className="flex flex-col gap-2">
+              <nav className="flex flex-col gap-3">
                 <Link
                   href="/"
                   className="px-4 py-2.5 rounded-md text-sm font-medium text-slate-800 hover:bg-slate-100"
@@ -249,7 +245,7 @@ export const Header: React.FC = () => {
                   Início
                 </Link>
 
-                {/* Mobile Accordion: Institucional */}
+                {/* Mobile Accordion 1: Institucional */}
                 <div className="border border-slate-100 rounded-lg overflow-hidden">
                   <button
                     onClick={() => toggleMobileAccordion('inst')}
@@ -261,47 +257,54 @@ export const Header: React.FC = () => {
                   {openMobileAccordion === 'inst' && (
                     <div className="p-2 space-y-1 bg-white border-t border-slate-100">
                       <Link href="/nossa-historia" className="block px-3 py-2 text-xs font-medium text-slate-700 hover:bg-slate-50 rounded">Nossa História</Link>
+                      <Link href="/70-anos" className="block px-3 py-2 text-xs font-semibold text-[#B8860B] hover:bg-amber-50 rounded">70 Anos (1956 - 2026)</Link>
                       <Link href="/diferenciais" className="block px-3 py-2 text-xs font-medium text-slate-700 hover:bg-slate-50 rounded">Diferenciais Pedagógicos</Link>
-                      <Link href="/nossa-estrutura" className="block px-3 py-2 text-xs font-medium text-slate-700 hover:bg-slate-50 rounded">Nossa Estrutura</Link>
-                    </div>
-                  )}
-                </div>
-
-                <Link
-                  href="/ensino"
-                  className="px-4 py-2.5 rounded-md text-sm font-medium text-slate-800 hover:bg-slate-100"
-                >
-                  Ensino
-                </Link>
-
-                <Link
-                  href="/70-anos"
-                  className="px-4 py-2.5 rounded-md text-sm font-semibold bg-amber-50 text-[#B8860B] border border-amber-200 flex items-center justify-between"
-                >
-                  <span>70 Anos Comemoração</span>
-                  <Sparkles className="w-4 h-4 text-amber-500" />
-                </Link>
-
-                {/* Mobile Accordion: Estrutura & Espaços */}
-                <div className="border border-slate-100 rounded-lg overflow-hidden">
-                  <button
-                    onClick={() => toggleMobileAccordion('espacos')}
-                    className="w-full flex items-center justify-between px-4 py-2.5 text-sm font-semibold text-slate-800 bg-slate-50"
-                  >
-                    <span>Estrutura & Espaços</span>
-                    <ChevronDown className={`w-4 h-4 transition-transform ${openMobileAccordion === 'espacos' ? 'rotate-180' : ''}`} />
-                  </button>
-                  {openMobileAccordion === 'espacos' && (
-                    <div className="p-2 space-y-1 bg-white border-t border-slate-100">
-                      <Link href="/locacao-de-espacos" className="block px-3 py-2 text-xs font-medium text-slate-700 hover:bg-slate-50 rounded">Locação de Espaços</Link>
                       <Link href="/vivencie-o-sagrado" className="block px-3 py-2 text-xs font-medium text-slate-700 hover:bg-slate-50 rounded">Vivencie o Sagrado</Link>
                     </div>
                   )}
                 </div>
 
-                <Link href="/noticias" className="px-4 py-2.5 rounded-md text-sm font-medium text-slate-800 hover:bg-slate-100">Notícias</Link>
-                <Link href="/matriculas" className="px-4 py-2.5 rounded-md text-sm font-medium text-slate-800 hover:bg-slate-100">Matrículas</Link>
-                <Link href="/contato" className="px-4 py-2.5 rounded-md text-sm font-medium text-slate-800 hover:bg-slate-100">Contato</Link>
+                {/* Mobile Accordion 2: Ensino & Câmpus */}
+                <div className="border border-slate-100 rounded-lg overflow-hidden">
+                  <button
+                    onClick={() => toggleMobileAccordion('ensino')}
+                    className="w-full flex items-center justify-between px-4 py-2.5 text-sm font-semibold text-slate-800 bg-slate-50"
+                  >
+                    <span>Ensino & Câmpus</span>
+                    <ChevronDown className={`w-4 h-4 transition-transform ${openMobileAccordion === 'ensino' ? 'rotate-180' : ''}`} />
+                  </button>
+                  {openMobileAccordion === 'ensino' && (
+                    <div className="p-2 space-y-1 bg-white border-t border-slate-100">
+                      <Link href="/ensino" className="block px-3 py-2 text-xs font-medium text-slate-700 hover:bg-slate-50 rounded">Modalidades de Ensino</Link>
+                      <Link href="/nossa-estrutura" className="block px-3 py-2 text-xs font-medium text-slate-700 hover:bg-slate-50 rounded">Nossa Estrutura & Câmpus</Link>
+                      <Link href="/locacao-de-espacos" className="block px-3 py-2 text-xs font-medium text-slate-700 hover:bg-slate-50 rounded">Locação de Espaços</Link>
+                    </div>
+                  )}
+                </div>
+
+                {/* Mobile Accordion 3: Comunicação */}
+                <div className="border border-slate-100 rounded-lg overflow-hidden">
+                  <button
+                    onClick={() => toggleMobileAccordion('comunicacao')}
+                    className="w-full flex items-center justify-between px-4 py-2.5 text-sm font-semibold text-slate-800 bg-slate-50"
+                  >
+                    <span>Comunicação</span>
+                    <ChevronDown className={`w-4 h-4 transition-transform ${openMobileAccordion === 'comunicacao' ? 'rotate-180' : ''}`} />
+                  </button>
+                  {openMobileAccordion === 'comunicacao' && (
+                    <div className="p-2 space-y-1 bg-white border-t border-slate-100">
+                      <Link href="/noticias" className="block px-3 py-2 text-xs font-medium text-slate-700 hover:bg-slate-50 rounded">Aconteceu no Sagrado (Notícias)</Link>
+                      <Link href="/contato" className="block px-3 py-2 text-xs font-medium text-slate-700 hover:bg-slate-50 rounded">Fale Conosco & Localização</Link>
+                    </div>
+                  )}
+                </div>
+
+                <Link
+                  href="/matriculas"
+                  className="px-4 py-2.5 rounded-md text-sm font-bold bg-[#1E3A5F] text-white text-center shadow"
+                >
+                  Matrículas 2026
+                </Link>
               </nav>
             </div>
 
