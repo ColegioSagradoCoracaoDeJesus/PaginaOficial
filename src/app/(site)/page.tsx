@@ -24,7 +24,7 @@ export default async function HomePage() {
   const avisosImportantes = [
     {
       id: 'a1',
-      tipo: 'Matrículas 2026',
+      tipo: 'Matrículas 2027',
       titulo: 'Período de Rematrículas para Alunos Veteranos e Novas Vagas Abertas',
       descricao: 'Agende o atendimento na secretaria ou garanta a vaga do seu filho pelo portal de matrículas.',
       data: 'Vagas Limitadas',

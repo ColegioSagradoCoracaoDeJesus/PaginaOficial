@@ -7,8 +7,8 @@ import { FormVisitaModal } from '@/components/conteudo/FormVisitaModal'
 import { BlocoCTA } from '@/components/conteudo/BlocoCTA'
 
 export const metadata = {
-  title: 'Matrículas e Rematrículas | Vagas Abertas',
-  description: 'Saiba como matricular seu filho no Colégio Sagrado Coração de Jesus. Documentação necessária, passo a passo e agendamento de visita.',
+  title: 'Matrículas e Rematrículas 2027 | Vagas Abertas',
+  description: 'Garanta a vaga do seu filho no Colégio Sagrado Coração de Jesus para o Ano Letivo 2027 em Rio Grande - RS. Documentação necessária, passo a passo e agendamento de visita.',
 }
 
 export default function MatriculasPage() {
@@ -29,21 +29,21 @@ export default function MatriculasPage() {
   ]
 
   const faqMatriculas = [
-    { pergunta: 'Qual é o horário de atendimento da Secretaria para matrículas?', resposta: 'A Secretaria atende presencialmente e por telefone de segunda a sexta-feira, das 07h30 às 18h30 sem fechar para o almoço.' },
+    { pergunta: 'Qual é o horário de atendimento da Secretaria para matrículas?', resposta: 'A Secretaria atende presencialmente e por telefone de segunda a sexta-feira, das 07h30 às 17h30 sem fechar para o almoço.' },
     { pergunta: 'O Colégio oferece período integral ou turmas de contraturno?', resposta: 'Sim! Possuímos programas de permanência estendida e atividades extracurriculares no contraturno escolar para Educação Infantil e Ensino Fundamental.' },
-    { pergunta: 'Como funciona a rematrícula de alunos veteranos?', resposta: 'Alunos veteranos possuem prioridade de renovação de vaga através do portal de rematrículas com condições especiais no período oficial de campanha.' },
+    { pergunta: 'Como funciona a rematrícula de alunos veteranos para 2027?', resposta: 'Alunos veteranos possuem prioridade de renovação de vaga através do portal de rematrículas com condições especiais no período oficial de campanha 2027.' },
   ]
 
   return (
     <div>
-      <MigalhaDePao items={[{ label: 'Matrículas & Rematrículas' }]} />
+      <MigalhaDePao items={[{ label: 'Matrículas & Rematrículas 2027' }]} />
 
       <section className="bg-[#1E3A5F] text-white py-16 px-4">
         <div className="max-w-[1280px] mx-auto text-center space-y-4">
-          <Etiqueta variant="anniversary">Ano Letivo Comemorativo</Etiqueta>
-          <h1 className="font-display text-h1 font-bold text-white">Matrículas & Rematrículas</h1>
+          <Etiqueta variant="anniversary">Ano Letivo 2027 — Vagas Abertas</Etiqueta>
+          <h1 className="font-display text-h1 font-bold text-white">Matrículas & Rematrículas 2027</h1>
           <p className="text-slate-200 text-body max-w-2xl mx-auto leading-relaxed">
-            Garanta a vaga do seu filho em uma instituição com 70 anos de tradição, inovação e acolhimento humano em Curitiba.
+            Garanta a vaga do seu filho para 2027 em uma instituição com 70 anos de tradição, inovação e acolhimento humano em Rio Grande - RS.
           </p>
         </div>
       </section>
@@ -88,7 +88,7 @@ export default function MatriculasPage() {
             </ul>
 
             <div className="pt-2">
-              <Botao href="https://wa.me/5541999997000" external variant="outline" fullWidth size="md">
+              <Botao href="https://wa.me/555332325531" external variant="outline" fullWidth size="md">
                 <MessageSquare className="w-4 h-4 text-emerald-600" />
                 <span>Tirar dúvidas sobre documentos</span>
               </Botao>
