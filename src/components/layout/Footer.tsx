@@ -11,18 +11,12 @@ export const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-slate-700/60">
           {/* Col 1: Colégio Info & 70 Anos Seal */}
           <div className="space-y-4">
-            <div className="flex items-center gap-3">
+            <div className="bg-white/95 p-3 rounded-xl shadow-md border-2 border-[#B8860B] inline-block max-w-[260px]">
               <img
                 src="/logotipo.png"
-                alt="Logotipo Colégio Sagrado Coração de Jesus"
-                className="w-12 h-12 rounded-lg object-contain bg-[#1E3A5F] text-white flex items-center justify-center font-display text-xl font-bold border-2 border-[#B8860B] shadow"
+                alt="Colégio Sagrado Coração de Jesus - 70 Anos"
+                className="h-14 sm:h-16 w-auto object-contain"
               />
-              <div>
-                <h2 className="font-display text-lg font-bold text-white leading-tight">
-                  Colégio Sagrado Coração de Jesus
-                </h2>
-                <p className="text-xs text-amber-400 font-semibold tracking-wider uppercase">de Jesus — 70 Anos</p>
-              </div>
             </div>
 
             <p className="text-sm text-slate-300 leading-relaxed">

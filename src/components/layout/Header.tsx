@@ -79,23 +79,14 @@ export const Header: React.FC = () => {
       {/* Main Navigation Header */}
       <div className={`max-w-[1280px] mx-auto px-4 py-3 flex items-center justify-between transition-all ${isScrolled ? 'py-2.5' : 'py-4'}`}>
         {/* Brand Logo */}
-        <Link href="/" className="flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-amber-500 rounded-md p-1">
-          <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-lg bg-white overflow-hidden flex items-center justify-center shadow-md border-2 border-[#B8860B] group-hover:scale-105 transition-transform p-0.5">
-            <img
-              src="/logotipo.png"
-              alt="Logotipo Colégio Sagrado Coração de Jesus"
-              className="w-full h-full object-contain"
-            />
-          </div>
-          <div className="flex flex-col">
-            <span className="font-display font-bold text-slate-900 text-base sm:text-lg leading-tight tracking-tight group-hover:text-[#1E3A5F] transition-colors">
-              Colégio Sagrado Coração de Jesus
-            </span>
-            <div className="flex items-center gap-1.5">
-              <span className="text-xs font-semibold text-[#5C7A99] tracking-wider uppercase">de Jesus</span>
-              <span className="text-[10px] font-bold bg-[#B8860B] text-white px-1.5 py-0.2 rounded">70 ANOS</span>
-            </div>
-          </div>
+        <Link href="/" className="flex items-center group focus:outline-none focus:ring-2 focus:ring-amber-500 rounded-md py-1">
+          <img
+            src="/logotipo.png"
+            alt="Colégio Sagrado Coração de Jesus - 70 Anos"
+            className={`w-auto transition-all object-contain group-hover:scale-[1.02] ${
+              isScrolled ? 'h-12 sm:h-14 md:h-16' : 'h-14 sm:h-18 md:h-20'
+            }`}
+          />
         </Link>
 
         {/* Desktop Navigation Links */}
