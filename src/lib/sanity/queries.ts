@@ -393,9 +393,11 @@ export const DEFAULT_ESTRUTURA: AmbienteEstrutura[] = [
   },
 ]
 
+const isSanityConfigured = Boolean(process.env.NEXT_PUBLIC_SANITY_PROJECT_ID && process.env.NEXT_PUBLIC_SANITY_PROJECT_ID !== 'placeholder-project')
+
 // QUERY FUNCTIONS WITH FALLBACK PROTECTION
 export async function getSiteSettings(): Promise<SiteSettings> {
-  if (!projectId) return DEFAULT_SITE_SETTINGS
+  if (!isSanityConfigured) return DEFAULT_SITE_SETTINGS
   try {
     const res = await client.fetch(`*[_type == "siteSettings"][0]`)
     return res || DEFAULT_SITE_SETTINGS
@@ -405,7 +407,7 @@ export async function getSiteSettings(): Promise<SiteSettings> {
 }
 
 export async function getNoticias(): Promise<Noticia[]> {
-  if (!projectId) return DEFAULT_NOTICIAS
+  if (!isSanityConfigured) return DEFAULT_NOTICIAS
   try {
     const res = await client.fetch(`*[_type == "noticia"] | order(data desc) {
       _id, titulo, slug, data, categoria, resumo, imagemCapa, destaque
@@ -417,7 +419,7 @@ export async function getNoticias(): Promise<Noticia[]> {
 }
 
 export async function getNoticiaBySlug(slug: string): Promise<Noticia | null> {
-  if (!projectId) {
+  if (!isSanityConfigured) {
     const found = DEFAULT_NOTICIAS.find(n => n.slug.current === slug)
     return found || DEFAULT_NOTICIAS[0]
   }
@@ -430,7 +432,7 @@ export async function getNoticiaBySlug(slug: string): Promise<Noticia | null> {
 }
 
 export async function getDiferenciais(): Promise<Diferencial[]> {
-  if (!projectId) return DEFAULT_DIFERENCIAIS
+  if (!isSanityConfigured) return DEFAULT_DIFERENCIAIS
   try {
     const res = await client.fetch(`*[_type == "diferencial"] | order(ordem asc)`)
     return res && res.length > 0 ? res : DEFAULT_DIFERENCIAIS
@@ -440,7 +442,7 @@ export async function getDiferenciais(): Promise<Diferencial[]> {
 }
 
 export async function getModalidades(): Promise<ModalidadeEnsino[]> {
-  if (!projectId) return DEFAULT_MODALIDADES
+  if (!isSanityConfigured) return DEFAULT_MODALIDADES
   try {
     const res = await client.fetch(`*[_type == "modalidadeEnsino"]`)
     return res && res.length > 0 ? res : DEFAULT_MODALIDADES
@@ -450,7 +452,7 @@ export async function getModalidades(): Promise<ModalidadeEnsino[]> {
 }
 
 export async function getEspacosLocacao(): Promise<EspacoLocacao[]> {
-  if (!projectId) return DEFAULT_ESPACOS
+  if (!isSanityConfigured) return DEFAULT_ESPACOS
   try {
     const res = await client.fetch(`*[_type == "espacoLocacao"]`)
     return res && res.length > 0 ? res : DEFAULT_ESPACOS
@@ -460,7 +462,7 @@ export async function getEspacosLocacao(): Promise<EspacoLocacao[]> {
 }
 
 export async function getLinhaDoTempo(): Promise<LinhaDoTempoItem[]> {
-  if (!projectId) return DEFAULT_LINHA_TEMPO
+  if (!isSanityConfigured) return DEFAULT_LINHA_TEMPO
   try {
     const res = await client.fetch(`*[_type == "linhaDoTempoItem"] | order(ordem asc)`)
     return res && res.length > 0 ? res : DEFAULT_LINHA_TEMPO
@@ -470,7 +472,7 @@ export async function getLinhaDoTempo(): Promise<LinhaDoTempoItem[]> {
 }
 
 export async function getDepoimentos(): Promise<Depoimento70Anos[]> {
-  if (!projectId) return DEFAULT_DEPOIMENTOS
+  if (!isSanityConfigured) return DEFAULT_DEPOIMENTOS
   try {
     const res = await client.fetch(`*[_type == "depoimento70anos"]`)
     return res && res.length > 0 ? res : DEFAULT_DEPOIMENTOS
@@ -480,7 +482,7 @@ export async function getDepoimentos(): Promise<Depoimento70Anos[]> {
 }
 
 export async function getEstrutura(): Promise<AmbienteEstrutura[]> {
-  if (!projectId) return DEFAULT_ESTRUTURA
+  if (!isSanityConfigured) return DEFAULT_ESTRUTURA
   try {
     const res = await client.fetch(`*[_type == "paginaEstrutura"] | order(ordem asc)`)
     return res && res.length > 0 ? res : DEFAULT_ESTRUTURA
@@ -518,7 +520,7 @@ export async function getGaleriasMes(): Promise<GaleriaMes[]> {
     },
   ]
 
-  if (!projectId) return fallbackGalerias
+  if (!isSanityConfigured) return fallbackGalerias
   try {
     const res = await client.fetch(`*[_type == "galeriaMes"] | order(ano desc, mes desc)`)
     return res && res.length > 0 ? res : fallbackGalerias
