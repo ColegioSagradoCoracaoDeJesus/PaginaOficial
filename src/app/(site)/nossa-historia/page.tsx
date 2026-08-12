@@ -46,7 +46,7 @@ export default async function NossaHistoriaPage() {
               Sete Décadas Marcadas pelo Afeto, Rigor Acadêmico e Tradição
             </h2>
             <p className="text-slate-600 text-body leading-relaxed">
-              Fundado em 1956 com a missão de oferecer uma educação cristã humanizada, o Colégio Sagrado Coração de Jesus consolidou-se como referência pedagógica em Curitiba. Durante 70 anos, acompanhamos as profundas transformações da sociedade sem jamais abrir mão de nossos pilares fundacionais.
+              Fundado em 1956 com a missão de oferecer uma educação cristã humanizada, o Colégio Sagrado Coração de Jesus consolidou-se como referência pedagógica em Rio Grande - RS. Durante 70 anos, acompanhamos as profundas transformações da sociedade sem jamais abrir mão de nossos pilares fundacionais.
             </p>
             <p className="text-slate-600 text-body leading-relaxed">
               Aqui, a tradição caminha lado a lado com a inovação: integrando recursos tecnológicos de ponta, laboratórios modernos e programa bilíngue ao acolhimento atento que faz cada aluno sentir-se único e valorizado.

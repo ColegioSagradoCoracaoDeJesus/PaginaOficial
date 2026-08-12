@@ -38,19 +38,15 @@ export const Header: React.FC = () => {
       <div className="bg-[#1E3A5F] text-white text-xs py-1.5 px-4 border-b border-[#152A47]">
         <div className="max-w-[1280px] mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
           <div className="flex items-center gap-4 flex-wrap justify-center sm:justify-start">
-            <span className="flex items-center gap-1.5 font-medium">
-              <Phone className="w-3.5 h-3.5 text-amber-400" />
-              <a href="tel:5332325531" className="hover:underline">(53) 3232-5531</a>
+            <span className="flex items-center gap-1.5 font-medium text-emerald-300">
+              <MessageSquare className="w-3.5 h-3.5" />
+              <a href="https://wa.me/555332325531" target="_blank" rel="noreferrer" className="hover:underline font-semibold">
+                WhatsApp Secretaria: (53) 3232-5531
+              </a>
             </span>
             <span className="hidden md:inline-flex items-center gap-1.5 font-medium">
               <Clock className="w-3.5 h-3.5 text-amber-400" />
               <span>Atendimento: 07h30 às 17h30</span>
-            </span>
-            <span className="flex items-center gap-1.5 font-medium text-emerald-300">
-              <MessageSquare className="w-3.5 h-3.5" />
-              <a href="https://wa.me/55533232-5531" target="_blank" rel="noreferrer" className="hover:underline">
-                WhatsApp Secretaria
-              </a>
             </span>
           </div>
 

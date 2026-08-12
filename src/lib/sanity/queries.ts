@@ -104,14 +104,14 @@ export interface AmbienteEstrutura {
 // MOCK DATA FALLBACKS FOR ROBUSTNESS
 export const DEFAULT_SITE_SETTINGS: SiteSettings = {
   title: 'Colégio Sagrado Coração de Jesus',
-  telefones: ['(41) 3333-7000', '(41) 3333-7001'],
-  whatsapp: '5541999997000',
-  email: 'contato@sagradocoracao.g12.br',
+  telefones: ['(53) 3232-5531 (Somente WhatsApp)'],
+  whatsapp: '555332325531',
+  email: 'secretaria@sagradocoracao.g12.br',
   emailVisita: 'secretaria@sagradocoracao.g12.br',
   emailLocacao: 'eventos@sagradocoracao.g12.br',
-  endereco: 'Rua Sagrado Coração de Jesus, 70 - Bairro Alto, Curitiba - PR, CEP 80000-000',
-  linkMapaEmbed: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3603.208226066228!2d-49.273!3d-25.428!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjXCsDI1JzQwLjgiUyA0OcKwMTYnMjIuOCJX!5e0!3m2!1spt-BR!2sbr!4v1700000000000!5m2!1spt-BR!2sbr',
-  horarioAtendimento: 'Segunda a Sexta, das 07h30 às 18h30',
+  endereco: 'Rua Doutor Augusto Duprat, 374 - Cidade Nova, Rio Grande - RS, CEP 96211-058 (CEP: 96200-010)',
+  linkMapaEmbed: 'https://maps.google.com/maps?q=Rua+Doutor+Augusto+Duprat,+374+-+Cidade+Nova,+Rio+Grande+-+RS,+96211-058&t=&z=16&ie=UTF8&iwloc=&output=embed',
+  horarioAtendimento: 'Segunda a Sexta, das 07h30 às 17h30',
   redesSociais: {
     instagram: 'https://instagram.com/colegiosagradocoracao',
     facebook: 'https://facebook.com/colegiosagradocoracao',

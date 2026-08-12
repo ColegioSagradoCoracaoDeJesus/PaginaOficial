@@ -20,16 +20,17 @@ export const metadata: Metadata = {
     default: 'Colégio Sagrado Coração de Jesus | 70 Anos de Excelência Educacional',
     template: '%s | Colégio Sagrado Coração de Jesus',
   },
-  description: 'Há 70 anos formando gerações com excelência acadêmica, acolhimento humano e valores cristãos em Curitiba. Matrículas e Rematrículas abertas.',
+  description: 'Há 70 anos formando gerações com excelência acadêmica, acolhimento humano e valores cristãos em Rio Grande - RS. Matrículas e Rematrículas abertas.',
   keywords: [
     'Colégio Sagrado Coração de Jesus',
-    'Escola Curitiba',
-    'Educação Infantil Curitiba',
-    'Ensino Fundamental Curitiba',
-    'Ensino Médio Curitiba',
-    'Escola 70 Anos',
-    'Matrículas Escolares Curitiba',
+    'Escola Rio Grande',
+    'Educação Infantil Rio Grande',
+    'Ensino Fundamental Rio Grande',
+    'Ensino Médio Rio Grande',
+    'Escola 70 Anos Rio Grande',
+    'Matrículas Escolares Rio Grande',
   ],
+  
   authors: [{ name: 'Colégio Sagrado Coração de Jesus' }],
   openGraph: {
     type: 'website',
@@ -37,7 +38,7 @@ export const metadata: Metadata = {
     url: 'https://sagradocoracao.g12.br',
     siteName: 'Colégio Sagrado Coração de Jesus',
     title: 'Colégio Sagrado Coração de Jesus | 70 Anos de Excelência Educacional',
-    description: 'Há 70 anos formando gerações com excelência, acolhimento e valores em Curitiba.',
+    description: 'Há 70 anos formando gerações com excelência, acolhimento e valores em Rio Grande - RS.',
     images: [
       {
         url: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1200&auto=format&fit=crop',
@@ -65,17 +66,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     foundingDate: '1956',
     address: {
       '@type': 'PostalAddress',
-      streetAddress: 'Rua Sagrado Coração de Jesus, 70',
-      addressLocality: 'Curitiba',
-      addressRegion: 'PR',
-      postalCode: '80000-000',
+      streetAddress: 'Rua Doutor Augusto Duprat, 374 - Cidade Nova, Rio Grande - RS, 96211-058',
+      addressLocality: 'Rio Grande',
+      addressRegion: 'RS',
+      postalCode: '96211-058',
       addressCountry: 'BR',
     },
-    telephone: '+55-41-3333-7000',
-    email: 'contato@sagradocoracao.g12.br',
+    telephone: '+55-53-3232-5531',
+    email: 'secretariasagradorg@gmail.com',
     sameAs: [
-      'https://instagram.com/colegiosagradocoracao',
-      'https://facebook.com/colegiosagradocoracao',
+      'https://instagram.com/colegiosagradorg',
+      'https://facebook.com/colegiosagradorg',
     ],
   }
 

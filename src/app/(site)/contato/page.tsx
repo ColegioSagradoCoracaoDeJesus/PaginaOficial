@@ -73,7 +73,7 @@ export default function ContatoPage() {
                       rel="noreferrer"
                       className="text-xs font-semibold text-emerald-600 hover:underline mt-0.5 block"
                     >
-                      (41) 99999-7000 (Clique para iniciar conversa)
+                      (53) 3232-5531 (Clique para iniciar conversa)
                     </a>
                   </div>
                 </li>
