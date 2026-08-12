@@ -64,7 +64,7 @@ export default function PoliticaDePrivacidadePage() {
             Em conformidade com a LGPD, o titular dos dados possui o direito de solicitar a confirmação, o acesso, a correção ou a exclusão definitiva dos seus dados pessoais fornecidos ao Colégio.
           </p>
           <p>
-            Para exercer seus direitos como titular de dados, entre em contato direto com nosso Encarregado de Proteção de Dados (DPO) através do e-mail oficial: <a href="mailto:contato@sagradocoracao.g12.br" className="text-[#1E3A5F] font-bold underline">contato@sagradocoracao.g12.br</a>.
+            Para exercer seus direitos como titular de dados, entre em contato direto com nosso Encarregado de Proteção de Dados (DPO) através do e-mail oficial: <a href="mailto:secretariacolegiosagrado@gmail.com" className="text-[#1E3A5F] font-bold underline">secretariacolegiosagrado@gmail.com</a>.
           </p>
         </section>
 
