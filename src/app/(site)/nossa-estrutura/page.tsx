@@ -17,6 +17,16 @@ export const metadata = {
 export default async function NossaEstruturaPage() {
   const estrutura = await getEstrutura()
 
+  const todasFotos = estrutura.flatMap((e) =>
+    (e.fotos || [])
+      .filter((f) => Boolean(f && f.url))
+      .map((f) => ({
+        url: f.url || '',
+        alt: f.alt || e.ambiente,
+        descricao: `${e.ambiente} — ${f.legenda || e.descricao || ''}`,
+      }))
+  )
+
   return (
     <div>
       <MigalhaDePao items={[{ label: 'Nossa Estrutura' }]} />
@@ -56,18 +66,12 @@ export default async function NossaEstruturaPage() {
         </div>
 
         {/* Global Lightbox for environment photos */}
-        <section className="space-y-6 border-t pt-10">
-          <h2 className="font-display text-h2 font-bold text-slate-900">Galeria dos Ambientes</h2>
-          <GaleriaComLightbox
-            fotos={estrutura.flatMap((e) =>
-              e.fotos.map((f) => ({
-                url: f.url,
-                alt: f.alt || e.ambiente,
-                descricao: `${e.ambiente} — ${f.legenda || e.descricao}`,
-              }))
-            )}
-          />
-        </section>
+        {todasFotos.length > 0 && (
+          <section className="space-y-6 border-t pt-10">
+            <h2 className="font-display text-h2 font-bold text-slate-900">Galeria dos Ambientes</h2>
+            <GaleriaComLightbox fotos={todasFotos} />
+          </section>
+        )}
 
         <BlocoCTA />
       </div>
