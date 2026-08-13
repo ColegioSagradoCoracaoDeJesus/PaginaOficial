@@ -158,9 +158,9 @@ export const DEFAULT_MODALIDADES: ModalidadeEnsino[] = [
       'Desenvolver hábitos de estudo, organização e autonomia',
       'Estimular a consciência cidadã e valores éticos'
     ],
-    metodologia: 'Aprendizagem significativa integrando disciplinas através de projetos interdisciplinares, cultura maker e resolução de problemas práticos do dia a dia.',
+    metodologia: 'Aprendizagem significativa integrando disciplinas através de projetos interdisciplinares e resolução de problemas práticos do dia a dia.',
     diferenciais: [
-      'Aulas de Robótica e Raciocínio Lógico',
+      'Material Didático da FTD Educação',
       'Programa Bilíngue em parceria internacional',
       'Feiras de Ciências e Artes anuais',
       'Reforço escolar e acompanhamento individualizado'
@@ -185,8 +185,8 @@ export const DEFAULT_MODALIDADES: ModalidadeEnsino[] = [
     ],
     metodologia: 'Foco na autonomia intelectual com laboratórios práticos, debates temáticos e projetos de iniciação científica orientados por professores especialistas.',
     diferenciais: [
-      'Laboratórios de Ciências e Física equipados',
-      'Olimpíadas de Conhecimento (Astronomia, Matemática, Robótica)',
+      'Laboratórios de Ciências equipados',
+      'Olimpíadas de Conhecimento (Astronomia, Matemática, Linguagens)',
       'Acompanhamento de orientação educacional próximo aos alunos',
       'Projetos de voluntariado e pastoral escolar'
     ],
@@ -227,7 +227,7 @@ export const DEFAULT_DIFERENCIAIS: Diferencial[] = [
   { _id: 'd1', titulo: 'Formação Humana e Valores', icone: 'Heart', textoCurto: 'Educação alicerçada no respeito, acolhimento, ética e responsabilidade social.', ordem: 1 },
   { _id: 'd2', titulo: 'Tradição dos 70 Anos', icone: 'Award', textoCurto: 'Sete décadas de história moldando cidadãos conscientes e preparados para o futuro.', ordem: 2 },
   { _id: 'd3', titulo: 'Programa Bilíngue e Global', icone: 'Globe', textoCurto: 'Imersão no idioma inglês com foco em fluência, cultura e certificações internacionais.', ordem: 3 },
-  { _id: 'd4', titulo: 'Tecnologia Educacional Avançada', icone: 'Cpu', textoCurto: 'Laboratórios modernos, Plataforma Iônica e ecossistema digital integrado.', ordem: 4 },
+  { _id: 'd4', titulo: 'Tecnologia Educacional FTD', icone: 'Cpu', textoCurto: 'Plataforma Iônica, recursos digitais e materiais de excelência da FTD Educação.', ordem: 4 },
   { _id: 'd5', titulo: 'Suporte Socioemocional', icone: 'Users', textoCurto: 'Equipe multidisciplinar de psicologia e orientação pedagógica permanente.', ordem: 5 },
   { _id: 'd6', titulo: 'Segurança e Estrutura Completa', icone: 'ShieldCheck', textoCurto: 'Monitoramento 24h, amplos espaços esportivos, auditório e ambientes climatizados.', ordem: 6 },
 ]
@@ -294,7 +294,7 @@ export const DEFAULT_ESTRUTURA: AmbienteEstrutura[] = [
   {
     _id: 'est3',
     ambiente: 'Laboratórios de Ciências e Informática',
-    descricao: 'Bancadas equipadas para experimentos de Física, Química e Biologia, além de computadores atualizados para robótica.',
+    descricao: 'Bancadas equipadas para experimentos de Física, Química e Biologia, além de computadores atualizados para pesquisa e estudos digitais.',
     fotos: [{ url: 'https://images.unsplash.com/photo-1532094349884-543bc11b234d?q=80&w=800&auto=format&fit=crop', alt: 'Laboratório de ciências' }]
   },
   {
