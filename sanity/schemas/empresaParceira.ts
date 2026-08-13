@@ -24,7 +24,6 @@ export default defineType({
       type: 'image',
       options: { hotspot: true },
       fields: [{ name: 'alt', type: 'string', title: 'Texto Alternativo' }],
-      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'descricao',
