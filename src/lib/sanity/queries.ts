@@ -608,3 +608,193 @@ export async function getGaleriasMes(): Promise<GaleriaMes[]> {
     return []
   }
 }
+
+export interface PaginaHistoria {
+  tituloBanner?: string
+  subtituloBanner?: string
+  tituloSecao?: string
+  textoInstitucional1?: string
+  textoInstitucional2?: string
+  imageUrl?: string
+  missao?: string
+  visao?: string
+  valores?: string
+  fotosHistoricas?: Array<{ url?: string; alt?: string; descricao?: string }>
+}
+
+export async function getPaginaHistoria(): Promise<PaginaHistoria | null> {
+  if (!isSanityConfigured) return null
+  try {
+    const res = await client.fetch(
+      `*[_type == "paginaHistoria"][0] {
+        tituloBanner,
+        subtituloBanner,
+        tituloSecao,
+        textoInstitucional1,
+        textoInstitucional2,
+        "imageUrl": imagemDestaque.asset->url,
+        missao,
+        visao,
+        valores,
+        "fotosHistoricas": fotosHistoricas[] {
+          "url": asset->url,
+          alt,
+          descricao
+        }
+      }`,
+      {},
+      fetchOptions
+    )
+    return res || null
+  } catch (err) {
+    return null
+  }
+}
+
+export interface PaginaSetentaAnos {
+  badge?: string
+  titulo?: string
+  subtitulo?: string
+  curiosidades?: Array<{ ano: string; texto: string }>
+  programacao?: Array<{
+    data: string
+    horario: string
+    titulo: string
+    local: string
+    descricao: string
+    ingresso: string
+  }>
+}
+
+export async function getPaginaSetentaAnos(): Promise<PaginaSetentaAnos | null> {
+  if (!isSanityConfigured) return null
+  try {
+    const res = await client.fetch(
+      `*[_type == "paginaSetentaAnos"][0] {
+        badge,
+        titulo,
+        subtitulo,
+        curiosidades[] {
+          ano,
+          texto
+        },
+        programacao[] {
+          data,
+          horario,
+          titulo,
+          local,
+          descricao,
+          ingresso
+        }
+      }`,
+      {},
+      fetchOptions
+    )
+    return res || null
+  } catch (err) {
+    return null
+  }
+}
+
+export interface PaginaVivencie {
+  tituloBanner?: string
+  subtituloBanner?: string
+  tituloIntro?: string
+  textoIntro1?: string
+  textoIntro2?: string
+  imageUrl?: string
+  pilares?: Array<{
+    titulo: string
+    descricao: string
+    icone: string
+  }>
+}
+
+export async function getPaginaVivencie(): Promise<PaginaVivencie | null> {
+  if (!isSanityConfigured) return null
+  try {
+    const res = await client.fetch(
+      `*[_type == "paginaVivencie"][0] {
+        tituloBanner,
+        subtituloBanner,
+        tituloIntro,
+        textoIntro1,
+        textoIntro2,
+        "imageUrl": imagemDestaque.asset->url,
+        pilares[] {
+          titulo,
+          descricao,
+          icone
+        }
+      }`,
+      {},
+      fetchOptions
+    )
+    return res || null
+  } catch (err) {
+    return null
+  }
+}
+
+export interface PaginaMatriculas {
+  titulo?: string
+  subtitulo?: string
+  passos?: Array<{ numero: number; titulo: string; descricao: string }>
+  documentosNecessarios?: string[]
+  duvidasFrequentes?: Array<{ pergunta: string; resposta: string }>
+}
+
+export async function getPaginaMatriculas(): Promise<PaginaMatriculas | null> {
+  if (!isSanityConfigured) return null
+  try {
+    const res = await client.fetch(
+      `*[_type == "paginaMatriculas"][0] {
+        titulo,
+        subtitulo,
+        passos[] {
+          numero,
+          titulo,
+          descricao
+        },
+        documentosNecessarios,
+        duvidasFrequentes[] {
+          pergunta,
+          resposta
+        }
+      }`,
+      {},
+      fetchOptions
+    )
+    return res || null
+  } catch (err) {
+    return null
+  }
+}
+
+export interface PaginaTecnologia {
+  titulo?: string
+  subtitulo?: string
+  recursos?: Array<{ nome: string; descricao: string; linkAcesso?: string }>
+}
+
+export async function getPaginaTecnologia(): Promise<PaginaTecnologia | null> {
+  if (!isSanityConfigured) return null
+  try {
+    const res = await client.fetch(
+      `*[_type == "paginaTecnologia"][0] {
+        titulo,
+        subtitulo,
+        recursos[] {
+          nome,
+          descricao,
+          linkAcesso
+        }
+      }`,
+      {},
+      fetchOptions
+    )
+    return res || null
+  } catch (err) {
+    return null
+  }
+}

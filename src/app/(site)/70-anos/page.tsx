@@ -6,7 +6,7 @@ import { Etiqueta } from '@/components/ui/Etiqueta'
 import { Botao } from '@/components/ui/Botao'
 import { ItemLinhaDoTempo } from '@/components/conteudo/ItemLinhaDoTempo'
 import { BlocoCTA } from '@/components/conteudo/BlocoCTA'
-import { getLinhaDoTempo, getDepoimentos } from '@/lib/sanity/queries'
+import { getLinhaDoTempo, getDepoimentos, getPaginaSetentaAnos } from '@/lib/sanity/queries'
 
 export const dynamic = 'force-dynamic'
 
@@ -18,8 +18,13 @@ export const metadata = {
 export default async function SetentaAnosPage() {
   const linhaTempo = await getLinhaDoTempo()
   const depoimentos = await getDepoimentos()
+  const data = await getPaginaSetentaAnos()
 
-  const programacao70Anos = [
+  const badge = data?.badge || '1956 — 2026 | Jubileu de Vinho'
+  const titulo = data?.titulo || '70 Anos Formando Gerações com Excelência, Acolhimento e Valores'
+  const subtitulo = data?.subtitulo || 'Sete décadas construindo memórias, transformando vidas e reafirmando o compromisso com uma educação integral de verdade.'
+
+  const programacao70Anos = data?.programacao && data.programacao.length > 0 ? data.programacao : [
     {
       data: '15 de Setembro de 2026',
       horario: '19h00',
@@ -46,7 +51,7 @@ export default async function SetentaAnosPage() {
     },
   ]
 
-  const curiosidades = [
+  const curiosidades = data?.curiosidades && data.curiosidades.length > 0 ? data.curiosidades : [
     { ano: '1956', texto: 'A primeira turma contava com apenas 28 alunos e funcionava em um casarão adaptado.' },
     { ano: '1974', texto: 'O Colégio formou seu primeiro time feminino de basquete, sagrando-se campeão municipal no ano seguinte.' },
     { ano: '1998', texto: 'Inauguração da cápsula do tempo no jardim central, que será aberta durante os festejos dos 70 anos.' },
@@ -64,15 +69,15 @@ export default async function SetentaAnosPage() {
         <div className="max-w-[1280px] mx-auto text-center relative z-10 space-y-6">
           <div className="inline-flex items-center gap-2 bg-[#B8860B] text-white px-4 py-1.5 rounded-full font-bold text-xs sm:text-sm tracking-wider uppercase shadow-md">
             <Award className="w-4 h-4" />
-            <span>1956 — 2026 | Jubileu de Vinho</span>
+            <span>{badge}</span>
           </div>
 
           <h1 className="font-display text-hero font-bold text-white max-w-4xl mx-auto leading-tight">
-            70 Anos Formando Gerações com Excelência, Acolhimento e Valores
+            {titulo}
           </h1>
 
           <p className="text-amber-100 text-base sm:text-xl max-w-2xl mx-auto font-sans leading-relaxed">
-            Sete décadas construindo memórias, transformando vidas e reafirmando o compromisso com uma educação integral de verdade.
+            {subtitulo}
           </p>
         </div>
       </section>

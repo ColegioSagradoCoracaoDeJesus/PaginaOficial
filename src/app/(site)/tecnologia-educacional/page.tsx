@@ -5,13 +5,21 @@ import { MigalhaDePao } from '@/components/ui/MigalhaDePao'
 import { Etiqueta } from '@/components/ui/Etiqueta'
 import { Botao } from '@/components/ui/Botao'
 import { BlocoCTA } from '@/components/conteudo/BlocoCTA'
+import { getPaginaTecnologia } from '@/lib/sanity/queries'
+
+export const dynamic = 'force-dynamic'
 
 export const metadata = {
   title: 'Tecnologia Educacional | Diário Escola e Plataforma Iônica',
-  description: 'Conheça as plataformas digitais, laboratórios de robótica e ecossistema de aprendizagem da Plataforma Iônica e Diário Escola.',
+  description: 'Conheça as plataformas digitais, laboratórios e ecossistema de aprendizagem do Colégio Sagrado Coração de Jesus.',
 }
 
-export default function TecnologiaEducacionalPage() {
+export default async function TecnologiaEducacionalPage() {
+  const data = await getPaginaTecnologia()
+
+  const tituloBanner = data?.titulo || 'Tecnologia Educacional & Inovação'
+  const subtituloBanner = data?.subtitulo || 'Ferramentas digitais de última geração integradas ao cotidiano pedagógico e à comunicação transparente com as famílias.'
+
   return (
     <div>
       <MigalhaDePao items={[{ label: 'Tecnologia Educacional' }]} />
@@ -19,9 +27,9 @@ export default function TecnologiaEducacionalPage() {
       <section className="bg-[#1E3A5F] text-white py-16 px-4">
         <div className="max-w-[1280px] mx-auto text-center space-y-4">
           <Etiqueta variant="anniversary">Ecossistema Digital</Etiqueta>
-          <h1 className="font-display text-h1 font-bold text-white">Tecnologia Educacional</h1>
+          <h1 className="font-display text-h1 font-bold text-white">{tituloBanner}</h1>
           <p className="text-slate-200 text-body max-w-2xl mx-auto leading-relaxed">
-            Ferramentas digitais de última geração integradas ao cotidiano pedagógico e à comunicação transparente com as famílias.
+            {subtituloBanner}
           </p>
         </div>
       </section>
