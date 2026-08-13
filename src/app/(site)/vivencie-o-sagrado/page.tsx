@@ -9,8 +9,8 @@ import { getPaginaVivencie } from '@/lib/sanity/queries'
 export const dynamic = 'force-dynamic'
 
 export const metadata = {
-  title: 'Vivencie o Sagrado | Vida Escolar e Pastoral',
-  description: 'Conheça o dia a dia, projetos pastorais, convivência comunitária e rotina acolhedora do Colégio Sagrado Coração de Jesus.',
+  title: 'Vivencie o Sagrado | Vida Escolar e Convivência',
+  description: 'Conheça o dia a dia, projetos de convivência, formação ética e rotina acolhedora do Colégio Sagrado Coração de Jesus.',
 }
 
 function getIcon(name: string) {
@@ -40,29 +40,29 @@ export default async function VivencieOSagradoPage() {
   const subtituloBanner = data?.subtituloBanner || 'Mais do que salas de aula: um espaço de convivência, desenvolvimento de virtudes e memórias inesquecíveis para toda a vida.'
   const tituloIntro = data?.tituloIntro || 'Um Ambiente Onde Cada Aluno se Sente em Casa'
   const texto1 = data?.textoIntro1 || 'No Colégio Sagrado Coração de Jesus, o aprendizado vai além dos livros. Acreditamos que o conhecimento floresce em um ambiente seguro, acolhedor e repleto de afeto.'
-  const texto2 = data?.textoIntro2 || 'Nossa rotina é planejada para equilibrar rigor acadêmico, práticas esportivas, manifestações artísticas e momentos de pastoral que conectam a juventude a valores elevados.'
+  const texto2 = data?.textoIntro2 || 'Nossa rotina é planejada para equilibrar qualidade pedagógica, práticas esportivas, manifestações culturais e projetos de convivência e cidadania.'
   const imageUrl = data?.imageUrl || 'https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=1000&auto=format&fit=crop'
 
   const pilaresVida = data?.pilares && data.pilares.length > 0 ? data.pilares : [
     {
       icone: 'Heart',
-      titulo: 'Pastoral & Espiritualidade',
-      descricao: 'Ações de solidariedade, encontros de reflexão, celebrações eucarísticas e voluntariado que aquecem o coração e desenvolvem a empatia.',
+      titulo: 'Cidadania, Ética & Solidariedade',
+      descricao: 'Ações de voluntariado, campanhas solidárias e rodas de reflexão que estimulam a empatia e o respeito ao próximo.',
     },
     {
       icone: 'Users',
       titulo: 'Projetos de Convivência',
-      descricao: 'Rodas de conversa socioemocionais, mediação de conflitos e assembleias de alunos para fortalecer o sentimento de pertencimento.',
+      descricao: 'Desenvolvimento socioemocional, mediação de conflitos e assembleias de alunos para fortalecer o sentimento de pertencimento.',
     },
     {
       icone: 'Music',
       titulo: 'Cultura, Arte & Esportes',
-      descricao: 'Mostras culturais, festivais de música, peças teatrais e olimpíadas internas no ginásio poliesportivo.',
+      descricao: 'Apresentações culturais, projetos artísticos, jogos esportivos e celebrações no ginásio poliesportivo.',
     },
     {
       icone: 'Sun',
-      titulo: 'Rotina e Conforto',
-      descricao: 'Horários organizados, ambiente seguro com monitoramento 24h e refeições acompanhadas por nutricionista.',
+      titulo: 'Rotina, Conforto & Segurança',
+      descricao: 'Horários organizados, ambiente monitorado e acompanhamento acolhedor para que cada aluno se desenvolva com tranquilidade.',
     },
   ]
 

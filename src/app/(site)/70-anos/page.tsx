@@ -26,28 +26,12 @@ export default async function SetentaAnosPage() {
 
   const programacao70Anos = data?.programacao && data.programacao.length > 0 ? data.programacao : [
     {
-      data: '15 de Setembro de 2026',
-      horario: '19h00',
-      titulo: 'Missa em Ação de Graças pelos 70 Anos',
-      local: 'Auditório Principal Ir. Tereza',
-      descricao: 'Celebração eucarística comemorativa presidida com participação do coral dos alunos.',
-      ingresso: 'Entrada Franca mediante confirmação prévia.',
-    },
-    {
-      data: '24 de Outubro de 2026',
-      horario: '14h00 às 20h00',
-      titulo: 'Grande Encontro dos Ex-Alunos & Feira Cultural 70 Anos',
-      local: 'Ginásio Poliesportivo e Pátios do Colégio',
-      descricao: 'Reencontro de turmas históricas, exposição de fotos antigas, música ao vivo e espaço gastronômico.',
-      ingresso: 'Convite individual disponível na Secretaria ou via WhatsApp.',
-    },
-    {
-      data: '20 de Novembro de 2026',
-      horario: '20h00',
-      titulo: 'Jantar Solene de Gala dos 70 Anos',
-      local: 'Salão de Eventos Principal',
-      descricao: 'Noite de homenagens a educadores históricos, ex-diretores e famílias fundadoras.',
-      ingresso: 'Mesa reserva na Secretaria. (Consulte disponibilidade).',
+      data: 'A Definir / Em Breve',
+      horario: 'A Definir',
+      titulo: 'Espetáculo Comemorativo dos 70 Anos',
+      local: 'Colégio Sagrado Coração de Jesus',
+      descricao: 'Grande apresentação artística e cultural celebrando a história de sete décadas do colégio.',
+      ingresso: 'Informações e ingressos na Secretaria do Colégio.',
     },
   ]
 

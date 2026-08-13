@@ -122,52 +122,69 @@ export const DEFAULT_SITE_SETTINGS: SiteSettings = {
 
 export const DEFAULT_MODALIDADES: ModalidadeEnsino[] = [
   {
+    _id: 'm-recreacao',
+    nome: 'Recreação (Turno Inverso)',
+    slug: { current: 'recreacao-turno-inverso' },
+    faixaEtaria: 'Educação Infantil e Ensino Fundamental',
+    resumo: 'Atividades lúdicas, momentos de descanso, brincadeiras orientadas e apoio às famílias no contraturno escolar.',
+    objetivos: [
+      'Proporcionar acolhimento seguro e atividades dinâmicas no contraturno',
+      'Auxiliar no desenvolvimento da socialização e convivência',
+      'Oferecer suporte prático para a rotina das famílias'
+    ],
+    metodologia: 'Brincadeiras dirigidas, oficinas culturais, momentos de leitura e convivência sadia.',
+    diferenciais: [
+      'Turno estendido e flexível',
+      'Pátios arborizados e ambientes seguros',
+      'Acompanhamento cuidadoso por monitoras e educadores'
+    ],
+    projetos: [
+      { nome: 'Oficinas Recreativas', descricao: 'Jogos cooperativos, contação de histórias e brincadeiras tradicionais.' }
+    ],
+    imageUrl: 'https://images.unsplash.com/photo-1587654780291-39c9404d746b?q=80&w=1200&auto=format&fit=crop',
+  },
+  {
     _id: 'm1',
     nome: 'Educação Infantil',
     slug: { current: 'educacao-infantil' },
-    faixaEtaria: '2 a 5 anos (Maternal ao Infantil V)',
-    resumo: 'Ambiente estimulante, seguro e acolhedor onde a criança descobre o mundo através do brincar guiado, da socialização e do desenvolvimento socioemocional.',
+    faixaEtaria: 'Maternal ao Nível V',
+    resumo: 'Ambiente acolhedor onde a criança desenvolve suas primeiras habilidades sociais, linguagem e autonomia através do brincar.',
     objetivos: [
-      'Desenvolver a autonomia, coordenação motora e expressão corporal',
-      'Estimular a linguagem oral e o gosto inicial pela leitura e histórias',
-      'Incentivar a convivência harmoniosa, empatia e compartilhamento',
-      'Promover a curiosidade científica e o contato com a natureza'
+      'Desenvolver a coordenação motora, linguagem e expressão',
+      'Estimular a socialização e o convívio em grupo',
+      'Incentivar a curiosidade e o gosto pelas histórias'
     ],
-    metodologia: 'Metodologia afetiva e investigativa, onde a criança é protagonista de suas descobertas. Utilizamos jogos pedagógicos, projetos temáticos e vivências ao ar livre.',
+    metodologia: 'Projetos lúdicos integrados a vivências cotidianas e materiais adequados para a primeira infância.',
     diferenciais: [
-      'Parque infantil exclusivo e arborizado',
-      'Iniciação ao inglês de forma lúdica',
-      'Acompanhamento nutricional e ambiente seguro',
-      'Salas de aulas lúdicas e climatizadas'
+      'Pátio infantil seguro',
+      'Salas preparadas e climatizadas',
+      'Acompanhamento diário pelo Diário Escola'
     ],
     projetos: [
-      { nome: 'Passaporte da Leitura', descricao: 'Incentivo diário ao contato com livros infantis com participação da família.' },
-      { nome: 'Horta Pedagógica', descricao: 'Vivência prática sobre sustentabilidade, cultivo e alimentação saudável.' }
+      { nome: 'Feira do Livro Infantil', descricao: 'Incentivo à leitura e contação de histórias com as famílias.' }
     ],
-    imageUrl: 'https://images.unsplash.com/photo-1587654780291-39c9404d746b?q=80&w=1200&auto=format&fit=crop',
+    imageUrl: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=1200&auto=format&fit=crop',
   },
   {
     _id: 'm2',
     nome: 'Ensino Fundamental I',
     slug: { current: 'ensino-fundamental-1' },
-    faixaEtaria: '1º ao 5º ano (6 a 10 anos)',
-    resumo: 'Consolidação da alfabetização, letramento matemático e raciocínio crítico em uma fase crucial para o desenvolvimento do pensamento lógico e colaborativo.',
+    faixaEtaria: '1º ao 5º ano',
+    resumo: 'Consolidação da alfabetização, raciocínio lógico e desenvolvimento de hábitos de estudo com acompanhamento pedagógico próximo.',
     objetivos: [
-      'Garantir a alfabetização plena e capacidade leitora crítica',
-      'Construir a base matemática e o raciocínio lógico-dedutivo',
-      'Desenvolver hábitos de estudo, organização e autonomia',
-      'Estimular a consciência cidadã e valores éticos'
+      'Desenvolver a alfabetização, leitura e interpretação de texto',
+      'Construir a base do raciocínio matemático',
+      'Estimular a responsabilidade e hábitos de estudo'
     ],
-    metodologia: 'Aprendizagem significativa integrando disciplinas através de projetos interdisciplinares e resolução de problemas práticos do dia a dia.',
+    metodologia: 'Aulas estruturadas com materiais didáticos da FTD Educação e projetos que conectam teoria e prática.',
     diferenciais: [
       'Material Didático da FTD Educação',
-      'Programa Bilíngue em parceria internacional',
-      'Feiras de Ciências e Artes anuais',
-      'Reforço escolar e acompanhamento individualizado'
+      'Acompanhamento pedagógico atencioso',
+      'Participação na Feira do Livro e Feira de Ciências'
     ],
     projetos: [
-      { nome: 'Jovens Escritores', descricao: 'Produção e autoria de livros pelos próprios alunos com noite de autógrafos.' },
-      { nome: 'Clube de Matemática Divertida', descricao: 'Jogos de tabuleiro e desafios lógicos estimulantes.' }
+      { nome: 'Feira do Livro Anual', descricao: 'Apresentação de trabalhos literários e incentivo à leitura.' },
+      { nome: 'Feira de Ciências Anual', descricao: 'Experiências simples e curiosidades científicas apresentadas pelos alunos.' }
     ],
     imageUrl: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=1200&auto=format&fit=crop',
   },
@@ -175,24 +192,22 @@ export const DEFAULT_MODALIDADES: ModalidadeEnsino[] = [
     _id: 'm3',
     nome: 'Ensino Fundamental II',
     slug: { current: 'ensino-fundamental-2' },
-    faixaEtaria: '6º ao 9º ano (11 a 14 anos)',
-    resumo: 'Aprofundamento científico, autonomia intelectual e preparação para os desafios do Ensino Médio em um período de profundas transformações interpessoais.',
+    faixaEtaria: '6º ao 9º ano',
+    resumo: 'Aprofundamento dos conteúdos curriculares, autonomia nos estudos e preparação para os desafios do Ensino Médio.',
     objetivos: [
-      'Aprofundar os conhecimentos científicos e pensamento abstrato',
-      'Estimular a responsabilidade social, liderança e protagonismo juvenil',
-      'Desenvolver competências socioemocionais para a adolescência',
-      'Introduzir metodologias ativas de estudo e pesquisa acadêmica'
+      'Consolidar conhecimentos nas diversas áreas do saber',
+      'Estimular o pensamento crítico e a capacidade de argumentação',
+      'Desenvolver a responsabilidade pessoal e coletiva'
     ],
-    metodologia: 'Foco na autonomia intelectual com laboratórios práticos, debates temáticos e projetos de iniciação científica orientados por professores especialistas.',
+    metodologia: 'Aulas com professores especialistas em cada disciplina, com apoio da Plataforma Iônica e materiais da FTD.',
     diferenciais: [
-      'Laboratórios de Ciências equipados',
-      'Olimpíadas de Conhecimento (Astronomia, Matemática, Linguagens)',
-      'Acompanhamento de orientação educacional próximo aos alunos',
-      'Projetos de voluntariado e pastoral escolar'
+      'Corpo docente qualificado',
+      'Acesso à Plataforma Iônica da FTD Educação',
+      'Ambientes climatizados e laboratório de informática'
     ],
     projetos: [
-      { nome: 'Mostra de Iniciação Científica', descricao: 'Pesquisa e apresentação de projetos inovadores para a comunidade escolar.' },
-      { nome: 'Simulações da ONU / Debates', descricao: 'Desenvolvimento de oratória e geopolítica.' }
+      { nome: 'Feira de Ciências Anual', descricao: 'Pesquisas e experimentos científicos conduzidos pelos estudantes.' },
+      { nome: 'Feira do Livro', descricao: 'Atividades culturais e produções textuais.' }
     ],
     imageUrl: 'https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=1200&auto=format&fit=crop',
   },
@@ -200,24 +215,21 @@ export const DEFAULT_MODALIDADES: ModalidadeEnsino[] = [
     _id: 'm4',
     nome: 'Ensino Médio',
     slug: { current: 'ensino-medio' },
-    faixaEtaria: '1ª à 3ª série (15 a 17 anos)',
-    resumo: 'Excelência preparatória para os vestibulares mais concorridos e ENEM, aliada à formação ética, visão de futuro e consolidação do projeto de vida do estudante.',
+    faixaEtaria: '1ª à 3ª série',
+    resumo: 'Preparação acadêmica e formação ética para o ingresso no ensino superior e vestibulares/ENEM.',
     objetivos: [
-      'Garantir alto rendimento no ENEM e vestibulares de excelência',
-      'Consolidar a maturidade intelectual, discernimento moral e liderança',
-      'Orientar o projeto de vida e escolhas profissionais com clareza',
-      'Estimular o pensamento crítico diante dos desafios contemporâneos'
+      'Aprofundar os conteúdos preparatórios para vestibulares e ENEM',
+      'Consolidar a maturidade intelectual e visão de futuro',
+      'Formar cidadãos éticos e responsáveis'
     ],
-    metodologia: 'Itinerários formativos flexíveis, simulados diagnósticos frequentes com correção TRI (padrão ENEM) e mentoria individualizada para vestibulares de alta concorrência.',
+    metodologia: 'Foco no currículo do Ensino Médio com materiais didáticos da FTD Educação e simulados preparatórios.',
     diferenciais: [
-      'Simulados periódicos com devolutiva analítica detalhada',
-      'Programa de Orientação Vocacional e Feira das Profissões',
-      'Plantões de dúvidas e salas de estudo climatizadas',
-      'Alto índice de aprovação nas principais universidades públicas e privadas'
+      'Material FTD Educação voltado para o ENEM e vestibulares',
+      'Salas de aula climatizadas',
+      'Simulados periódicos'
     ],
     projetos: [
-      { nome: 'Foco ENEM & Redação Nota Mil', descricao: 'Oficinas semanais de redação com correção personalizada.' },
-      { nome: 'Mentorias de Carreira', descricao: 'Encontros com ex-alunos aprovados em Medicina, Direito, Engenharia e áreas de ponta.' }
+      { nome: 'Feira de Ciências e Mostra Cultural', descricao: 'Apresentação de projetos interdisciplinares.' }
     ],
     imageUrl: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=1200&auto=format&fit=crop',
   },

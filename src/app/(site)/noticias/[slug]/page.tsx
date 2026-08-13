@@ -90,7 +90,7 @@ export default async function NoticiaDetailPage({ params }: { params: Promise<{ 
             O Colégio Sagrado Coração de Jesus tem o orgulho de compartilhar com toda a comunidade escolar mais um capítulo marcante de nossa caminhada pedagógica e institucional.
           </p>
           <p>
-            Durante as atividades desenvolvidas com nossos estudantes, promovemos continuamente a integração entre teoria acadêmica, ética cristã, sensibilidade socioemocional e uso responsável da tecnologia.
+            Durante as atividades desenvolvidas com nossos estudantes, promovemos continuamente a integração entre teoria acadêmica, ética, sensibilidade socioemocional e vivência de valores humanos.
           </p>
           <p>
             Parabenizamos todos os alunos, educadores e famílias envolvidas neste projeto, reforçando nosso compromisso de 70 anos com a formação integral do ser humano.

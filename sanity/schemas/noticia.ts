@@ -33,9 +33,9 @@ export default defineType({
         list: [
           { title: 'Institucional', value: 'Institucional' },
           { title: 'Pedagógico', value: 'Pedagógico' },
-          { title: 'Eventos & Projetos', value: 'Eventos & Projetos' },
-          { title: 'Esportes & Cultura', value: 'Esportes & Cultura' },
-          { title: ' Pastoral & Espiritualidade', value: 'Pastoral & Espiritualidade' },
+          { title: 'Eventos & Cultura', value: 'Eventos & Cultura' },
+          { title: 'Esportes', value: 'Esportes' },
+          { title: 'Cidadania & Projetos Sociais', value: 'Cidadania & Projetos Sociais' },
           { title: '70 Anos', value: '70 Anos' },
         ],
       },

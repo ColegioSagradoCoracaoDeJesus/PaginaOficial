@@ -25,7 +25,7 @@ export const Footer: React.FC<FooterProps> = ({ settings }) => {
             </div>
 
             <p className="text-sm text-slate-300 leading-relaxed">
-              Há 70 anos formando gerações com excelência acadêmica, acolhimento humano, ética e valores cristãos em Rio Grande - RS.
+              Há 70 anos formando gerações com excelência acadêmica, acolhimento humano, ética e respeito a todas as famílias em Rio Grande - RS.
             </p>
 
             <div className="p-3.5 rounded-lg bg-[#1E3A5F]/60 border border-[#B8860B]/40 flex items-center gap-3">

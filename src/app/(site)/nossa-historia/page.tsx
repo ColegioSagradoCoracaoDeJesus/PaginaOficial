@@ -22,12 +22,12 @@ export default async function NossaHistoriaPage() {
   const tituloBanner = data?.tituloBanner || 'Nossa História & Propósito'
   const subtituloBanner = data?.subtituloBanner || 'Há sete décadas, o Colégio Sagrado Coração de Jesus dedica-se a formar cidadãos conscientes, éticos e preparados para transformar a sociedade.'
   const tituloSecao = data?.tituloSecao || 'Sete Décadas Marcadas pelo Afeto, Rigor Acadêmico e Tradição'
-  const texto1 = data?.textoInstitucional1 || 'Fundado em 1956 com a missão de oferecer uma educação cristã humanizada, o Colégio Sagrado Coração de Jesus consolidou-se como referência pedagógica em Rio Grande - RS. Durante 70 anos, acompanhamos as profundas transformações da sociedade sem jamais abrir mão de nossos pilares fundacionais.'
-  const texto2 = data?.textoInstitucional2 || 'Aqui, a tradição caminha lado a lado com a inovação: integrando recursos tecnológicos de ponta, laboratórios modernos e programa bilíngue ao acolhimento atento que faz cada aluno sentir-se único e valorizado.'
+  const texto1 = data?.textoInstitucional1 || 'Fundado em 1956 com a missão de oferecer uma educação humanizada e acolhedora, o Colégio Sagrado Coração de Jesus consolidou-se como referência pedagógica em Rio Grande - RS. Durante 70 anos, acompanhamos as transformações da sociedade promovendo a ética, o respeito a todas as crenças e o saber.'
+  const texto2 = data?.textoInstitucional2 || 'Aqui, a tradição caminha lado a lado com a formação integral: integrando propostas pedagógicas de qualidade ao acolhimento atento que faz cada aluno sentir-se único e valorizado.'
   const imageUrl = data?.imageUrl || 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1200&auto=format&fit=crop'
-  const missao = data?.missao || 'Promover a formação humana integral por meio da excelência acadêmica, da evangelização e da vivência de valores cristãos, capacitando o estudante a agir no mundo de forma ética e solidária.'
-  const visao = data?.visao || 'Ser reconhecido como um ecossistema educacional de excelência que alia tradição pedagógica, inovação metodológica e desenvolvimento socioemocional de alto nível.'
-  const valores = data?.valores || 'Acolhimento afetivo, ética, respeito à diversidade, compromisso com o saber científico, responsabilidade ambiental e amor ao próximo em cada atitude.'
+  const missao = data?.missao || 'Promover a formação humana integral por meio da excelência pedagógica, da ética, do respeito à diversidade e da vivência de valores humanos universais, capacitando o estudante a agir no mundo de forma ética e solidária.'
+  const visao = data?.visao || 'Ser reconhecido como uma instituição de excelência que alia tradição pedagógica, acolhimento humano e desenvolvimento socioemocional.'
+  const valores = data?.valores || 'Acolhimento afetivo, ética, respeito à diversidade de crenças e culturas, compromisso com o saber, responsabilidade social e empatia.'
 
   const fotosHistoricas = data?.fotosHistoricas && data.fotosHistoricas.length > 0 
     ? data.fotosHistoricas.map(f => ({ url: f.url || '', alt: f.alt || 'Registro Histórico', descricao: f.descricao }))

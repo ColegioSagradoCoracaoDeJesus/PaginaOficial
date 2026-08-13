@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     default: 'Colégio Sagrado Coração de Jesus | 70 Anos de Excelência Educacional',
     template: '%s | Colégio Sagrado Coração de Jesus',
   },
-  description: 'Há 70 anos formando gerações com excelência acadêmica, acolhimento humano e valores cristãos em Rio Grande - RS. Matrículas e Rematrículas abertas.',
+  description: 'Há 70 anos formando gerações com excelência acadêmica, acolhimento humano, ética e respeito à diversidade em Rio Grande - RS. Matrículas e Rematrículas abertas.',
   keywords: [
     'Colégio Sagrado Coração de Jesus',
     'Escola Rio Grande',
