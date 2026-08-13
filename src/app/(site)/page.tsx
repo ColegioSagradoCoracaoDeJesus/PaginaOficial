@@ -6,8 +6,9 @@ import { Botao } from '@/components/ui/Botao'
 import { Etiqueta } from '@/components/ui/Etiqueta'
 import { CartaoNoticia } from '@/components/conteudo/CartaoNoticia'
 import { CartaoDiferencial } from '@/components/conteudo/CartaoDiferencial'
+import { SecaoParceiros } from '@/components/conteudo/SecaoParceiros'
 import { BlocoCTA } from '@/components/conteudo/BlocoCTA'
-import { getNoticias, getDiferenciais, getModalidades, getDepoimentos, getHomeBlocks } from '@/lib/sanity/queries'
+import { getNoticias, getDiferenciais, getModalidades, getDepoimentos, getHomeBlocks, getEmpresasParceiras } from '@/lib/sanity/queries'
 
 export const dynamic = 'force-dynamic'
 
@@ -17,6 +18,7 @@ export default async function HomePage() {
   const modalidades = await getModalidades()
   const depoimentos = await getDepoimentos()
   const homeBlocks = await getHomeBlocks()
+  const parceiros = await getEmpresasParceiras()
 
   const noticiasDestaque = notizie.filter((n) => n.destaque).slice(0, 2)
   const outrasNoticias = notizie.slice(0, 3)
@@ -151,77 +153,81 @@ export default async function HomePage() {
       )}
 
       {/* SECTION 3: MODALIDADES DE ENSINO PREVIEW (RF04) */}
-      <section className="max-w-[1280px] mx-auto px-4">
-        <div className="text-center max-w-2xl mx-auto mb-12 space-y-3">
-          <Etiqueta variant="brand">Formação Integral</Etiqueta>
-          <h2 className="font-display text-h1 font-bold text-slate-900">
-            Nossas Modalidades de Ensino
-          </h2>
-          <p className="text-slate-600 text-body">
-            Uma trajetória contínua de aprendizagem, afeto e desenvolvimento cognitivo adaptada a cada fase da infância e juventude.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {modalidades.map((m) => (
-            <div key={m._id} className="bg-white rounded-md border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col justify-between group">
-              <div className="relative h-44 w-full bg-slate-100">
-                {m.imageUrl && (
-                  <Image src={m.imageUrl} alt={m.nome} fill sizes="(max-width: 768px) 100vw, 25vw" className="object-cover group-hover:scale-105 transition-transform duration-500" />
-                )}
-                <div className="absolute top-3 left-3">
-                  <span className="bg-[#1E3A5F] text-white text-xs font-bold px-2.5 py-1 rounded">
-                    {m.faixaEtaria}
-                  </span>
-                </div>
-              </div>
-
-              <div className="p-5 flex-1 flex flex-col justify-between">
-                <div>
-                  <h3 className="font-display font-bold text-xl text-slate-900 mb-2 group-hover:text-[#1E3A5F] transition-colors">
-                    {m.nome}
-                  </h3>
-                  <p className="text-slate-600 text-xs line-clamp-3 leading-relaxed mb-4">
-                    {m.resumo}
-                  </p>
-                </div>
-
-                <Link href="/ensino" className="inline-flex items-center gap-1 text-xs font-bold text-[#1E3A5F] hover:text-[#D97706] transition-colors">
-                  <span>Conhecer modalidade</span>
-                  <ChevronRight className="w-4 h-4" />
-                </Link>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* SECTION 4: DIFERENCIAIS INSTITUCIONAIS (RF06) */}
-      <section className="bg-slate-50 py-16 border-y border-slate-200">
-        <div className="max-w-[1280px] mx-auto px-4">
+      {modalidades.length > 0 && (
+        <section className="max-w-[1280px] mx-auto px-4">
           <div className="text-center max-w-2xl mx-auto mb-12 space-y-3">
-            <Etiqueta variant="anniversary">Por que o Sagrado?</Etiqueta>
+            <Etiqueta variant="brand">Formação Integral</Etiqueta>
             <h2 className="font-display text-h1 font-bold text-slate-900">
-              Diferenciais que Transformam Futuros
+              Nossas Modalidades de Ensino
             </h2>
             <p className="text-slate-600 text-body">
-              Conheça os pilares pedagógicos e de infraestrutura que fundamentam nossos 70 anos de história.
+              Uma trajetória contínua de aprendizagem, afeto e desenvolvimento cognitivo adaptada a cada fase da infância e juventude.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {diferenciais.map((dif) => (
-              <CartaoDiferencial key={dif._id} diferencial={dif} />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {modalidades.map((m) => (
+              <div key={m._id} className="bg-white rounded-md border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col justify-between group">
+                <div className="relative h-44 w-full bg-slate-100">
+                  {m.imageUrl && (
+                    <Image src={m.imageUrl} alt={m.nome} fill sizes="(max-width: 768px) 100vw, 25vw" className="object-cover group-hover:scale-105 transition-transform duration-500" />
+                  )}
+                  <div className="absolute top-3 left-3">
+                    <span className="bg-[#1E3A5F] text-white text-xs font-bold px-2.5 py-1 rounded">
+                      {m.faixaEtaria}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="p-5 flex-1 flex flex-col justify-between">
+                  <div>
+                    <h3 className="font-display font-bold text-xl text-slate-900 mb-2 group-hover:text-[#1E3A5F] transition-colors">
+                      {m.nome}
+                    </h3>
+                    <p className="text-slate-600 text-xs line-clamp-3 leading-relaxed mb-4">
+                      {m.resumo}
+                    </p>
+                  </div>
+
+                  <Link href="/ensino" className="inline-flex items-center gap-1 text-xs font-bold text-[#1E3A5F] hover:text-[#D97706] transition-colors">
+                    <span>Conhecer modalidade</span>
+                    <ChevronRight className="w-4 h-4" />
+                  </Link>
+                </div>
+              </div>
             ))}
           </div>
+        </section>
+      )}
 
-          <div className="text-center mt-10">
-            <Botao href="/diferenciais" variant="outline" size="md">
-              Ver Todos os Diferenciais em Detalhes
-            </Botao>
+      {/* SECTION 4: DIFERENCIAIS INSTITUCIONAIS (RF06) */}
+      {diferenciais.length > 0 && (
+        <section className="bg-slate-50 py-16 border-y border-slate-200">
+          <div className="max-w-[1280px] mx-auto px-4">
+            <div className="text-center max-w-2xl mx-auto mb-12 space-y-3">
+              <Etiqueta variant="anniversary">Por que o Sagrado?</Etiqueta>
+              <h2 className="font-display text-h1 font-bold text-slate-900">
+                Diferenciais que Transformam Futuros
+              </h2>
+              <p className="text-slate-600 text-body">
+                Conheça os pilares pedagógicos e de infraestrutura que fundamentam nossos 70 anos de história.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {diferenciais.map((dif) => (
+                <CartaoDiferencial key={dif._id} diferencial={dif} />
+              ))}
+            </div>
+
+            <div className="text-center mt-10">
+              <Botao href="/diferenciais" variant="outline" size="md">
+                Ver Todos os Diferenciais em Detalhes
+              </Botao>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* SECTION 5: NOTÍCIAS & ACONTECEU NO SAGRADO (RF10) */}
       <section className="max-w-[1280px] mx-auto px-4">
@@ -287,7 +293,10 @@ export default async function HomePage() {
         </section>
       )}
 
-      {/* SECTION 7: HIGH CONVERSION CTA */}
+      {/* SECTION 7: EMPRESAS PARCEIRAS */}
+      <SecaoParceiros parceiros={parceiros} />
+
+      {/* SECTION 8: HIGH CONVERSION CTA */}
       <div className="max-w-[1280px] mx-auto px-4">
         <BlocoCTA />
       </div>

@@ -13,6 +13,7 @@ import paginaSetentaAnos from './paginaSetentaAnos'
 import paginaVivencie from './paginaVivencie'
 import paginaMatriculas from './paginaMatriculas'
 import paginaTecnologia from './paginaTecnologia'
+import empresaParceira from './empresaParceira'
 
 export const schemaTypes = [
   siteSettings,
@@ -30,4 +31,5 @@ export const schemaTypes = [
   paginaVivencie,
   paginaMatriculas,
   paginaTecnologia,
+  empresaParceira,
 ]

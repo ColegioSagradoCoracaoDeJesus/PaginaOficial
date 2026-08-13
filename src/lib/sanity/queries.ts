@@ -344,7 +344,7 @@ export interface HomeBlocks {
 
 const isSanityConfigured = Boolean(process.env.NEXT_PUBLIC_SANITY_PROJECT_ID && process.env.NEXT_PUBLIC_SANITY_PROJECT_ID !== 'placeholder-project')
 
-const fetchOptions = { next: { revalidate: 0 } }
+const fetchOptions = { next: { revalidate: 0 }, cache: 'no-store' as RequestCache }
 
 // QUERY FUNCTIONS (NO FICTITIOUS DATA - ONLY SANITY DATA)
 export async function getSiteSettings(): Promise<SiteSettings> {
@@ -460,17 +460,17 @@ export async function getNoticiaBySlug(slug: string): Promise<Noticia | null> {
 }
 
 export async function getDiferenciais(): Promise<Diferencial[]> {
-  if (!isSanityConfigured) return DEFAULT_DIFERENCIAIS
+  if (!isSanityConfigured) return []
   try {
     const res = await client.fetch(`*[_type == "diferencial"] | order(ordem asc)`, {}, fetchOptions)
-    return Array.isArray(res) && res.length > 0 ? res : DEFAULT_DIFERENCIAIS
+    return Array.isArray(res) ? res : []
   } catch (err) {
-    return DEFAULT_DIFERENCIAIS
+    return []
   }
 }
 
 export async function getModalidades(): Promise<ModalidadeEnsino[]> {
-  if (!isSanityConfigured) return DEFAULT_MODALIDADES
+  if (!isSanityConfigured) return []
   try {
     const res = await client.fetch(
       `*[_type == "modalidadeEnsino"] {
@@ -489,14 +489,14 @@ export async function getModalidades(): Promise<ModalidadeEnsino[]> {
       {},
       fetchOptions
     )
-    return Array.isArray(res) && res.length > 0 ? res : DEFAULT_MODALIDADES
+    return Array.isArray(res) ? res : []
   } catch (err) {
-    return DEFAULT_MODALIDADES
+    return []
   }
 }
 
 export async function getEspacosLocacao(): Promise<EspacoLocacao[]> {
-  if (!isSanityConfigured) return DEFAULT_ESPACOS
+  if (!isSanityConfigured) return []
   try {
     const res = await client.fetch(
       `*[_type == "espacoLocacao"] {
@@ -513,9 +513,9 @@ export async function getEspacosLocacao(): Promise<EspacoLocacao[]> {
       {},
       fetchOptions
     )
-    return Array.isArray(res) && res.length > 0 ? res : DEFAULT_ESPACOS
+    return Array.isArray(res) ? res : []
   } catch (err) {
-    return DEFAULT_ESPACOS
+    return []
   }
 }
 
@@ -561,7 +561,7 @@ export async function getDepoimentos(): Promise<Depoimento70Anos[]> {
 }
 
 export async function getEstrutura(): Promise<AmbienteEstrutura[]> {
-  if (!isSanityConfigured) return DEFAULT_ESTRUTURA
+  if (!isSanityConfigured) return []
   try {
     const res = await client.fetch(
       `*[_type == "paginaEstrutura"] | order(ordem asc) {
@@ -578,9 +578,43 @@ export async function getEstrutura(): Promise<AmbienteEstrutura[]> {
       {},
       fetchOptions
     )
-    return Array.isArray(res) && res.length > 0 ? res : DEFAULT_ESTRUTURA
+    return Array.isArray(res) ? res : []
   } catch (err) {
-    return DEFAULT_ESTRUTURA
+    return []
+  }
+}
+
+export interface EmpresaParceira {
+  _id: string
+  nome: string
+  categoria?: string
+  logoUrl?: string
+  descricao?: string
+  linkSite?: string
+  ordem?: number
+  ativo?: boolean
+}
+
+export async function getEmpresasParceiras(): Promise<EmpresaParceira[]> {
+  if (!isSanityConfigured) return []
+  try {
+    const res = await client.fetch(
+      `*[_type == "empresaParceira" && ativo != false] | order(ordem asc) {
+        _id,
+        nome,
+        categoria,
+        "logoUrl": logo.asset->url,
+        descricao,
+        linkSite,
+        ordem,
+        ativo
+      }`,
+      {},
+      fetchOptions
+    )
+    return Array.isArray(res) ? res : []
+  } catch (err) {
+    return []
   }
 }
 
