@@ -10,6 +10,7 @@ export interface SiteSettings {
   endereco: string
   linkMapaEmbed: string
   horarioAtendimento: string
+  logoUrl?: string
   redesSociais: {
     instagram?: string
     facebook?: string

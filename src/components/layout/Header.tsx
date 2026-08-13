@@ -78,7 +78,7 @@ export const Header: React.FC<HeaderProps> = ({ settings }) => {
         {/* Prominent High-Res Official Logo */}
         <Link href="/" className="flex items-center group focus:outline-none focus:ring-2 focus:ring-amber-500 rounded-md py-0.5 shrink-0">
           <img
-            src="/logotipo.png?v=4"
+            src={currentSettings.logoUrl || '/logotipo.png?v=4'}
             alt="Colégio Sagrado Coração de Jesus - 70 Anos"
             className={`w-auto transition-all duration-300 object-contain group-hover:scale-[1.01] ${
               isScrolled

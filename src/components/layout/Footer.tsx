@@ -18,7 +18,7 @@ export const Footer: React.FC<FooterProps> = ({ settings }) => {
           <div className="space-y-4">
             <div className="bg-white/95 p-3 rounded-xl shadow-md border-2 border-[#B8860B] inline-block max-w-[260px]">
               <img
-                src="/logotipo.png"
+                src={currentSettings.logoUrl || '/logotipo.png'}
                 alt="Colégio Sagrado Coração de Jesus - 70 Anos"
                 className="h-14 sm:h-16 w-auto object-contain"
               />
