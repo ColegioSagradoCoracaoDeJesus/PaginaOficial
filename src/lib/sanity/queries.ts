@@ -607,8 +607,37 @@ export interface EmpresaParceira {
   ativo?: boolean
 }
 
+export const DEFAULT_EMPRESAS_PARCEIRAS: EmpresaParceira[] = [
+  {
+    _id: 'parceiro-ftd',
+    nome: 'FTD Educação & Plataforma Iônica',
+    categoria: 'Material Didático & Plataforma Digital',
+    descricao: 'Sistema de ensino e ambiente virtual de aprendizagem integrado.',
+    linkSite: 'https://ftd.com.br',
+    ordem: 1,
+    ativo: true,
+  },
+  {
+    _id: 'parceiro-diario-escola',
+    nome: 'Diário Escola',
+    categoria: 'Comunicação Digital',
+    descricao: 'Aplicativo oficial de comunicação diária entre escola, professores e famílias.',
+    linkSite: 'https://diarioescola.com.br',
+    ordem: 2,
+    ativo: true,
+  },
+  {
+    _id: 'parceiro-bilingue',
+    nome: 'Programa Bilíngue Internacional',
+    categoria: 'Bilinguismo & Certificação',
+    descricao: 'Formação em língua inglesa com certificações e vivência global.',
+    ordem: 3,
+    ativo: true,
+  },
+]
+
 export async function getEmpresasParceiras(): Promise<EmpresaParceira[]> {
-  if (!isSanityConfigured) return []
+  if (!isSanityConfigured) return DEFAULT_EMPRESAS_PARCEIRAS
   try {
     const res = await client.fetch(
       `*[_type == "empresaParceira" && ativo != false] | order(ordem asc) {
@@ -624,9 +653,9 @@ export async function getEmpresasParceiras(): Promise<EmpresaParceira[]> {
       {},
       fetchOptions
     )
-    return Array.isArray(res) ? res : []
+    return Array.isArray(res) && res.length > 0 ? res : DEFAULT_EMPRESAS_PARCEIRAS
   } catch (err) {
-    return []
+    return DEFAULT_EMPRESAS_PARCEIRAS
   }
 }
 
