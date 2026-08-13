@@ -21,23 +21,15 @@ export default async function HomePage() {
   const noticiasDestaque = notizie.filter((n) => n.destaque).slice(0, 2)
   const outrasNoticias = notizie.slice(0, 3)
 
-  // Dynamic avisos from Sanity or default fallback
+  // Dynamic avisos from Sanity (strictly real data)
   const avisosAtivos = homeBlocks?.avisos?.filter((a) => a.ativo) || []
-  const avisosImportantes = avisosAtivos.length > 0 ? avisosAtivos.map((a, idx) => ({
+  const avisosImportantes = avisosAtivos.map((a, idx) => ({
     id: `aviso-${idx}`,
     tipo: a.tipo || 'Informativo',
     titulo: a.titulo,
     descricao: a.descricao,
     data: a.dataValidade ? `Válido até ${a.dataValidade}` : 'Importante',
-  })) : [
-    {
-      id: 'a1',
-      tipo: 'Matrículas 2027',
-      titulo: 'Período de Rematrículas para Alunos Veteranos e Novas Vagas Abertas',
-      descricao: 'Agende o atendimento na secretaria ou garanta a vaga do seu filho pelo portal de matrículas.',
-      data: 'Vagas Limitadas',
-    },
-  ]
+  }))
 
   return (
     <div className="space-y-16 pb-12">
@@ -237,52 +229,63 @@ export default async function HomePage() {
           <div>
             <Etiqueta variant="brand" className="mb-2">Comunidade Escolar</Etiqueta>
             <h2 className="font-display text-h1 font-bold text-slate-900">Aconteceu no Sagrado</h2>
-            <p className="text-slate-600 text-sm mt-1">Acompanhe as últimas notícias, projetos pedagógicos e comemorações dos 70 anos.</p>
+            <p className="text-slate-600 text-sm mt-1">Acompanhe as últimas notícias, projetos pedagógicos e comunicados oficiais do Colégio.</p>
           </div>
-          <Botao href="/noticias" variant="outline" size="sm">
-            Ver Todas as Notícias
-          </Botao>
+          {notizie.length > 0 && (
+            <Botao href="/noticias" variant="outline" size="sm">
+              Ver Todas as Notícias
+            </Botao>
+          )}
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {outrasNoticias.map((noticia) => (
-            <CartaoNoticia key={noticia._id} noticia={noticia} />
-          ))}
-        </div>
-      </section>
-
-      {/* SECTION 6: TESTEMUNHOS DOS 70 ANOS (RF08) */}
-      <section className="bg-[#1E3A5F] text-white py-16 px-4">
-        <div className="max-w-[1280px] mx-auto">
-          <div className="text-center max-w-2xl mx-auto mb-12 space-y-3">
-            <Etiqueta variant="anniversary">Vozes da Nossa História</Etiqueta>
-            <h2 className="font-display text-h1 font-bold text-white">Depoimentos dos 70 Anos</h2>
-            <p className="text-slate-200 text-body">
-              Histórias reais de quem vivenciou a excelência e o afeto do Colégio Sagrado Coração de Jesus.
-            </p>
-          </div>
-
+        {notizie.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {depoimentos.map((dep) => (
-              <div key={dep._id} className="bg-[#152A47] p-6 rounded-md border border-[#B8860B]/40 shadow-lg flex flex-col justify-between">
-                <p className="italic text-slate-200 text-sm leading-relaxed mb-6">
-                  "{dep.texto}"
-                </p>
-
-                <div className="flex items-center gap-3 pt-4 border-t border-slate-700">
-                  <div className="w-10 h-10 rounded-full bg-[#B8860B] text-white font-bold flex items-center justify-center text-sm shrink-0">
-                    {dep.nome.charAt(0)}
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-white text-sm">{dep.nome}</h4>
-                    <p className="text-xs text-amber-300">{dep.relacao}</p>
-                  </div>
-                </div>
-              </div>
+            {outrasNoticias.map((noticia) => (
+              <CartaoNoticia key={noticia._id} noticia={noticia} />
             ))}
           </div>
-        </div>
+        ) : (
+          <div className="bg-slate-50 border border-slate-200 rounded-lg p-10 text-center space-y-2">
+            <p className="font-display font-bold text-lg text-slate-800">Nenhuma notícia publicada no momento</p>
+            <p className="text-sm text-slate-500">As publicações e comunicados cadastrados pela Secretaria no Sanity aparecerão aqui.</p>
+          </div>
+        )}
       </section>
+
+      {/* SECTION 6: TESTEMUNHOS DOS 70 ANOS (RF08 - Only if registered in Sanity) */}
+      {depoimentos.length > 0 && (
+        <section className="bg-[#1E3A5F] text-white py-16 px-4">
+          <div className="max-w-[1280px] mx-auto">
+            <div className="text-center max-w-2xl mx-auto mb-12 space-y-3">
+              <Etiqueta variant="anniversary">Vozes da Nossa História</Etiqueta>
+              <h2 className="font-display text-h1 font-bold text-white">Depoimentos dos 70 Anos</h2>
+              <p className="text-slate-200 text-body">
+                Histórias reais de quem vivenciou a excelência e o afeto do Colégio Sagrado Coração de Jesus.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {depoimentos.map((dep) => (
+                <div key={dep._id} className="bg-[#152A47] p-6 rounded-md border border-[#B8860B]/40 shadow-lg flex flex-col justify-between">
+                  <p className="italic text-slate-200 text-sm leading-relaxed mb-6">
+                    "{dep.texto}"
+                  </p>
+
+                  <div className="flex items-center gap-3 pt-4 border-t border-slate-700">
+                    <div className="w-10 h-10 rounded-full bg-[#B8860B] text-white font-bold flex items-center justify-center text-sm shrink-0">
+                      {dep.nome.charAt(0)}
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-white text-sm">{dep.nome}</h4>
+                      <p className="text-xs text-amber-300">{dep.relacao}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* SECTION 7: HIGH CONVERSION CTA */}
       <div className="max-w-[1280px] mx-auto px-4">

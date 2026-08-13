@@ -98,18 +98,20 @@ export default async function SetentaAnosPage() {
         </section>
 
         {/* Timeline */}
-        <section className="space-y-8">
-          <div className="text-center max-w-2xl mx-auto space-y-2">
-            <Etiqueta variant="brand">Trajetória Cronológica</Etiqueta>
-            <h2 className="font-display text-h2 font-bold text-slate-900">A Nossa História Ano a Ano</h2>
-          </div>
+        {linhaTempo.length > 0 && (
+          <section className="space-y-8">
+            <div className="text-center max-w-2xl mx-auto space-y-2">
+              <Etiqueta variant="brand">Trajetória Cronológica</Etiqueta>
+              <h2 className="font-display text-h2 font-bold text-slate-900">A Nossa História Ano a Ano</h2>
+            </div>
 
-          <div className="relative border-l-2 md:border-l-0 md:before:absolute md:before:left-1/2 md:before:-translate-x-1/2 md:before:w-1 md:before:h-full md:before:bg-[#1E3A5F]/20">
-            {linhaTempo.map((item, idx) => (
-              <ItemLinhaDoTempo key={item._id} item={item} isEven={idx % 2 === 0} />
-            ))}
-          </div>
-        </section>
+            <div className="relative border-l-2 md:border-l-0 md:before:absolute md:before:left-1/2 md:before:-translate-x-1/2 md:before:w-1 md:before:h-full md:before:bg-[#1E3A5F]/20">
+              {linhaTempo.map((item, idx) => (
+                <ItemLinhaDoTempo key={item._id} item={item} isEven={idx % 2 === 0} />
+              ))}
+            </div>
+          </section>
+        )}
 
         {/* Programação de Eventos dos 70 Anos (RF08) */}
         <section className="bg-slate-900 text-white p-8 sm:p-12 rounded-lg border-2 border-[#B8860B]/60 shadow-xl space-y-8">
@@ -162,29 +164,31 @@ export default async function SetentaAnosPage() {
         </section>
 
         {/* Depoimentos dos 70 Anos */}
-        <section className="space-y-8">
-          <div className="text-center max-w-2xl mx-auto space-y-2">
-            <Etiqueta variant="anniversary">Depoimentos Históricos</Etiqueta>
-            <h2 className="font-display text-h2 font-bold text-slate-900">Histórias que Vivem no Sagrado</h2>
-          </div>
+        {depoimentos.length > 0 && (
+          <section className="space-y-8">
+            <div className="text-center max-w-2xl mx-auto space-y-2">
+              <Etiqueta variant="anniversary">Depoimentos Históricos</Etiqueta>
+              <h2 className="font-display text-h2 font-bold text-slate-900">Histórias que Vivem no Sagrado</h2>
+            </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {depoimentos.map((dep) => (
-              <div key={dep._id} className="bg-white p-6 rounded-md border border-slate-200 shadow-sm space-y-4">
-                <p className="italic text-slate-700 text-sm leading-relaxed">"{dep.texto}"</p>
-                <div className="pt-4 border-t border-slate-100 flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-[#1E3A5F] text-white font-bold flex items-center justify-center">
-                    {dep.nome.charAt(0)}
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-slate-900 text-sm">{dep.nome}</h4>
-                    <p className="text-xs text-[#5C7A99] font-medium">{dep.relacao}</p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {depoimentos.map((dep) => (
+                <div key={dep._id} className="bg-white p-6 rounded-md border border-slate-200 shadow-sm space-y-4">
+                  <p className="italic text-slate-700 text-sm leading-relaxed">"{dep.texto}"</p>
+                  <div className="pt-4 border-t border-slate-100 flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-[#1E3A5F] text-white font-bold flex items-center justify-center">
+                      {dep.nome.charAt(0)}
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-slate-900 text-sm">{dep.nome}</h4>
+                      <p className="text-xs text-[#5C7A99] font-medium">{dep.relacao}</p>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        </section>
+              ))}
+            </div>
+          </section>
+        )}
 
         <BlocoCTA />
       </div>

@@ -44,17 +44,25 @@ export default async function AconteceuNoSagradoPage() {
                 <span>Últimas Notícias</span>
               </h2>
             </div>
-            <Link href="/noticias" className="text-sm font-bold text-[#1E3A5F] hover:underline flex items-center gap-1">
-              Ver arquivo completo
-              <ArrowRight className="w-4 h-4" />
-            </Link>
+            {noticias.length > 0 && (
+              <Link href="/noticias" className="text-sm font-bold text-[#1E3A5F] hover:underline flex items-center gap-1">
+                Ver arquivo completo
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            )}
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {noticias.slice(0, 3).map((n) => (
-              <CartaoNoticia key={n._id} noticia={n} />
-            ))}
-          </div>
+          {noticias.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {noticias.slice(0, 3).map((n) => (
+                <CartaoNoticia key={n._id} noticia={n} />
+              ))}
+            </div>
+          ) : (
+            <div className="bg-slate-50 border border-slate-200 rounded-lg p-8 text-center text-sm text-slate-500">
+              Nenhuma notícia cadastrada no momento. A Secretaria publicará novidades em breve pelo Sanity.
+            </div>
+          )}
         </section>
 
         {/* Monthly Galleries (RF11, RF23) */}
@@ -68,23 +76,29 @@ export default async function AconteceuNoSagradoPage() {
             <p className="text-slate-600 text-sm mt-1">Clique nas fotos para expandir em tela cheia (Lightbox).</p>
           </div>
 
-          {galerias.map((g) => (
-            <div key={g._id} className="bg-slate-50 p-6 sm:p-8 rounded-lg border border-slate-200 space-y-4">
-              <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 pb-3">
-                <div>
-                  <h3 className="font-display font-bold text-xl text-slate-900">{g.titulo}</h3>
-                  <p className="text-xs text-slate-500 font-medium">
-                    {g.mes} de {g.ano}
-                  </p>
+          {galerias.length > 0 ? (
+            galerias.map((g) => (
+              <div key={g._id} className="bg-slate-50 p-6 sm:p-8 rounded-lg border border-slate-200 space-y-4">
+                <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 pb-3">
+                  <div>
+                    <h3 className="font-display font-bold text-xl text-slate-900">{g.titulo}</h3>
+                    <p className="text-xs text-slate-500 font-medium">
+                      {g.mes} de {g.ano}
+                    </p>
+                  </div>
+                  <Etiqueta variant="brand">{g.fotos?.length || 0} Fotos</Etiqueta>
                 </div>
-                <Etiqueta variant="brand">{g.fotos.length} Fotos</Etiqueta>
+
+                <p className="text-slate-600 text-sm">{g.descricao}</p>
+
+                {g.fotos && g.fotos.length > 0 && <GaleriaComLightbox fotos={g.fotos} />}
               </div>
-
-              <p className="text-slate-600 text-sm">{g.descricao}</p>
-
-              <GaleriaComLightbox fotos={g.fotos} />
+            ))
+          ) : (
+            <div className="bg-slate-50 border border-slate-200 rounded-lg p-8 text-center text-sm text-slate-500">
+              Nenhum álbum de fotos publicado no momento. Os álbuns do mês serão adicionados pela Secretaria através do Sanity.
             </div>
-          ))}
+          )}
         </section>
 
         <BlocoCTA />
