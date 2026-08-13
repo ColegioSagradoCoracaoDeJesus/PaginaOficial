@@ -482,7 +482,7 @@ export async function getDiferenciais(): Promise<Diferencial[]> {
 }
 
 export async function getModalidades(): Promise<ModalidadeEnsino[]> {
-  if (!isSanityConfigured) return []
+  if (!isSanityConfigured) return DEFAULT_MODALIDADES
   try {
     const res = await client.fetch(
       `*[_type == "modalidadeEnsino"] {
@@ -501,9 +501,9 @@ export async function getModalidades(): Promise<ModalidadeEnsino[]> {
       {},
       fetchOptions
     )
-    return Array.isArray(res) ? res : []
+    return Array.isArray(res) && res.length > 0 ? res : DEFAULT_MODALIDADES
   } catch (err) {
-    return []
+    return DEFAULT_MODALIDADES
   }
 }
 

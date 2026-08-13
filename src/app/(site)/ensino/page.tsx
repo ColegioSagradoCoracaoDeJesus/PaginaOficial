@@ -35,7 +35,7 @@ export default async function EnsinoPage() {
         {modalidades.map((m, index) => (
           <section
             key={m._id}
-            id={m.slug.current}
+            id={m.slug?.current || m._id}
             className={`p-8 sm:p-10 rounded-lg border border-slate-200 bg-white shadow-sm ${
               index % 2 === 1 ? 'border-l-4 border-l-[#B8860B]' : 'border-l-4 border-l-[#1E3A5F]'
             }`}
@@ -54,29 +54,33 @@ export default async function EnsinoPage() {
                 <p className="text-slate-700 text-base leading-relaxed">{m.resumo}</p>
 
                 {/* Methodology */}
-                <div className="bg-slate-50 p-5 rounded-md border border-slate-200">
-                  <h3 className="font-bold text-slate-900 text-sm mb-2 flex items-center gap-2">
-                    <BookOpen className="w-4 h-4 text-[#D97706]" />
-                    <span>Metodologia & Abordagem</span>
-                  </h3>
-                  <p className="text-slate-600 text-sm leading-relaxed">{m.metodologia}</p>
-                </div>
+                {m.metodologia && (
+                  <div className="bg-slate-50 p-5 rounded-md border border-slate-200">
+                    <h3 className="font-bold text-slate-900 text-sm mb-2 flex items-center gap-2">
+                      <BookOpen className="w-4 h-4 text-[#D97706]" />
+                      <span>Metodologia & Abordagem</span>
+                    </h3>
+                    <p className="text-slate-600 text-sm leading-relaxed">{m.metodologia}</p>
+                  </div>
+                )}
 
                 {/* Objectives */}
-                <div>
-                  <h3 className="font-bold text-slate-900 text-sm mb-3 flex items-center gap-2">
-                    <Target className="w-4 h-4 text-[#1E3A5F]" />
-                    <span>Objetivos Pedagógicos</span>
-                  </h3>
-                  <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-slate-700">
-                    {m.objetivos.map((obj, idx) => (
-                      <li key={idx} className="flex items-start gap-2 bg-slate-50 p-2.5 rounded border border-slate-100">
-                        <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                        <span>{obj}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                {m.objetivos && m.objetivos.length > 0 && (
+                  <div>
+                    <h3 className="font-bold text-slate-900 text-sm mb-3 flex items-center gap-2">
+                      <Target className="w-4 h-4 text-[#1E3A5F]" />
+                      <span>Objetivos Pedagógicos</span>
+                    </h3>
+                    <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-slate-700">
+                      {m.objetivos.map((obj, idx) => (
+                        <li key={idx} className="flex items-start gap-2 bg-slate-50 p-2.5 rounded border border-slate-100">
+                          <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                          <span>{obj}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
 
                 {/* Projects */}
                 {m.projetos && m.projetos.length > 0 && (
