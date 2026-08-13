@@ -7,6 +7,8 @@ import { Botao } from '@/components/ui/Botao'
 import { BlocoCTA } from '@/components/conteudo/BlocoCTA'
 import { getModalidades } from '@/lib/sanity/queries'
 
+export const dynamic = 'force-dynamic'
+
 export const metadata = {
   title: 'Modalidades de Ensino',
   description: 'Conheça o projeto pedagógico do Colégio Sagrado Coração de Jesus da Educação Infantil ao Ensino Médio.',

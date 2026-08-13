@@ -5,6 +5,8 @@ import { CartaoNoticia } from '@/components/conteudo/CartaoNoticia'
 import { BlocoCTA } from '@/components/conteudo/BlocoCTA'
 import { getNoticias } from '@/lib/sanity/queries'
 
+export const dynamic = 'force-dynamic'
+
 export const metadata = {
   title: 'Notícias & Aconteceu no Sagrado',
   description: 'Confira as últimas notícias, conquistas pedagógicas e eventos do Colégio Sagrado Coração de Jesus.',

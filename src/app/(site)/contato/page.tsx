@@ -3,15 +3,17 @@ import { Phone, Mail, MapPin, Clock, MessageSquare, Globe } from 'lucide-react'
 import { MigalhaDePao } from '@/components/ui/MigalhaDePao'
 import { Etiqueta } from '@/components/ui/Etiqueta'
 import { FormVisitaModal } from '@/components/conteudo/FormVisitaModal'
-import { DEFAULT_SITE_SETTINGS } from '@/lib/sanity/queries'
+import { getSiteSettings } from '@/lib/sanity/queries'
+
+export const dynamic = 'force-dynamic'
 
 export const metadata = {
   title: 'Fale Conosco & Agende uma Visita',
-  description: 'Entre em contato com a secretaria do Colégio Sagrado Coração de Jesus em Curitiba. Telefones, WhatsApp, localização e formulário de agendamento.',
+  description: 'Entre em contato com a secretaria do Colégio Sagrado Coração de Jesus em Rio Grande - RS. Telefones, WhatsApp, localização e formulário de agendamento.',
 }
 
-export default function ContatoPage() {
-  const settings = DEFAULT_SITE_SETTINGS
+export default async function ContatoPage() {
+  const settings = await getSiteSettings()
 
   return (
     <div>

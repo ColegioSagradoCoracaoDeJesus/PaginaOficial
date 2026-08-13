@@ -8,6 +8,8 @@ import { ItemLinhaDoTempo } from '@/components/conteudo/ItemLinhaDoTempo'
 import { BlocoCTA } from '@/components/conteudo/BlocoCTA'
 import { getLinhaDoTempo, getDepoimentos } from '@/lib/sanity/queries'
 
+export const dynamic = 'force-dynamic'
+
 export const metadata = {
   title: '70 Anos do Colégio Sagrado Coração de Jesus | Jubileu de Vinho',
   description: 'Celebre 70 anos de história, programação de eventos comemorativos, depoimentos de ex-alunos e aquisição de ingressos para a celebração.',
@@ -117,7 +119,7 @@ export default async function SetentaAnosPage() {
               <h2 className="font-display font-bold text-2xl sm:text-3xl text-white">Programação dos 70 Anos</h2>
               <p className="text-slate-300 text-sm mt-1">Participe dos eventos festivos ao longo do ano comemorativo.</p>
             </div>
-            <Botao href="https://wa.me/5541999997000" external variant="anniversary" size="md">
+            <Botao href="https://wa.me/555332325531" external variant="anniversary" size="md">
               <Ticket className="w-4 h-4" />
               <span>Informações sobre Convites / Ingressos</span>
             </Botao>
@@ -153,7 +155,7 @@ export default async function SetentaAnosPage() {
                 <strong>Como adquirir seu convite:</strong> Os convites para os eventos dos 70 anos são retirados diretamente na Secretaria do Colégio ou reservados pelo WhatsApp oficial, sem cobrança de taxas de intermediação online.
               </span>
             </div>
-            <Botao href="https://wa.me/5541999997000" external variant="white" size="sm" className="shrink-0">
+            <Botao href="https://wa.me/555332325531" external variant="white" size="sm" className="shrink-0">
               Reservar via WhatsApp
             </Botao>
           </div>

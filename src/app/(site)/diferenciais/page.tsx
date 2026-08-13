@@ -5,6 +5,8 @@ import { CartaoDiferencial } from '@/components/conteudo/CartaoDiferencial'
 import { BlocoCTA } from '@/components/conteudo/BlocoCTA'
 import { getDiferenciais } from '@/lib/sanity/queries'
 
+export const dynamic = 'force-dynamic'
+
 export const metadata = {
   title: 'Nossos Diferenciais',
   description: 'Descubra os diferenciais pedagógicos, bilinguismo, segurança, formação humana e estrutura do Colégio Sagrado Coração de Jesus.',

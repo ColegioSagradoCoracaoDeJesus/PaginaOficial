@@ -1,9 +1,14 @@
 import React from 'react'
 import Link from 'next/link'
 import { Phone, Mail, MapPin, Clock, ShieldCheck, Heart, Award, ChevronRight, ExternalLink } from 'lucide-react'
-import { DEFAULT_SITE_SETTINGS } from '@/lib/sanity/queries'
+import { SiteSettings, DEFAULT_SITE_SETTINGS } from '@/lib/sanity/queries'
 
-export const Footer: React.FC = () => {
+interface FooterProps {
+  settings?: SiteSettings
+}
+
+export const Footer: React.FC<FooterProps> = ({ settings }) => {
+  const currentSettings = settings || DEFAULT_SITE_SETTINGS
   return (
     <footer className="bg-[#152A47] text-slate-200 pt-14 pb-8 border-t-4 border-[#B8860B]">
       <div className="max-w-[1280px] mx-auto px-4">
@@ -59,13 +64,13 @@ export const Footer: React.FC = () => {
               <li>
                 <Link href="/diferenciais" className="hover:text-amber-400 transition-colors flex items-center gap-1.5">
                   <ChevronRight className="w-3.5 h-3.5 text-amber-400" />
-                  <span>Nossos Diferenciais</span>
+                  <span>Diferenciais Pedagógicos</span>
                 </Link>
               </li>
               <li>
-                <Link href="/noticias" className="hover:text-amber-400 transition-colors flex items-center gap-1.5">
+                <Link href="/aconteceu-no-sagrado" className="hover:text-amber-400 transition-colors flex items-center gap-1.5">
                   <ChevronRight className="w-3.5 h-3.5 text-amber-400" />
-                  <span>Aconteceu no Sagrado (Notícias)</span>
+                  <span>Aconteceu no Sagrado</span>
                 </Link>
               </li>
               <li>
@@ -124,12 +129,12 @@ export const Footer: React.FC = () => {
             <ul className="space-y-3 text-xs sm:text-sm text-slate-300">
               <li className="flex items-start gap-2.5">
                 <MapPin className="w-4 h-4 text-amber-400 shrink-0 mt-1" />
-                <span>{DEFAULT_SITE_SETTINGS.endereco}</span>
+                <span>{currentSettings.endereco}</span>
               </li>
               <li className="flex items-center gap-2.5">
                 <Phone className="w-4 h-4 text-amber-400 shrink-0" />
                 <div className="flex flex-col">
-                  {DEFAULT_SITE_SETTINGS.telefones.map((tel, idx) => (
+                  {currentSettings.telefones?.map((tel, idx) => (
                     <a key={idx} href={`tel:${tel.replace(/\D/g, '')}`} className="hover:underline text-slate-200">
                       {tel}
                     </a>
@@ -138,13 +143,13 @@ export const Footer: React.FC = () => {
               </li>
               <li className="flex items-center gap-2.5">
                 <Mail className="w-4 h-4 text-amber-400 shrink-0" />
-                <a href={`mailto:${DEFAULT_SITE_SETTINGS.email}`} className="hover:underline truncate text-slate-200">
-                  {DEFAULT_SITE_SETTINGS.email}
+                <a href={`mailto:${currentSettings.email}`} className="hover:underline truncate text-slate-200">
+                  {currentSettings.email}
                 </a>
               </li>
               <li className="flex items-center gap-2.5">
                 <Clock className="w-4 h-4 text-amber-400 shrink-0" />
-                <span>{DEFAULT_SITE_SETTINGS.horarioAtendimento}</span>
+                <span>{currentSettings.horarioAtendimento}</span>
               </li>
             </ul>
           </div>

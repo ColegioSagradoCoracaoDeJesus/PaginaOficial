@@ -114,16 +114,16 @@ export default function TecnologiaEducacionalPage() {
         <section className="bg-slate-50 p-8 sm:p-10 rounded-lg border border-slate-200">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             <div className="lg:col-span-7 space-y-4">
-              <Etiqueta variant="brand">Cultura Maker & STEAM</Etiqueta>
+              <Etiqueta variant="brand">Musicalização</Etiqueta>
               <h3 className="font-display font-bold text-2xl text-slate-900">Laboratório de Robótica & Raciocínio Lógico</h3>
               <p className="text-slate-600 text-sm leading-relaxed">
-                Nossos alunos aprendem programação, montagem de protótipos e resolução de problemas através de um currículo prático de robótica alinhado com desafios mundiais de inovação.
+                Nossos alunos aprendem ..... problemas através de um currículo prático de .... alinhado com desafios mundiais de inovação.
               </p>
             </div>
             <div className="lg:col-span-5 relative h-60 rounded-md overflow-hidden bg-slate-200">
               <Image
                 src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=800&auto=format&fit=crop"
-                alt="Alunos aprendendo robótica"
+                alt="Alunos aprendendo ..."
                 fill
                 className="object-cover"
               />

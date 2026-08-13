@@ -8,6 +8,8 @@ import { GaleriaComLightbox } from '@/components/conteudo/GaleriaComLightbox'
 import { BlocoCTA } from '@/components/conteudo/BlocoCTA'
 import { getNoticias, getGaleriasMes } from '@/lib/sanity/queries'
 
+export const dynamic = 'force-dynamic'
+
 export const metadata = {
   title: 'Aconteceu no Sagrado | Notícias e Galerias Mensais',
   description: 'Fique por dentro das últimas notícias, galerias de fotos mensais e eventos do Colégio Sagrado Coração de Jesus.',

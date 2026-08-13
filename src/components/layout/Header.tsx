@@ -5,8 +5,14 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Menu, X, Phone, MessageSquare, Calendar, GraduationCap, ChevronDown, Clock, Sparkles, BookOpen, PhoneCall } from 'lucide-react'
 import { Botao } from '../ui/Botao'
+import { SiteSettings, DEFAULT_SITE_SETTINGS } from '@/lib/sanity/queries'
 
-export const Header: React.FC = () => {
+interface HeaderProps {
+  settings?: SiteSettings
+}
+
+export const Header: React.FC<HeaderProps> = ({ settings }) => {
+  const currentSettings = settings || DEFAULT_SITE_SETTINGS
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const [openMobileAccordion, setOpenMobileAccordion] = useState<string | null>('inst')
@@ -32,6 +38,10 @@ export const Header: React.FC = () => {
     setOpenMobileAccordion(openMobileAccordion === key ? null : key)
   }
 
+  const whatsappClean = currentSettings.whatsapp?.replace(/\D/g, '') || '555332325531'
+  const telefonePrincipal = currentSettings.telefones?.[0] || '(53) 3232-5531'
+  const horario = currentSettings.horarioAtendimento || 'Atendimento: 07h30 às 17h30'
+
   return (
     <header className="sticky top-0 z-40 w-full bg-white shadow-md transition-all duration-300">
       {/* Top Header Bar (Compact Utilities) */}
@@ -40,13 +50,13 @@ export const Header: React.FC = () => {
           <div className="flex items-center gap-4 flex-wrap justify-center sm:justify-start">
             <span className="flex items-center gap-1.5 font-medium text-emerald-300">
               <MessageSquare className="w-3.5 h-3.5" />
-              <a href="https://wa.me/555332325531" target="_blank" rel="noreferrer" className="hover:underline font-semibold">
-                WhatsApp Secretaria: (53) 3232-5531
+              <a href={`https://wa.me/${whatsappClean}`} target="_blank" rel="noreferrer" className="hover:underline font-semibold">
+                WhatsApp Secretaria: {telefonePrincipal}
               </a>
             </span>
             <span className="hidden md:inline-flex items-center gap-1.5 font-medium">
               <Clock className="w-3.5 h-3.5 text-amber-400" />
-              <span>Atendimento: 07h30 às 17h30</span>
+              <span>{horario.startsWith('Atendimento:') ? horario : `Atendimento: ${horario}`}</span>
             </span>
           </div>
 

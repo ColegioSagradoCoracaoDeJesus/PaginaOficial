@@ -7,6 +7,8 @@ import { GaleriaComLightbox } from '@/components/conteudo/GaleriaComLightbox'
 import { BlocoCTA } from '@/components/conteudo/BlocoCTA'
 import { getEstrutura } from '@/lib/sanity/queries'
 
+export const dynamic = 'force-dynamic'
+
 export const metadata = {
   title: 'Nossa Estrutura Física',
   description: 'Conheça a infraestrutura completa do Colégio Sagrado Coração de Jesus: salas climatizadas, ginásio poliesportivo, auditório, biblioteca e laboratórios.',

@@ -7,21 +7,29 @@ import { Etiqueta } from '@/components/ui/Etiqueta'
 import { CartaoNoticia } from '@/components/conteudo/CartaoNoticia'
 import { CartaoDiferencial } from '@/components/conteudo/CartaoDiferencial'
 import { BlocoCTA } from '@/components/conteudo/BlocoCTA'
-import { getNoticias, getDiferenciais, getModalidades, getDepoimentos } from '@/lib/sanity/queries'
+import { getNoticias, getDiferenciais, getModalidades, getDepoimentos, getHomeBlocks } from '@/lib/sanity/queries'
 
-export const revalidate = 60 // Revalidate cache every 60 seconds
+export const dynamic = 'force-dynamic'
 
 export default async function HomePage() {
   const notizie = await getNoticias()
   const diferenciais = await getDiferenciais()
   const modalidades = await getModalidades()
   const depoimentos = await getDepoimentos()
+  const homeBlocks = await getHomeBlocks()
 
   const noticiasDestaque = notizie.filter((n) => n.destaque).slice(0, 2)
   const outrasNoticias = notizie.slice(0, 3)
 
-  // Dynamic avisos mock/data (hides automatically if empty)
-  const avisosImportantes = [
+  // Dynamic avisos from Sanity or default fallback
+  const avisosAtivos = homeBlocks?.avisos?.filter((a) => a.ativo) || []
+  const avisosImportantes = avisosAtivos.length > 0 ? avisosAtivos.map((a, idx) => ({
+    id: `aviso-${idx}`,
+    tipo: a.tipo || 'Informativo',
+    titulo: a.titulo,
+    descricao: a.descricao,
+    data: a.dataValidade ? `Válido até ${a.dataValidade}` : 'Importante',
+  })) : [
     {
       id: 'a1',
       tipo: 'Matrículas 2027',

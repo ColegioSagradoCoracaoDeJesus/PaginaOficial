@@ -393,25 +393,117 @@ export const DEFAULT_ESTRUTURA: AmbienteEstrutura[] = [
   },
 ]
 
+export interface HomeBlocks {
+  campanhaAtiva?: {
+    ativo?: boolean
+    titulo?: string
+    subtitulo?: string
+    badge?: string
+    textoBotao?: string
+    linkBotao?: string
+    imageUrl?: string
+  }
+  avisos?: Array<{
+    ativo?: boolean
+    titulo: string
+    descricao: string
+    tipo: string
+    dataValidade?: string
+  }>
+  proximosEventos?: Array<{
+    titulo: string
+    data: string
+    horario?: string
+    descricao?: string
+  }>
+}
+
 const isSanityConfigured = Boolean(process.env.NEXT_PUBLIC_SANITY_PROJECT_ID && process.env.NEXT_PUBLIC_SANITY_PROJECT_ID !== 'placeholder-project')
+
+const fetchOptions = { next: { revalidate: 0 } }
 
 // QUERY FUNCTIONS WITH FALLBACK PROTECTION
 export async function getSiteSettings(): Promise<SiteSettings> {
   if (!isSanityConfigured) return DEFAULT_SITE_SETTINGS
   try {
-    const res = await client.fetch(`*[_type == "siteSettings"][0]`)
-    return res || DEFAULT_SITE_SETTINGS
+    const res = await client.fetch(
+      `*[_type == "siteSettings"][0] {
+        title,
+        telefones,
+        whatsapp,
+        email,
+        emailVisita,
+        emailLocacao,
+        endereco,
+        linkMapaEmbed,
+        horarioAtendimento,
+        redesSociais,
+        "logoUrl": logo.asset->url
+      }`,
+      {},
+      fetchOptions
+    )
+    return res && res.title ? { ...DEFAULT_SITE_SETTINGS, ...res } : DEFAULT_SITE_SETTINGS
   } catch (err) {
     return DEFAULT_SITE_SETTINGS
+  }
+}
+
+export async function getHomeBlocks(): Promise<HomeBlocks | null> {
+  if (!isSanityConfigured) return null
+  try {
+    const res = await client.fetch(
+      `*[_type == "homeBlocks"][0] {
+        campanhaAtiva {
+          ativo,
+          titulo,
+          subtitulo,
+          badge,
+          textoBotao,
+          linkBotao,
+          "imageUrl": imagem.asset->url
+        },
+        avisos[] {
+          ativo,
+          titulo,
+          descricao,
+          tipo,
+          dataValidade
+        },
+        proximosEventos[] {
+          titulo,
+          data,
+          horario,
+          descricao
+        }
+      }`,
+      {},
+      fetchOptions
+    )
+    return res || null
+  } catch (err) {
+    return null
   }
 }
 
 export async function getNoticias(): Promise<Noticia[]> {
   if (!isSanityConfigured) return DEFAULT_NOTICIAS
   try {
-    const res = await client.fetch(`*[_type == "noticia"] | order(data desc) {
-      _id, titulo, slug, data, categoria, resumo, imagemCapa, destaque
-    }`)
+    const res = await client.fetch(
+      `*[_type == "noticia"] | order(data desc) {
+        _id,
+        titulo,
+        slug,
+        data,
+        categoria,
+        resumo,
+        imagemCapa,
+        "imageUrl": imagemCapa.asset->url,
+        destaque
+      }`,
+      {},
+      fetchOptions
+    )
     return res && res.length > 0 ? res : DEFAULT_NOTICIAS
   } catch (err) {
     return DEFAULT_NOTICIAS
@@ -424,7 +516,22 @@ export async function getNoticiaBySlug(slug: string): Promise<Noticia | null> {
     return found || DEFAULT_NOTICIAS[0]
   }
   try {
-    const res = await client.fetch(`*[_type == "noticia" && slug.current == $slug][0]`, { slug })
+    const res = await client.fetch(
+      `*[_type == "noticia" && slug.current == $slug][0] {
+        _id,
+        titulo,
+        slug,
+        data,
+        categoria,
+        resumo,
+        corpo,
+        imagemCapa,
+        "imageUrl": imagemCapa.asset->url,
+        destaque
+      }`,
+      { slug },
+      fetchOptions
+    )
     return res || DEFAULT_NOTICIAS.find(n => n.slug.current === slug) || DEFAULT_NOTICIAS[0]
   } catch (err) {
     return DEFAULT_NOTICIAS.find(n => n.slug.current === slug) || DEFAULT_NOTICIAS[0]
@@ -434,7 +541,7 @@ export async function getNoticiaBySlug(slug: string): Promise<Noticia | null> {
 export async function getDiferenciais(): Promise<Diferencial[]> {
   if (!isSanityConfigured) return DEFAULT_DIFERENCIAIS
   try {
-    const res = await client.fetch(`*[_type == "diferencial"] | order(ordem asc)`)
+    const res = await client.fetch(`*[_type == "diferencial"] | order(ordem asc)`, {}, fetchOptions)
     return res && res.length > 0 ? res : DEFAULT_DIFERENCIAIS
   } catch (err) {
     return DEFAULT_DIFERENCIAIS
@@ -444,7 +551,23 @@ export async function getDiferenciais(): Promise<Diferencial[]> {
 export async function getModalidades(): Promise<ModalidadeEnsino[]> {
   if (!isSanityConfigured) return DEFAULT_MODALIDADES
   try {
-    const res = await client.fetch(`*[_type == "modalidadeEnsino"]`)
+    const res = await client.fetch(
+      `*[_type == "modalidadeEnsino"] {
+        _id,
+        nome,
+        slug,
+        faixaEtaria,
+        resumo,
+        objetivos,
+        metodologia,
+        diferenciais,
+        projetos,
+        fotos,
+        "imageUrl": fotos[0].asset->url
+      }`,
+      {},
+      fetchOptions
+    )
     return res && res.length > 0 ? res : DEFAULT_MODALIDADES
   } catch (err) {
     return DEFAULT_MODALIDADES
@@ -454,7 +577,21 @@ export async function getModalidades(): Promise<ModalidadeEnsino[]> {
 export async function getEspacosLocacao(): Promise<EspacoLocacao[]> {
   if (!isSanityConfigured) return DEFAULT_ESPACOS
   try {
-    const res = await client.fetch(`*[_type == "espacoLocacao"]`)
+    const res = await client.fetch(
+      `*[_type == "espacoLocacao"] {
+        _id,
+        nome,
+        capacidade,
+        descricao,
+        itensDisponiveis,
+        usosPossiveis,
+        condicoesGerais,
+        fotos,
+        "imageUrl": fotos[0].asset->url
+      }`,
+      {},
+      fetchOptions
+    )
     return res && res.length > 0 ? res : DEFAULT_ESPACOS
   } catch (err) {
     return DEFAULT_ESPACOS
@@ -464,7 +601,18 @@ export async function getEspacosLocacao(): Promise<EspacoLocacao[]> {
 export async function getLinhaDoTempo(): Promise<LinhaDoTempoItem[]> {
   if (!isSanityConfigured) return DEFAULT_LINHA_TEMPO
   try {
-    const res = await client.fetch(`*[_type == "linhaDoTempoItem"] | order(ordem asc)`)
+    const res = await client.fetch(
+      `*[_type == "linhaDoTempoItem"] | order(ordem asc) {
+        _id,
+        ano,
+        titulo,
+        descricao,
+        "imageUrl": imagem.asset->url,
+        ordem
+      }`,
+      {},
+      fetchOptions
+    )
     return res && res.length > 0 ? res : DEFAULT_LINHA_TEMPO
   } catch (err) {
     return DEFAULT_LINHA_TEMPO
@@ -474,7 +622,17 @@ export async function getLinhaDoTempo(): Promise<LinhaDoTempoItem[]> {
 export async function getDepoimentos(): Promise<Depoimento70Anos[]> {
   if (!isSanityConfigured) return DEFAULT_DEPOIMENTOS
   try {
-    const res = await client.fetch(`*[_type == "depoimento70anos"]`)
+    const res = await client.fetch(
+      `*[_type == "depoimento70anos"] {
+        _id,
+        nome,
+        relacao,
+        texto,
+        "imageUrl": foto.asset->url
+      }`,
+      {},
+      fetchOptions
+    )
     return res && res.length > 0 ? res : DEFAULT_DEPOIMENTOS
   } catch (err) {
     return DEFAULT_DEPOIMENTOS
@@ -484,7 +642,21 @@ export async function getDepoimentos(): Promise<Depoimento70Anos[]> {
 export async function getEstrutura(): Promise<AmbienteEstrutura[]> {
   if (!isSanityConfigured) return DEFAULT_ESTRUTURA
   try {
-    const res = await client.fetch(`*[_type == "paginaEstrutura"] | order(ordem asc)`)
+    const res = await client.fetch(
+      `*[_type == "paginaEstrutura"] | order(ordem asc) {
+        _id,
+        ambiente,
+        descricao,
+        "fotos": fotos[] {
+          "url": asset->url,
+          alt,
+          legenda
+        },
+        ordem
+      }`,
+      {},
+      fetchOptions
+    )
     return res && res.length > 0 ? res : DEFAULT_ESTRUTURA
   } catch (err) {
     return DEFAULT_ESTRUTURA
@@ -522,7 +694,22 @@ export async function getGaleriasMes(): Promise<GaleriaMes[]> {
 
   if (!isSanityConfigured) return fallbackGalerias
   try {
-    const res = await client.fetch(`*[_type == "galeriaMes"] | order(ano desc, mes desc)`)
+    const res = await client.fetch(
+      `*[_type == "galeriaMes"] | order(ano desc, mes desc) {
+        _id,
+        titulo,
+        mes,
+        ano,
+        descricao,
+        "fotos": fotos[] {
+          "url": asset->url,
+          alt,
+          descricao
+        }
+      }`,
+      {},
+      fetchOptions
+    )
     return res && res.length > 0 ? res : fallbackGalerias
   } catch (err) {
     return fallbackGalerias

@@ -8,6 +8,8 @@ import { Etiqueta } from '@/components/ui/Etiqueta'
 import { Botao } from '@/components/ui/Botao'
 import { getNoticiaBySlug, getNoticias } from '@/lib/sanity/queries'
 
+export const dynamic = 'force-dynamic'
+
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
   const noticia = await getNoticiaBySlug(slug)
