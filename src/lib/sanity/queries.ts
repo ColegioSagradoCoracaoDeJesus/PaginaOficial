@@ -805,10 +805,25 @@ export async function getPaginaMatriculas(): Promise<PaginaMatriculas | null> {
   }
 }
 
+export interface PlataformaAppItem {
+  nome: string
+  publicoAlvo?: string
+  descricao?: string
+  linkWeb?: string
+  linkPlayStore?: string
+  linkAppStore?: string
+  iconeTipo?: string
+  recursos?: string[]
+  ordem?: number
+  ativo?: boolean
+}
+
 export interface PaginaTecnologia {
   titulo?: string
   subtitulo?: string
-  recursos?: Array<{ nome: string; descricao: string; linkAcesso?: string }>
+  avisoTransparencia?: string
+  textoSuporteWhats?: string
+  plataformas?: PlataformaAppItem[]
 }
 
 export async function getPaginaTecnologia(): Promise<PaginaTecnologia | null> {
@@ -818,10 +833,19 @@ export async function getPaginaTecnologia(): Promise<PaginaTecnologia | null> {
       `*[_type == "paginaTecnologia"][0] {
         titulo,
         subtitulo,
-        recursos[] {
+        avisoTransparencia,
+        textoSuporteWhats,
+        plataformas[] {
           nome,
+          publicoAlvo,
           descricao,
-          linkAcesso
+          linkWeb,
+          linkPlayStore,
+          linkAppStore,
+          iconeTipo,
+          recursos,
+          ordem,
+          ativo
         }
       }`,
       {},
