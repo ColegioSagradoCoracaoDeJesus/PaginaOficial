@@ -34,7 +34,7 @@ export default async function NossaEstruturaPage() {
           <Etiqueta variant="anniversary">Espaços de Aprendizado</Etiqueta>
           <h1 className="font-display text-h1 font-bold text-white">Nossa Estrutura Física</h1>
           <p className="text-slate-200 text-body max-w-2xl mx-auto leading-relaxed">
-            Mais de 15.000m² projetados para garantir segurança, conforto, estímulo cognitivo e bem-estar em todas as fases escolares.
+            Espaços projetados para garantir segurança, conforto, estímulo cognitivo e bem-estar em todas as fases escolares.
           </p>
         </div>
       </section>

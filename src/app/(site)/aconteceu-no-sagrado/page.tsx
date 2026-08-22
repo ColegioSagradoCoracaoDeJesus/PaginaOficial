@@ -14,8 +14,7 @@ export const metadata = {
 }
 
 export default async function AconteceuNoSagradoPage() {
-  const noticias = await getNoticias()
-  const galerias = await getGaleriasMes()
+  const [noticias, galerias] = await Promise.all([getNoticias(), getGaleriasMes()])
 
   return (
     <div>
@@ -75,12 +74,12 @@ export default async function AconteceuNoSagradoPage() {
                     {g.mes} de {g.ano}
                   </p>
                 </div>
-                <Etiqueta variant="brand">{g.fotos.length} Fotos</Etiqueta>
+                <Etiqueta variant="brand">{g.fotos?.length || 0} Fotos</Etiqueta>
               </div>
 
               <p className="text-slate-600 text-sm">{g.descricao}</p>
 
-              <GaleriaComLightbox fotos={g.fotos} />
+              {g.fotos && g.fotos.length > 0 && <GaleriaComLightbox fotos={g.fotos} />}
             </div>
           ))}
         </section>

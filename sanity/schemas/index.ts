@@ -9,6 +9,11 @@ import linhaDoTempoItem from './linhaDoTempoItem'
 import depoimento70anos from './depoimento70anos'
 import paginaEstrutura from './paginaEstrutura'
 import parceiro from './parceiro'
+import paginaHistoria from './paginaHistoria'
+import paginaMatriculas from './paginaMatriculas'
+import paginaTecnologia from './paginaTecnologia'
+import paginaVivencie from './paginaVivencie'
+import paginaSetentaAnos from './paginaSetentaAnos'
 
 export const schemaTypes = [
   siteSettings,
@@ -22,4 +27,9 @@ export const schemaTypes = [
   depoimento70anos,
   paginaEstrutura,
   parceiro,
+  paginaHistoria,
+  paginaMatriculas,
+  paginaTecnologia,
+  paginaVivencie,
+  paginaSetentaAnos,
 ]

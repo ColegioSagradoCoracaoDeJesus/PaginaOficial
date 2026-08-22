@@ -12,7 +12,13 @@ export function CarroselParceiros({ parceiros }: CarroselParceirosProps) {
     return null
   }
 
-  const parceirosDuplicados = [...parceiros, ...parceiros]
+  // A duplicação da lista só faz sentido para alimentar a animação de
+  // rolagem contínua (marquee). Com poucos parceiros, a faixa não chega a
+  // preencher a largura do container e a duplicata fica visível parada,
+  // parecendo um item repetido por engano — nesse caso exibimos a lista
+  // uma única vez, sem animação.
+  const precisaDeMarquee = parceiros.length > 5
+  const parceirosExibidos = precisaDeMarquee ? [...parceiros, ...parceiros] : parceiros
 
   return (
     <section className="py-16 bg-gradient-to-b from-white to-slate-50" aria-label="Empresas Parceiras">
@@ -26,8 +32,10 @@ export function CarroselParceiros({ parceiros }: CarroselParceirosProps) {
         </div>
 
         <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white/80 py-6 shadow-sm">
-          <div className="partners-marquee-track flex w-max items-center gap-5 px-4">
-            {parceirosDuplicados.map((parceiro, index) => (
+          <div
+            className={`flex items-center gap-5 px-4 ${precisaDeMarquee ? 'partners-marquee-track w-max' : 'w-full flex-wrap justify-center'}`}
+          >
+            {parceirosExibidos.map((parceiro, index) => (
               <div
                 key={`${parceiro._id}-${index}`}
                 className="group flex min-w-[220px] max-w-[260px] flex-col items-center justify-center rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition-transform duration-300 hover:-translate-y-1 hover:shadow-md"

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Heart, Award, Globe, Cpu, Users, ShieldCheck, BookOpen, Dumbbell, Sparkles } from 'lucide-react'
+import { Heart, Award, Globe, Cpu, Users, ShieldCheck, BookOpen, Dumbbell, Music, Sparkles } from 'lucide-react'
 import { Diferencial } from '@/lib/sanity/queries'
 
 interface CartaoDiferencialProps {
@@ -15,6 +15,7 @@ const iconMap: Record<string, React.ReactNode> = {
   ShieldCheck: <ShieldCheck className="w-7 h-7 text-amber-600" />,
   BookOpen: <BookOpen className="w-7 h-7 text-amber-600" />,
   Dumbbell: <Dumbbell className="w-7 h-7 text-amber-600" />,
+  Music: <Music className="w-7 h-7 text-amber-600" />,
 }
 
 export const CartaoDiferencial: React.FC<CartaoDiferencialProps> = ({ diferencial }) => {

@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 
-interface BotaoProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface BotaoProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'onClick'> {
   variant?: 'primary' | 'secondary' | 'accent' | 'anniversary' | 'outline' | 'white'
   size?: 'sm' | 'md' | 'lg'
   href?: string
@@ -9,6 +9,9 @@ interface BotaoProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode
   fullWidth?: boolean
   className?: string
+  // Aceita tanto <button> quanto <a>/<Link> (quando `href` é usado) — sem isso,
+  // um onClick passado junto com href era silenciosamente descartado.
+  onClick?: React.MouseEventHandler<HTMLButtonElement | HTMLAnchorElement>
 }
 
 export const Botao: React.FC<BotaoProps> = ({
@@ -19,6 +22,7 @@ export const Botao: React.FC<BotaoProps> = ({
   children,
   fullWidth = false,
   className = '',
+  onClick,
   ...props
 }) => {
   const baseStyles = 'inline-flex items-center justify-center font-medium transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer'
@@ -43,20 +47,20 @@ export const Botao: React.FC<BotaoProps> = ({
   if (href) {
     if (external) {
       return (
-        <a href={href} target="_blank" rel="noopener noreferrer" className={combinedClasses}>
+        <a href={href} onClick={onClick} target="_blank" rel="noopener noreferrer" className={combinedClasses}>
           {children}
         </a>
       )
     }
     return (
-      <Link href={href} className={combinedClasses}>
+      <Link href={href} onClick={onClick} className={combinedClasses}>
         {children}
       </Link>
     )
   }
 
   return (
-    <button className={combinedClasses} {...props}>
+    <button className={combinedClasses} onClick={onClick} {...props}>
       {children}
     </button>
   )

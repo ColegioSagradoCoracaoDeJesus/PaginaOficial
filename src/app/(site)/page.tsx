@@ -18,11 +18,13 @@ export const metadata = {
 export const revalidate = 60 // Revalidate cache every 60 seconds
 
 export default async function HomePage() {
-  const notizie = await getNoticias()
-  const diferenciais = await getDiferenciais()
-  const modalidades = await getModalidades()
-  const depoimentos = await getDepoimentos()
-  const parceiros = await getParceiros()
+  const [notizie, diferenciais, modalidades, depoimentos, parceiros] = await Promise.all([
+    getNoticias(),
+    getDiferenciais(),
+    getModalidades(),
+    getDepoimentos(),
+    getParceiros(),
+  ])
 
   const outrasNoticias = notizie.slice(0, 3)
 
@@ -44,7 +46,7 @@ export default async function HomePage() {
         {/* Background Image Overlay with dark gradient */}
         <div className="absolute inset-0 z-0 opacity-25">
           <Image
-            src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1920&auto=format&fit=crop"
+            src="https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=1920&auto=format&fit=crop"
             alt="Fachada do Colégio Sagrado Coração de Jesus"
             fill
             priority

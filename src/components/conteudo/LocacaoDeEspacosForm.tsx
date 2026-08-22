@@ -15,14 +15,22 @@ interface LocacaoDeEspacosFormProps {
 }
 
 export function LocacaoDeEspacosForm({ espacos }: LocacaoDeEspacosFormProps) {
+  // Opções do select derivadas dos espaços vindos do Sanity — se um espaço for
+  // renomeado, adicionado ou removido no CMS, o formulário acompanha automaticamente
+  // em vez de manter uma lista fixa desatualizada.
+  const opcoesEspaco = [
+    ...espacos.map((esp) => ({ value: esp.nome, label: esp.nome })),
+    ...(espacos.length > 1 ? [{ value: 'Ambos os Espaços', label: 'Ambos os Espaços' }] : []),
+  ]
+  const espacoInicial = espacos[0]?.nome || ''
 
-  const [selectedEspaco, setSelectedEspaco] = useState('Ginásio Poliesportivo Sagrado')
+  const [selectedEspaco, setSelectedEspaco] = useState(espacoInicial)
 
   const [formData, setFormData] = useState({
     nome: '',
     telefone: '',
     email: '',
-    espacoInteresse: 'Ginásio Poliesportivo Sagrado',
+    espacoInteresse: espacoInicial,
     dataPrevista: '',
     numeroEstimadoPessoas: '',
     descricaoEvento: '',
@@ -228,11 +236,7 @@ export function LocacaoDeEspacosForm({ espacos }: LocacaoDeEspacosFormProps) {
                   value={formData.espacoInteresse}
                   onChange={handleChange}
                   error={errors.espacoInteresse}
-                  options={[
-                    { value: 'Ginásio Poliesportivo Sagrado', label: 'Ginásio Poliesportivo Sagrado' },
-                    { value: 'Auditório Principal Ir. Tereza', label: 'Auditório Principal Ir. Tereza' },
-                    { value: 'Ambos os Espaços', label: 'Ambos os Espaços (Ginásio + Auditório)' },
-                  ]}
+                  options={opcoesEspaco}
                 />
               </div>
 

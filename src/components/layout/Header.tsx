@@ -293,11 +293,11 @@ export const Header: React.FC<HeaderProps> = ({ whatsappNumber = '555332325531' 
             </div>
 
             <div className="pt-6 border-t mt-6 flex flex-col gap-3">
-              <Botao href="/contato#agendar-visita" variant="accent" fullWidth size="md">
+              <Botao href="/contato#agendar-visita" onClick={closeMobileMenu} variant="accent" fullWidth size="md">
                 <Calendar className="w-4 h-4" />
                 <span>Agende uma Visita Guiada</span>
               </Botao>
-              <Botao href={`https://wa.me/${whatsappNumber}`} external variant="outline" fullWidth size="md">
+              <Botao href={`https://wa.me/${whatsappNumber}`} onClick={closeMobileMenu} external variant="outline" fullWidth size="md">
                 <MessageSquare className="w-4 h-4 text-emerald-600" />
                 <span>Falar com a Secretaria</span>
               </Botao>
