@@ -1,42 +1,46 @@
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Calendar, GraduationCap, Award, Heart, CheckCircle2, ChevronRight, MessageSquare, PhoneCall, Sparkles, Megaphone, Clock } from 'lucide-react'
+import { Calendar, GraduationCap, Award, Heart, CheckCircle2, ChevronRight, MessageSquare, PhoneCall, Sparkles, Megaphone, Clock, MapPin } from 'lucide-react'
 import { Botao } from '@/components/ui/Botao'
 import { Etiqueta } from '@/components/ui/Etiqueta'
 import { CartaoNoticia } from '@/components/conteudo/CartaoNoticia'
 import { CartaoDiferencial } from '@/components/conteudo/CartaoDiferencial'
-import { SecaoParceiros } from '@/components/conteudo/SecaoParceiros'
 import { BlocoCTA } from '@/components/conteudo/BlocoCTA'
-import { getNoticias, getDiferenciais, getModalidades, getDepoimentos, getHomeBlocks, getEmpresasParceiras } from '@/lib/sanity/queries'
+import { CarroselParceiros } from '@/components/conteudo/CarroselParceiros'
+import { getNoticias, getDiferenciais, getModalidades, getDepoimentos, getParceiros } from '@/lib/sanity/queries'
 
-export const dynamic = 'force-dynamic'
+export const metadata = {
+  title: 'Colégio Sagrado Coração de Jesus | Educação de Excelência em Rio Grande - RS',
+  description: 'Descubra o Colégio Sagrado Coração de Jesus em Rio Grande - RS: Educação Infantil, Ensino Fundamental, Ensino Médio, tradição, acolhimento e matrículas abertas.',
+}
+
+export const revalidate = 60 // Revalidate cache every 60 seconds
 
 export default async function HomePage() {
   const notizie = await getNoticias()
   const diferenciais = await getDiferenciais()
   const modalidades = await getModalidades()
   const depoimentos = await getDepoimentos()
-  const homeBlocks = await getHomeBlocks()
-  const parceiros = await getEmpresasParceiras()
+  const parceiros = await getParceiros()
 
-  const noticiasDestaque = notizie.filter((n) => n.destaque).slice(0, 2)
   const outrasNoticias = notizie.slice(0, 3)
 
-  // Dynamic avisos from Sanity (strictly real data)
-  const avisosAtivos = homeBlocks?.avisos?.filter((a) => a.ativo) || []
-  const avisosImportantes = avisosAtivos.map((a, idx) => ({
-    id: `aviso-${idx}`,
-    tipo: a.tipo || 'Informativo',
-    titulo: a.titulo,
-    descricao: a.descricao,
-    data: a.dataValidade ? `Válido até ${a.dataValidade}` : 'Importante',
-  }))
+  // Dynamic avisos mock/data (hides automatically if empty)
+  const avisosImportantes = [
+    {
+      id: 'a1',
+      tipo: 'Matrículas 2027',
+      titulo: 'Período de Rematrículas para Alunos Veteranos e Novas Vagas Abertas',
+      descricao: 'Agende o atendimento na secretaria ou garanta a vaga do seu filho pelo portal de matrículas.',
+      data: 'Vagas Limitadas',
+    },
+  ]
 
   return (
     <div className="space-y-16 pb-12">
       {/* SECTION 1: HERO BANNER (RF01, RF02) */}
-      <section className="relative bg-[#1E3A5F] text-white py-16 lg:py-24 px-4 overflow-hidden border-b-4 border-[#B8860B]">
+      <section className="relative bg-brand text-white py-16 lg:py-24 px-4 overflow-hidden border-b-4 border-[#B8860B]">
         {/* Background Image Overlay with dark gradient */}
         <div className="absolute inset-0 z-0 opacity-25">
           <Image
@@ -47,7 +51,7 @@ export default async function HomePage() {
             className="object-cover object-center"
           />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-r from-[#152A47] via-[#1E3A5F]/90 to-[#152A47]/80 z-0" />
+        <div className="absolute inset-0 bg-gradient-to-r from-brand-dark via-brand/90 to-brand-dark/80 z-0" />
 
         <div className="max-w-[1280px] mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           <div className="lg:col-span-8 space-y-6 text-center lg:text-left">
@@ -61,8 +65,13 @@ export default async function HomePage() {
             </h1>
 
             <p className="text-slate-200 text-base sm:text-xl max-w-2xl leading-relaxed font-sans">
-              Tradição pedagógica reconhecida, estrutura moderna com ginásio e auditório próprios, programa bilíngue e foco constante na formação humana integral do seu filho.
+              Tradição pedagógica reconhecida em Rio Grande - RS, no bairro Cidade Nova, com estrutura moderna, ginásio e auditório próprios, programa bilíngue e foco constante na formação humana integral do seu filho.
             </p>
+
+            <div className="inline-flex items-center gap-2 rounded-full border border-amber-300/60 bg-white/5 px-3 py-1.5 text-xs sm:text-sm font-semibold text-amber-200 backdrop-blur-sm">
+              <MapPin className="w-4 h-4 text-amber-300" />
+              <span>Rua Doutor Augusto Duprat, 374 - Cidade Nova, Rio Grande - RS</span>
+            </div>
 
             {/* 4 Mandatory Action Buttons (RF01) */}
             <div className="pt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 max-w-3xl mx-auto lg:mx-0">
@@ -71,7 +80,7 @@ export default async function HomePage() {
                 <span>Matrículas & Rematrículas</span>
               </Botao>
 
-              <Botao href="/nossa-historia" variant="outline" size="md" fullWidth className="border-white text-white hover:bg-white hover:text-[#1E3A5F]">
+              <Botao href="/nossa-historia" variant="outline" size="md" fullWidth className="border-white text-white hover:bg-white hover:text-brand">
                 <Award className="w-4 h-4" />
                 <span>Conheça o Colégio</span>
               </Botao>
@@ -82,7 +91,7 @@ export default async function HomePage() {
               </Botao>
 
               <Botao href="/contato" variant="white" size="md" fullWidth>
-                <PhoneCall className="w-4 h-4 text-[#1E3A5F]" />
+                <PhoneCall className="w-4 h-4 text-brand" />
                 <span>Fale Conosco</span>
               </Botao>
             </div>
@@ -125,6 +134,35 @@ export default async function HomePage() {
         </div>
       </section>
 
+      <section className="max-w-[1280px] mx-auto px-4">
+        <div className="rounded-2xl border border-slate-200 bg-[#F8FAFC] p-6 shadow-sm sm:p-8">
+          <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+            <div className="max-w-3xl">
+              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand">Escola em Rio Grande - RS</p>
+              <h2 className="mt-2 font-display text-h2 font-bold text-slate-900">Educação de qualidade para famílias da região</h2>
+              <p className="mt-3 text-slate-600 leading-relaxed">
+                O Colégio Sagrado Coração de Jesus está localizado no bairro Cidade Nova, em Rio Grande - RS, e oferece uma proposta educativa completa para a Educação Infantil, Ensino Fundamental e Ensino Médio. Com 70 anos de tradição, o Colégio combina acolhimento, valores, excelência acadêmica e uma infraestrutura moderna para o desenvolvimento integral dos estudantes.
+              </p>
+            </div>
+
+            <div className="grid gap-3 sm:grid-cols-3 lg:w-[360px]">
+              <div className="rounded-lg border border-slate-200 bg-white p-3 text-center shadow-sm">
+                <div className="text-lg font-bold text-brand">70 anos</div>
+                <div className="text-xs text-slate-600">de tradição</div>
+              </div>
+              <div className="rounded-lg border border-slate-200 bg-white p-3 text-center shadow-sm">
+                <div className="text-lg font-bold text-brand">Educação</div>
+                <div className="text-xs text-slate-600">Integral</div>
+              </div>
+              <div className="rounded-lg border border-slate-200 bg-white p-3 text-center shadow-sm">
+                <div className="text-lg font-bold text-brand">Rio Grande</div>
+                <div className="text-xs text-slate-600">- RS</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* SECTION 2: DYNAMIC AVISOS & CAMPANHA BANNER (RF02 - hides automatically if empty) */}
       {avisosImportantes.length > 0 && (
         <section className="max-w-[1280px] mx-auto px-4">
@@ -153,81 +191,77 @@ export default async function HomePage() {
       )}
 
       {/* SECTION 3: MODALIDADES DE ENSINO PREVIEW (RF04) */}
-      {modalidades.length > 0 && (
-        <section className="max-w-[1280px] mx-auto px-4">
+      <section className="max-w-[1280px] mx-auto px-4">
+        <div className="text-center max-w-2xl mx-auto mb-12 space-y-3">
+          <Etiqueta variant="brand">Formação Integral</Etiqueta>
+          <h2 className="font-display text-h1 font-bold text-slate-900">
+            Nossas Modalidades de Ensino
+          </h2>
+          <p className="text-slate-600 text-body">
+            Uma trajetória contínua de aprendizagem, afeto e desenvolvimento cognitivo adaptada a cada fase da infância e juventude.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {modalidades.map((m) => (
+            <div key={m._id} className="bg-white rounded-md border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col justify-between group">
+              <div className="relative h-44 w-full bg-slate-100">
+                {m.imageUrl && (
+                  <Image src={m.imageUrl} alt={m.nome} fill sizes="(max-width: 768px) 100vw, 25vw" className="object-cover group-hover:scale-105 transition-transform duration-500" />
+                )}
+                <div className="absolute top-3 left-3">
+                  <span className="bg-brand text-white text-xs font-bold px-2.5 py-1 rounded">
+                    {m.faixaEtaria}
+                  </span>
+                </div>
+              </div>
+
+              <div className="p-5 flex-1 flex flex-col justify-between">
+                <div>
+                  <h3 className="font-display font-bold text-xl text-slate-900 mb-2 group-hover:text-brand transition-colors">
+                    {m.nome}
+                  </h3>
+                  <p className="text-slate-600 text-xs line-clamp-3 leading-relaxed mb-4">
+                    {m.resumo}
+                  </p>
+                </div>
+
+                <Link href="/ensino" className="inline-flex items-center gap-1 text-xs font-bold text-brand hover:text-[#D97706] transition-colors">
+                  <span>Conhecer modalidade</span>
+                  <ChevronRight className="w-4 h-4" />
+                </Link>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* SECTION 4: DIFERENCIAIS INSTITUCIONAIS (RF06) */}
+      <section className="bg-slate-50 py-16 border-y border-slate-200">
+        <div className="max-w-[1280px] mx-auto px-4">
           <div className="text-center max-w-2xl mx-auto mb-12 space-y-3">
-            <Etiqueta variant="brand">Formação Integral</Etiqueta>
+            <Etiqueta variant="anniversary">Por que o Sagrado?</Etiqueta>
             <h2 className="font-display text-h1 font-bold text-slate-900">
-              Nossas Modalidades de Ensino
+              Diferenciais que Transformam Futuros
             </h2>
             <p className="text-slate-600 text-body">
-              Uma trajetória contínua de aprendizagem, afeto e desenvolvimento cognitivo adaptada a cada fase da infância e juventude.
+              Conheça os pilares pedagógicos e de infraestrutura que fundamentam nossos 70 anos de história.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {modalidades.map((m) => (
-              <div key={m._id} className="bg-white rounded-md border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col justify-between group">
-                <div className="relative h-44 w-full bg-slate-100">
-                  {m.imageUrl && (
-                    <Image src={m.imageUrl} alt={m.nome} fill sizes="(max-width: 768px) 100vw, 25vw" className="object-cover group-hover:scale-105 transition-transform duration-500" />
-                  )}
-                  <div className="absolute top-3 left-3">
-                    <span className="bg-[#1E3A5F] text-white text-xs font-bold px-2.5 py-1 rounded">
-                      {m.faixaEtaria}
-                    </span>
-                  </div>
-                </div>
-
-                <div className="p-5 flex-1 flex flex-col justify-between">
-                  <div>
-                    <h3 className="font-display font-bold text-xl text-slate-900 mb-2 group-hover:text-[#1E3A5F] transition-colors">
-                      {m.nome}
-                    </h3>
-                    <p className="text-slate-600 text-xs line-clamp-3 leading-relaxed mb-4">
-                      {m.resumo}
-                    </p>
-                  </div>
-
-                  <Link href="/ensino" className="inline-flex items-center gap-1 text-xs font-bold text-[#1E3A5F] hover:text-[#D97706] transition-colors">
-                    <span>Conhecer modalidade</span>
-                    <ChevronRight className="w-4 h-4" />
-                  </Link>
-                </div>
-              </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {diferenciais.map((dif) => (
+              <CartaoDiferencial key={dif._id} diferencial={dif} />
             ))}
           </div>
-        </section>
-      )}
 
-      {/* SECTION 4: DIFERENCIAIS INSTITUCIONAIS (RF06) */}
-      {diferenciais.length > 0 && (
-        <section className="bg-slate-50 py-16 border-y border-slate-200">
-          <div className="max-w-[1280px] mx-auto px-4">
-            <div className="text-center max-w-2xl mx-auto mb-12 space-y-3">
-              <Etiqueta variant="anniversary">Por que o Sagrado?</Etiqueta>
-              <h2 className="font-display text-h1 font-bold text-slate-900">
-                Diferenciais que Transformam Futuros
-              </h2>
-              <p className="text-slate-600 text-body">
-                Conheça os pilares pedagógicos e de infraestrutura que fundamentam nossos 70 anos de história.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {diferenciais.map((dif) => (
-                <CartaoDiferencial key={dif._id} diferencial={dif} />
-              ))}
-            </div>
-
-            <div className="text-center mt-10">
-              <Botao href="/diferenciais" variant="outline" size="md">
-                Ver Todos os Diferenciais em Detalhes
-              </Botao>
-            </div>
+          <div className="text-center mt-10">
+            <Botao href="/diferenciais" variant="outline" size="md">
+              Ver Todos os Diferenciais em Detalhes
+            </Botao>
           </div>
-        </section>
-      )}
+        </div>
+      </section>
 
       {/* SECTION 5: NOTÍCIAS & ACONTECEU NO SAGRADO (RF10) */}
       <section className="max-w-[1280px] mx-auto px-4">
@@ -235,68 +269,56 @@ export default async function HomePage() {
           <div>
             <Etiqueta variant="brand" className="mb-2">Comunidade Escolar</Etiqueta>
             <h2 className="font-display text-h1 font-bold text-slate-900">Aconteceu no Sagrado</h2>
-            <p className="text-slate-600 text-sm mt-1">Acompanhe as últimas notícias, projetos pedagógicos e comunicados oficiais do Colégio.</p>
+            <p className="text-slate-600 text-sm mt-1">Acompanhe as últimas notícias, projetos pedagógicos e comemorações dos 70 anos.</p>
           </div>
-          {notizie.length > 0 && (
-            <Botao href="/noticias" variant="outline" size="sm">
-              Ver Todas as Notícias
-            </Botao>
-          )}
+          <Botao href="/noticias" variant="outline" size="sm">
+            Ver Todas as Notícias
+          </Botao>
         </div>
 
-        {notizie.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {outrasNoticias.map((noticia) => (
-              <CartaoNoticia key={noticia._id} noticia={noticia} />
-            ))}
-          </div>
-        ) : (
-          <div className="bg-slate-50 border border-slate-200 rounded-lg p-10 text-center space-y-2">
-            <p className="font-display font-bold text-lg text-slate-800">Nenhuma notícia publicada no momento</p>
-            <p className="text-sm text-slate-500">As publicações e comunicados cadastrados pela Secretaria no Sanity aparecerão aqui.</p>
-          </div>
-        )}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {outrasNoticias.map((noticia) => (
+            <CartaoNoticia key={noticia._id} noticia={noticia} />
+          ))}
+        </div>
       </section>
 
-      {/* SECTION 6: TESTEMUNHOS DOS 70 ANOS (RF08 - Only if registered in Sanity) */}
-      {depoimentos.length > 0 && (
-        <section className="bg-[#1E3A5F] text-white py-16 px-4">
-          <div className="max-w-[1280px] mx-auto">
-            <div className="text-center max-w-2xl mx-auto mb-12 space-y-3">
-              <Etiqueta variant="anniversary">Vozes da Nossa História</Etiqueta>
-              <h2 className="font-display text-h1 font-bold text-white">Depoimentos dos 70 Anos</h2>
-              <p className="text-slate-200 text-body">
-                Histórias reais de quem vivenciou a excelência e o afeto do Colégio Sagrado Coração de Jesus.
-              </p>
-            </div>
+      <CarroselParceiros parceiros={parceiros} />
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {depoimentos.map((dep) => (
-                <div key={dep._id} className="bg-[#152A47] p-6 rounded-md border border-[#B8860B]/40 shadow-lg flex flex-col justify-between">
-                  <p className="italic text-slate-200 text-sm leading-relaxed mb-6">
-                    "{dep.texto}"
-                  </p>
+      {/* SECTION 6: TESTEMUNHOS DOS 70 ANOS (RF08) */}
+      <section className="bg-brand text-white py-16 px-4">
+        <div className="max-w-[1280px] mx-auto">
+          <div className="text-center max-w-2xl mx-auto mb-12 space-y-3">
+            <Etiqueta variant="anniversary">Vozes da Nossa História</Etiqueta>
+            <h2 className="font-display text-h1 font-bold text-white">Depoimentos dos 70 Anos</h2>
+            <p className="text-slate-200 text-body">
+              Histórias reais de quem vivenciou a excelência e o afeto do Colégio Sagrado Coração de Jesus.
+            </p>
+          </div>
 
-                  <div className="flex items-center gap-3 pt-4 border-t border-slate-700">
-                    <div className="w-10 h-10 rounded-full bg-[#B8860B] text-white font-bold flex items-center justify-center text-sm shrink-0">
-                      {dep.nome.charAt(0)}
-                    </div>
-                    <div>
-                      <h4 className="font-bold text-white text-sm">{dep.nome}</h4>
-                      <p className="text-xs text-amber-300">{dep.relacao}</p>
-                    </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {depoimentos.map((dep) => (
+              <div key={dep._id} className="bg-brand-dark p-6 rounded-md border border-[#B8860B]/40 shadow-lg flex flex-col justify-between">
+                <p className="italic text-slate-200 text-sm leading-relaxed mb-6">
+                  “{dep.texto}”
+                </p>
+
+                <div className="flex items-center gap-3 pt-4 border-t border-slate-700">
+                  <div className="w-10 h-10 rounded-full bg-[#B8860B] text-white font-bold flex items-center justify-center text-sm shrink-0">
+                    {dep.nome.charAt(0)}
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-white text-sm">{dep.nome}</h4>
+                    <p className="text-xs text-amber-300">{dep.relacao}</p>
                   </div>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
-        </section>
-      )}
+        </div>
+      </section>
 
-      {/* SECTION 7: EMPRESAS PARCEIRAS */}
-      <SecaoParceiros parceiros={parceiros} />
-
-      {/* SECTION 8: HIGH CONVERSION CTA */}
+      {/* SECTION 7: HIGH CONVERSION CTA */}
       <div className="max-w-[1280px] mx-auto px-4">
         <BlocoCTA />
       </div>

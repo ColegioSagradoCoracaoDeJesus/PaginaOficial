@@ -6,9 +6,7 @@ import { Etiqueta } from '@/components/ui/Etiqueta'
 import { Botao } from '@/components/ui/Botao'
 import { ItemLinhaDoTempo } from '@/components/conteudo/ItemLinhaDoTempo'
 import { BlocoCTA } from '@/components/conteudo/BlocoCTA'
-import { getLinhaDoTempo, getDepoimentos, getPaginaSetentaAnos } from '@/lib/sanity/queries'
-
-export const dynamic = 'force-dynamic'
+import { getLinhaDoTempo, getDepoimentos } from '@/lib/sanity/queries'
 
 export const metadata = {
   title: '70 Anos do Colégio Sagrado Coração de Jesus | Jubileu de Vinho',
@@ -18,24 +16,35 @@ export const metadata = {
 export default async function SetentaAnosPage() {
   const linhaTempo = await getLinhaDoTempo()
   const depoimentos = await getDepoimentos()
-  const data = await getPaginaSetentaAnos()
 
-  const badge = data?.badge || '1956 — 2026 | Jubileu de Vinho'
-  const titulo = data?.titulo || '70 Anos Formando Gerações com Excelência, Acolhimento e Valores'
-  const subtitulo = data?.subtitulo || 'Sete décadas construindo memórias, transformando vidas e reafirmando o compromisso com uma educação integral de verdade.'
-
-  const programacao70Anos = data?.programacao && data.programacao.length > 0 ? data.programacao : [
+  const programacao70Anos = [
     {
-      data: 'A Definir / Em Breve',
-      horario: 'A Definir',
-      titulo: 'Espetáculo Comemorativo dos 70 Anos',
-      local: 'Colégio Sagrado Coração de Jesus',
-      descricao: 'Grande apresentação artística e cultural celebrando a história de sete décadas do colégio.',
-      ingresso: 'Informações e ingressos na Secretaria do Colégio.',
+      data: '15 de Setembro de 2026',
+      horario: '19h00',
+      titulo: 'Missa em Ação de Graças pelos 70 Anos',
+      local: 'Auditório Principal Ir. Tereza',
+      descricao: 'Celebração eucarística comemorativa presidida com participação do coral dos alunos.',
+      ingresso: 'Entrada Franca mediante confirmação prévia.',
+    },
+    {
+      data: '24 de Outubro de 2026',
+      horario: '14h00 às 20h00',
+      titulo: 'Grande Encontro dos Ex-Alunos & Feira Cultural 70 Anos',
+      local: 'Ginásio Poliesportivo e Pátios do Colégio',
+      descricao: 'Reencontro de turmas históricas, exposição de fotos antigas, música ao vivo e espaço gastronômico.',
+      ingresso: 'Convite individual disponível na Secretaria ou via WhatsApp.',
+    },
+    {
+      data: '20 de Novembro de 2026',
+      horario: '20h00',
+      titulo: 'Jantar Solene de Gala dos 70 Anos',
+      local: 'Salão de Eventos Principal',
+      descricao: 'Noite de homenagens a educadores históricos, ex-diretores e famílias fundadoras.',
+      ingresso: 'Mesa reserva na Secretaria. (Consulte disponibilidade).',
     },
   ]
 
-  const curiosidades = data?.curiosidades && data.curiosidades.length > 0 ? data.curiosidades : [
+  const curiosidades = [
     { ano: '1956', texto: 'A primeira turma contava com apenas 28 alunos e funcionava em um casarão adaptado.' },
     { ano: '1974', texto: 'O Colégio formou seu primeiro time feminino de basquete, sagrando-se campeão municipal no ano seguinte.' },
     { ano: '1998', texto: 'Inauguração da cápsula do tempo no jardim central, que será aberta durante os festejos dos 70 anos.' },
@@ -47,21 +56,21 @@ export default async function SetentaAnosPage() {
       <MigalhaDePao items={[{ label: '70 Anos' }]} />
 
       {/* Hero Banner Gold */}
-      <section className="bg-gradient-to-r from-[#152A47] via-[#1E3A5F] to-[#152A47] text-white py-20 px-4 border-b-4 border-[#B8860B] relative overflow-hidden">
+      <section className="bg-gradient-to-r from-brand-dark via-brand to-brand-dark text-white py-20 px-4 border-b-4 border-[#B8860B] relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(#B8860B_1px,transparent_1px)] [background-size:16px_16px] opacity-15 pointer-events-none" />
 
         <div className="max-w-[1280px] mx-auto text-center relative z-10 space-y-6">
           <div className="inline-flex items-center gap-2 bg-[#B8860B] text-white px-4 py-1.5 rounded-full font-bold text-xs sm:text-sm tracking-wider uppercase shadow-md">
             <Award className="w-4 h-4" />
-            <span>{badge}</span>
+            <span>1956 — 2026 | Jubileu de Vinho</span>
           </div>
 
           <h1 className="font-display text-hero font-bold text-white max-w-4xl mx-auto leading-tight">
-            {titulo}
+            70 Anos Formando Gerações com Excelência, Acolhimento e Valores
           </h1>
 
           <p className="text-amber-100 text-base sm:text-xl max-w-2xl mx-auto font-sans leading-relaxed">
-            {subtitulo}
+            Sete décadas construindo memórias, transformando vidas e reafirmando o compromisso com uma educação integral de verdade.
           </p>
         </div>
       </section>
@@ -87,20 +96,18 @@ export default async function SetentaAnosPage() {
         </section>
 
         {/* Timeline */}
-        {linhaTempo.length > 0 && (
-          <section className="space-y-8">
-            <div className="text-center max-w-2xl mx-auto space-y-2">
-              <Etiqueta variant="brand">Trajetória Cronológica</Etiqueta>
-              <h2 className="font-display text-h2 font-bold text-slate-900">A Nossa História Ano a Ano</h2>
-            </div>
+        <section className="space-y-8">
+          <div className="text-center max-w-2xl mx-auto space-y-2">
+            <Etiqueta variant="brand">Trajetória Cronológica</Etiqueta>
+            <h2 className="font-display text-h2 font-bold text-slate-900">A Nossa História Ano a Ano</h2>
+          </div>
 
-            <div className="relative border-l-2 md:border-l-0 md:before:absolute md:before:left-1/2 md:before:-translate-x-1/2 md:before:w-1 md:before:h-full md:before:bg-[#1E3A5F]/20">
-              {linhaTempo.map((item, idx) => (
-                <ItemLinhaDoTempo key={item._id} item={item} isEven={idx % 2 === 0} />
-              ))}
-            </div>
-          </section>
-        )}
+          <div className="relative border-l-2 md:border-l-0 md:before:absolute md:before:left-1/2 md:before:-translate-x-1/2 md:before:w-1 md:before:h-full md:before:bg-brand/20">
+            {linhaTempo.map((item, idx) => (
+              <ItemLinhaDoTempo key={item._id} item={item} isEven={idx % 2 === 0} />
+            ))}
+          </div>
+        </section>
 
         {/* Programação de Eventos dos 70 Anos (RF08) */}
         <section className="bg-slate-900 text-white p-8 sm:p-12 rounded-lg border-2 border-[#B8860B]/60 shadow-xl space-y-8">
@@ -118,7 +125,7 @@ export default async function SetentaAnosPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {programacao70Anos.map((prog, idx) => (
-              <div key={idx} className="bg-[#152A47] p-6 rounded-md border border-slate-700 space-y-4 flex flex-col justify-between">
+              <div key={idx} className="bg-brand-dark p-6 rounded-md border border-slate-700 space-y-4 flex flex-col justify-between">
                 <div className="space-y-3">
                   <div className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-300 bg-amber-500/20 px-3 py-1 rounded">
                     <Calendar className="w-3.5 h-3.5" />
@@ -139,7 +146,7 @@ export default async function SetentaAnosPage() {
           </div>
 
           {/* Directing for ticket info without processing online payment */}
-          <div className="p-4 bg-[#1E3A5F] rounded-md border border-slate-700 text-xs text-slate-300 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <div className="p-4 bg-brand rounded-md border border-slate-700 text-xs text-slate-300 flex flex-col sm:flex-row items-center justify-between gap-3">
             <div className="flex items-center gap-2">
               <HelpCircle className="w-5 h-5 text-amber-400 shrink-0" />
               <span>
@@ -153,31 +160,29 @@ export default async function SetentaAnosPage() {
         </section>
 
         {/* Depoimentos dos 70 Anos */}
-        {depoimentos.length > 0 && (
-          <section className="space-y-8">
-            <div className="text-center max-w-2xl mx-auto space-y-2">
-              <Etiqueta variant="anniversary">Depoimentos Históricos</Etiqueta>
-              <h2 className="font-display text-h2 font-bold text-slate-900">Histórias que Vivem no Sagrado</h2>
-            </div>
+        <section className="space-y-8">
+          <div className="text-center max-w-2xl mx-auto space-y-2">
+            <Etiqueta variant="anniversary">Depoimentos Históricos</Etiqueta>
+            <h2 className="font-display text-h2 font-bold text-slate-900">Histórias que Vivem no Sagrado</h2>
+          </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {depoimentos.map((dep) => (
-                <div key={dep._id} className="bg-white p-6 rounded-md border border-slate-200 shadow-sm space-y-4">
-                  <p className="italic text-slate-700 text-sm leading-relaxed">"{dep.texto}"</p>
-                  <div className="pt-4 border-t border-slate-100 flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-[#1E3A5F] text-white font-bold flex items-center justify-center">
-                      {dep.nome.charAt(0)}
-                    </div>
-                    <div>
-                      <h4 className="font-bold text-slate-900 text-sm">{dep.nome}</h4>
-                      <p className="text-xs text-[#5C7A99] font-medium">{dep.relacao}</p>
-                    </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {depoimentos.map((dep) => (
+              <div key={dep._id} className="bg-white p-6 rounded-md border border-slate-200 shadow-sm space-y-4">
+                <p className="italic text-slate-700 text-sm leading-relaxed">“{dep.texto}”</p>
+                <div className="pt-4 border-t border-slate-100 flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-brand text-white font-bold flex items-center justify-center">
+                    {dep.nome.charAt(0)}
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-slate-900 text-sm">{dep.nome}</h4>
+                    <p className="text-xs text-brand-dark font-medium">{dep.relacao}</p>
                   </div>
                 </div>
-              ))}
-            </div>
-          </section>
-        )}
+              </div>
+            ))}
+          </div>
+        </section>
 
         <BlocoCTA />
       </div>

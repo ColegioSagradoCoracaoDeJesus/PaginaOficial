@@ -5,11 +5,10 @@ import { MessageSquare } from 'lucide-react'
 import { DEFAULT_SITE_SETTINGS } from '@/lib/sanity/queries'
 
 interface BotaoWhatsAppProps {
-  whatsapp?: string
+  whatsappNumber?: string
 }
 
-export const BotaoWhatsApp: React.FC<BotaoWhatsAppProps> = ({ whatsapp }) => {
-  const whatsappNumber = whatsapp || DEFAULT_SITE_SETTINGS.whatsapp
+export const BotaoWhatsApp: React.FC<BotaoWhatsAppProps> = ({ whatsappNumber = DEFAULT_SITE_SETTINGS.whatsapp }) => {
   const message = encodeURIComponent('Olá! Vim através do site oficial do Colégio Sagrado Coração de Jesus e gostaria de mais informações.')
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${message}`
 

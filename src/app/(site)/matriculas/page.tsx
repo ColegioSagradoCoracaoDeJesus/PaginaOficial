@@ -5,33 +5,23 @@ import { Etiqueta } from '@/components/ui/Etiqueta'
 import { Botao } from '@/components/ui/Botao'
 import { FormVisitaModal } from '@/components/conteudo/FormVisitaModal'
 import { BlocoCTA } from '@/components/conteudo/BlocoCTA'
-import { getPaginaMatriculas } from '@/lib/sanity/queries'
-
-export const dynamic = 'force-dynamic'
+import { getSiteSettings } from '@/lib/sanity/queries'
 
 export const metadata = {
-  title: 'Matrículas e Rematrículas | Vagas Abertas',
-  description: 'Garanta a vaga do seu filho no Colégio Sagrado Coração de Jesus em Rio Grande - RS. Documentação necessária, passo a passo e agendamento de visita.',
+  title: 'Matrículas e Rematrículas 2027 | Vagas Abertas',
+  description: 'Garanta a vaga do seu filho no Colégio Sagrado Coração de Jesus para o Ano Letivo 2027 em Rio Grande - RS. Documentação necessária, passo a passo e agendamento de visita.',
 }
 
 export default async function MatriculasPage() {
-  const data = await getPaginaMatriculas()
-
-  const tituloBanner = data?.titulo || 'Matrículas & Rematrículas 2026/2027'
-  const subtituloBanner = data?.subtitulo || 'Garanta a vaga do seu filho em uma instituição com 70 anos de tradição, inovação e acolhimento humano em Rio Grande - RS.'
-
-  const passosMatricula = data?.passos && data.passos.length > 0 ? data.passos.map((p, idx) => ({
-    passo: String(p.numero || idx + 1).padStart(2, '0'),
-    titulo: p.titulo,
-    descricao: p.descricao,
-  })) : [
+  const settings = await getSiteSettings()
+  const passosMatricula = [
     { passo: '01', titulo: 'Agende uma Visita Guiada', descricao: 'Conheça nossa estrutura física, proposta pedagógica e tire dúvidas com a equipe de coordenação.' },
     { passo: '02', titulo: 'Entrevista Pedagógica & Apresentação', descricao: 'Conversa acolhedora com os pais e apresentação das diretrizes de convivência do Sagrado.' },
     { passo: '03', titulo: 'Entrega de Documentos', descricao: 'Apresentação da documentação do aluno e dos responsáveis na Secretaria do Colégio.' },
     { passo: '04', titulo: 'Assinatura & Boas-Vindas', descricao: 'Assinatura do contrato de prestação de serviços educacionais e integração da família no Diário Escola.' },
   ]
 
-  const documentosNecessarios = data?.documentosNecessarios && data.documentosNecessarios.length > 0 ? data.documentosNecessarios : [
+  const documentosNecessarios = [
     'Certidão de Nascimento do Aluno (cópia simples)',
     'RG e CPF do Aluno (se houver)',
     'RG, CPF e Comprovante de Residência dos Responsáveis Financeiros',
@@ -40,17 +30,17 @@ export default async function MatriculasPage() {
     'Declaração de Quitação de Débitos da escola anterior',
   ]
 
-  const faqMatriculas = data?.duvidasFrequentes && data.duvidasFrequentes.length > 0 ? data.duvidasFrequentes : [
+  const faqMatriculas = [
     { pergunta: 'Qual é o horário de atendimento da Secretaria para matrículas?', resposta: 'A Secretaria atende presencialmente e por telefone de segunda a sexta-feira, das 07h30 às 17h30 sem fechar para o almoço.' },
     { pergunta: 'O Colégio oferece período integral ou turmas de contraturno?', resposta: 'Sim! Possuímos programas de permanência estendida e atividades extracurriculares no contraturno escolar para Educação Infantil e Ensino Fundamental.' },
-    { pergunta: 'Como funciona a rematrícula de alunos veteranos?', resposta: 'Alunos veteranos possuem prioridade de renovação de vaga através do portal de rematrículas com condições especiais no período oficial de campanha.' },
+    { pergunta: 'Como funciona a rematrícula de alunos veteranos para 2027?', resposta: 'Alunos veteranos possuem prioridade de renovação de vaga através do portal de rematrículas com condições especiais no período oficial de campanha 2027.' },
   ]
 
   return (
     <div>
       <MigalhaDePao items={[{ label: 'Matrículas & Rematrículas 2027' }]} />
 
-      <section className="bg-[#1E3A5F] text-white py-16 px-4">
+      <section className="bg-brand text-white py-16 px-4">
         <div className="max-w-[1280px] mx-auto text-center space-y-4">
           <Etiqueta variant="anniversary">Ano Letivo 2027 — Vagas Abertas</Etiqueta>
           <h1 className="font-display text-h1 font-bold text-white">Matrículas & Rematrículas 2027</h1>
@@ -85,7 +75,7 @@ export default async function MatriculasPage() {
             <div className="space-y-2">
               <Etiqueta variant="brand">Documentação Exigida</Etiqueta>
               <h3 className="font-display font-bold text-xl text-slate-900 flex items-center gap-2">
-                <FileCheck className="w-5 h-5 text-[#1E3A5F]" />
+                <FileCheck className="w-5 h-5 text-brand" />
                 <span>Documentos para Matrícula</span>
               </h3>
             </div>
@@ -100,7 +90,7 @@ export default async function MatriculasPage() {
             </ul>
 
             <div className="pt-2">
-              <Botao href="https://wa.me/555332325531" external variant="outline" fullWidth size="md">
+              <Botao href={`https://wa.me/${settings.whatsapp}`} external variant="outline" fullWidth size="md">
                 <MessageSquare className="w-4 h-4 text-emerald-600" />
                 <span>Tirar dúvidas sobre documentos</span>
               </Botao>

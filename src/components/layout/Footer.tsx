@@ -1,34 +1,39 @@
 import React from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
-import { Phone, Mail, MapPin, Clock, ShieldCheck, Heart, Award, ChevronRight, ExternalLink } from 'lucide-react'
-import { SiteSettings, DEFAULT_SITE_SETTINGS } from '@/lib/sanity/queries'
+import { Phone, Mail, MapPin, Clock, ShieldCheck, Award, ChevronRight, ExternalLink } from 'lucide-react'
+import { DEFAULT_SITE_SETTINGS, type SiteSettings } from '@/lib/sanity/queries'
 
 interface FooterProps {
   settings?: SiteSettings
 }
 
-export const Footer: React.FC<FooterProps> = ({ settings }) => {
-  const currentSettings = settings || DEFAULT_SITE_SETTINGS
+export const Footer: React.FC<FooterProps> = ({ settings = DEFAULT_SITE_SETTINGS }) => {
+  const mapsQuery = encodeURIComponent(settings.endereco)
+  const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${mapsQuery}`
+
   return (
-    <footer className="bg-[#152A47] text-slate-200 pt-14 pb-8 border-t-4 border-[#B8860B]">
+    <footer className="bg-brand-dark text-slate-200 pt-14 pb-8 border-t-4 border-[#B8860B]">
       <div className="max-w-[1280px] mx-auto px-4">
         {/* Main Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-slate-700/60">
           {/* Col 1: Colégio Info & 70 Anos Seal */}
           <div className="space-y-4">
             <div className="bg-white/95 p-3 rounded-xl shadow-md border-2 border-[#B8860B] inline-block max-w-[260px]">
-              <img
-                src={currentSettings.logoUrl || '/logotipo.png'}
+              <Image
+                src="/logotipo.png"
                 alt="Colégio Sagrado Coração de Jesus - 70 Anos"
+                width={260}
+                height={64}
                 className="h-14 sm:h-16 w-auto object-contain"
               />
             </div>
 
             <p className="text-sm text-slate-300 leading-relaxed">
-              Há 70 anos formando gerações com excelência acadêmica, acolhimento humano, ética e respeito a todas as famílias em Rio Grande - RS.
+              Há 70 anos formando gerações com excelência acadêmica, acolhimento humano, ética e valores cristãos em Rio Grande - RS.
             </p>
 
-            <div className="p-3.5 rounded-lg bg-[#1E3A5F]/60 border border-[#B8860B]/40 flex items-center gap-3">
+            <div className="p-3.5 rounded-lg bg-brand/60 border border-[#B8860B]/40 flex items-center gap-3">
               <Award className="w-8 h-8 text-amber-400 shrink-0" />
               <div className="text-xs">
                 <p className="font-bold text-amber-200">Jubileu de Vinho — 70 Anos</p>
@@ -50,6 +55,12 @@ export const Footer: React.FC<FooterProps> = ({ settings }) => {
                 </Link>
               </li>
               <li>
+                <Link href="/escola-em-rio-grande-rs" className="hover:text-amber-400 transition-colors flex items-center gap-1.5">
+                  <ChevronRight className="w-3.5 h-3.5 text-amber-400" />
+                  <span>Escola em Rio Grande - RS</span>
+                </Link>
+              </li>
+              <li>
                 <Link href="/ensino" className="hover:text-amber-400 transition-colors flex items-center gap-1.5">
                   <ChevronRight className="w-3.5 h-3.5 text-amber-400" />
                   <span>Modalidades de Ensino</span>
@@ -64,13 +75,13 @@ export const Footer: React.FC<FooterProps> = ({ settings }) => {
               <li>
                 <Link href="/diferenciais" className="hover:text-amber-400 transition-colors flex items-center gap-1.5">
                   <ChevronRight className="w-3.5 h-3.5 text-amber-400" />
-                  <span>Diferenciais Pedagógicos</span>
+                  <span>Nossos Diferenciais</span>
                 </Link>
               </li>
               <li>
-                <Link href="/aconteceu-no-sagrado" className="hover:text-amber-400 transition-colors flex items-center gap-1.5">
+                <Link href="/noticias" className="hover:text-amber-400 transition-colors flex items-center gap-1.5">
                   <ChevronRight className="w-3.5 h-3.5 text-amber-400" />
-                  <span>Aconteceu no Sagrado</span>
+                  <span>Aconteceu no Sagrado (Notícias)</span>
                 </Link>
               </li>
               <li>
@@ -129,12 +140,24 @@ export const Footer: React.FC<FooterProps> = ({ settings }) => {
             <ul className="space-y-3 text-xs sm:text-sm text-slate-300">
               <li className="flex items-start gap-2.5">
                 <MapPin className="w-4 h-4 text-amber-400 shrink-0 mt-1" />
-                <span>{currentSettings.endereco}</span>
+                <div className="space-y-1">
+                  <a
+                    href={googleMapsUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-slate-200 hover:text-amber-300 hover:underline font-medium leading-relaxed block"
+                  >
+                    {settings.endereco}
+                  </a>
+                  <p className="text-[11px] uppercase tracking-[0.12em] text-amber-300 font-semibold">
+                    Colégio em Cidade Nova, Rio Grande - RS
+                  </p>
+                </div>
               </li>
               <li className="flex items-center gap-2.5">
                 <Phone className="w-4 h-4 text-amber-400 shrink-0" />
                 <div className="flex flex-col">
-                  {currentSettings.telefones?.map((tel, idx) => (
+                  {settings.telefones.map((tel, idx) => (
                     <a key={idx} href={`tel:${tel.replace(/\D/g, '')}`} className="hover:underline text-slate-200">
                       {tel}
                     </a>
@@ -143,13 +166,13 @@ export const Footer: React.FC<FooterProps> = ({ settings }) => {
               </li>
               <li className="flex items-center gap-2.5">
                 <Mail className="w-4 h-4 text-amber-400 shrink-0" />
-                <a href={`mailto:${currentSettings.email}`} className="hover:underline truncate text-slate-200">
-                  {currentSettings.email}
+                <a href={`mailto:${settings.email}`} className="hover:underline truncate text-slate-200">
+                  {settings.email}
                 </a>
               </li>
               <li className="flex items-center gap-2.5">
                 <Clock className="w-4 h-4 text-amber-400 shrink-0" />
-                <span>{currentSettings.horarioAtendimento}</span>
+                <span>{settings.horarioAtendimento}</span>
               </li>
             </ul>
           </div>

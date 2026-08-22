@@ -1,33 +1,33 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import Link from 'next/link'
-import { ShieldCheck, X } from 'lucide-react'
+import { ShieldCheck } from 'lucide-react'
 import { Botao } from '../ui/Botao'
 
 export const AvisoCookies: React.FC = () => {
-  const [showBanner, setShowBanner] = useState(false)
-
-  useEffect(() => {
-    const consent = localStorage.getItem('sagrado_cookie_consent')
-    if (!consent) {
-      setShowBanner(true)
-    }
-  }, [])
+  const [showBanner, setShowBanner] = useState<boolean>(() => {
+    if (typeof window === 'undefined') return false
+    return !window.localStorage.getItem('sagrado_cookie_consent')
+  })
 
   const handleAccept = () => {
-    localStorage.setItem('sagrado_cookie_consent', 'accepted')
+    window.localStorage.setItem('sagrado_cookie_consent', 'accepted')
     setShowBanner(false)
-    // Initialize GA4 if key exists
+
     if (process.env.NEXT_PUBLIC_GA_ID && typeof window !== 'undefined') {
-      ;(window as any).gtag?.('consent', 'update', {
+      const gtagWindow = window as Window & {
+        gtag?: (command: string, action: string, params: { analytics_storage: string }) => void
+      }
+
+      gtagWindow.gtag?.('consent', 'update', {
         analytics_storage: 'granted',
       })
     }
   }
 
   const handleReject = () => {
-    localStorage.setItem('sagrado_cookie_consent', 'rejected')
+    window.localStorage.setItem('sagrado_cookie_consent', 'rejected')
     setShowBanner(false)
   }
 
@@ -37,7 +37,7 @@ export const AvisoCookies: React.FC = () => {
     <div
       role="region"
       aria-label="Aviso de Privacidade e Cookies (LGPD)"
-      className="fixed bottom-0 inset-x-0 z-50 p-4 sm:p-6 bg-[#152A47]/95 backdrop-blur-md text-white border-t-2 border-[#D97706] shadow-2xl animate-slideUp"
+      className="fixed bottom-0 inset-x-0 z-50 p-4 sm:p-6 bg-brand-dark/95 backdrop-blur-md text-white border-t-2 border-[#D97706] shadow-2xl animate-slideUp"
     >
       <div className="max-w-[1280px] mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
         <div className="flex items-start gap-3.5 max-w-3xl">

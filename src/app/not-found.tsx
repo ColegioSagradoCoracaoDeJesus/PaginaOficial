@@ -33,7 +33,7 @@ export default function NotFound() {
 
         <div className="pt-4 border-t border-slate-100">
           <p className="text-xs text-slate-500">
-            Dúvidas? Entre em contato com nossa secretaria pelo telefone <strong className="text-slate-800">(53) 3232-5531</strong>.
+            Dúvidas? Entre em contato com nossa secretaria pelo telefone <strong className="text-slate-800">(41) 3333-7000</strong>.
           </p>
         </div>
       </div>

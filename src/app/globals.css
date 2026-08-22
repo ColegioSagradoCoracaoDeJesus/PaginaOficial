@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
 @theme {
-  --color-brand: #1E3A5F;
-  --color-brand-dark: #152A47;
-  --color-brand-soft: #5C7A99;
+  --color-brand: #54000A;
+  --color-brand-dark: #0A0760;
+  --color-brand-soft: #398AEA;
   --color-brand-light: #EBF2FA;
   --color-accent: #D97706;
   --color-anniversary: #B8860B;
@@ -15,7 +15,7 @@
   --color-success: #16A34A;
   --color-error: #DC2626;
 
-  --font-display: var(--font-lora), Lora, Georgia, serif;
+  --font-display: var(--font-poppins), Poppins, Georgia, serif;
   --font-sans: var(--font-inter), Inter, system-ui, sans-serif;
 
   --radius-sm: 6px;
@@ -31,13 +31,11 @@
 }
 
 :root {
-  --font-lora: 'Lora', serif;
+  /* O peso "display" foi carregado como Lora (next/font/google, ver layout.tsx) —
+     apontamos o token --font-poppins pra ela em vez de um "Poppins" nunca
+     carregado, senão os títulos caíam para a serifa padrão do navegador. */
+  --font-poppins: var(--font-lora), Georgia, serif;
   --font-inter: 'Inter', sans-serif;
-  --brand-primary: #1E3A5F;
-  --brand-primary-dark: #152A47;
-  --brand-secondary: #5C7A99;
-  --brand-accent: #D97706;
-  --brand-anniversary: #B8860B;
 }
 
 html {
@@ -62,9 +60,33 @@ body {
   outline-offset: 2px;
 }
 
+/* Screen reader only content */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.sr-only:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+  padding: inherit;
+  margin: inherit;
+}
+
 /* Base Typographic Utility Classes */
 .font-display {
-  font-family: var(--font-lora), Lora, Georgia, serif;
+  font-family: var(--font-poppins), Poppins, Georgia, serif;
 }
 
 .font-sans {
@@ -138,6 +160,23 @@ body {
 .text-xs-custom {
   font-size: 0.75rem;
   line-height: 1.3;
+}
+
+@keyframes partners-marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.partners-marquee-track {
+  animation: partners-marquee 30s linear infinite;
+}
+
+.partners-marquee-track:hover {
+  animation-play-state: paused;
 }
 
 /* Custom scrollbar */
