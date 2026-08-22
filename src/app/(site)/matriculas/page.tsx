@@ -5,7 +5,7 @@ import { Etiqueta } from '@/components/ui/Etiqueta'
 import { Botao } from '@/components/ui/Botao'
 import { FormVisitaModal } from '@/components/conteudo/FormVisitaModal'
 import { BlocoCTA } from '@/components/conteudo/BlocoCTA'
-import { getSiteSettings } from '@/lib/sanity/queries'
+import { getSiteSettings, getPaginaMatriculas } from '@/lib/sanity/queries'
 
 export const metadata = {
   title: 'Matrículas e Rematrículas 2027 | Vagas Abertas',
@@ -13,28 +13,10 @@ export const metadata = {
 }
 
 export default async function MatriculasPage() {
-  const settings = await getSiteSettings()
-  const passosMatricula = [
-    { passo: '01', titulo: 'Agende uma Visita Guiada', descricao: 'Conheça nossa estrutura física, proposta pedagógica e tire dúvidas com a equipe de coordenação.' },
-    { passo: '02', titulo: 'Entrevista Pedagógica & Apresentação', descricao: 'Conversa acolhedora com os pais e apresentação das diretrizes de convivência do Sagrado.' },
-    { passo: '03', titulo: 'Entrega de Documentos', descricao: 'Apresentação da documentação do aluno e dos responsáveis na Secretaria do Colégio.' },
-    { passo: '04', titulo: 'Assinatura & Boas-Vindas', descricao: 'Assinatura do contrato de prestação de serviços educacionais e integração da família no Diário Escola.' },
-  ]
-
-  const documentosNecessarios = [
-    'Certidão de Nascimento do Aluno (cópia simples)',
-    'RG e CPF do Aluno (se houver)',
-    'RG, CPF e Comprovante de Residência dos Responsáveis Financeiros',
-    'Declaração de Transferência ou Histórico Escolar da escola de origem',
-    'Carteira de Vacinação atualizada (para Educação Infantil e Fundamental I)',
-    'Declaração de Quitação de Débitos da escola anterior',
-  ]
-
-  const faqMatriculas = [
-    { pergunta: 'Qual é o horário de atendimento da Secretaria para matrículas?', resposta: 'A Secretaria atende presencialmente e por telefone de segunda a sexta-feira, das 07h30 às 17h30 sem fechar para o almoço.' },
-    { pergunta: 'O Colégio oferece período integral ou turmas de contraturno?', resposta: 'Sim! Possuímos programas de permanência estendida e atividades extracurriculares no contraturno escolar para Educação Infantil e Ensino Fundamental.' },
-    { pergunta: 'Como funciona a rematrícula de alunos veteranos para 2027?', resposta: 'Alunos veteranos possuem prioridade de renovação de vaga através do portal de rematrículas com condições especiais no período oficial de campanha 2027.' },
-  ]
+  const [settings, pagina] = await Promise.all([getSiteSettings(), getPaginaMatriculas()])
+  const passosMatricula = pagina.passos
+  const documentosNecessarios = pagina.documentosNecessarios
+  const faqMatriculas = pagina.faq
 
   return (
     <div>
@@ -42,10 +24,10 @@ export default async function MatriculasPage() {
 
       <section className="bg-brand text-white py-16 px-4">
         <div className="max-w-[1280px] mx-auto text-center space-y-4">
-          <Etiqueta variant="anniversary">Ano Letivo 2027 — Vagas Abertas</Etiqueta>
-          <h1 className="font-display text-h1 font-bold text-white">Matrículas & Rematrículas 2027</h1>
+          <Etiqueta variant="anniversary">{pagina.etiquetaBanner}</Etiqueta>
+          <h1 className="font-display text-h1 font-bold text-white">{pagina.tituloBanner}</h1>
           <p className="text-slate-200 text-body max-w-2xl mx-auto leading-relaxed">
-            Garanta a vaga do seu filho para 2027 em uma instituição com 70 anos de tradição, inovação e acolhimento humano em Rio Grande - RS.
+            {pagina.subtituloBanner}
           </p>
         </div>
       </section>
@@ -61,7 +43,7 @@ export default async function MatriculasPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {passosMatricula.map((p, idx) => (
               <div key={idx} className="bg-white p-6 rounded-md border border-slate-200 shadow-sm relative space-y-3">
-                <span className="font-display font-bold text-3xl text-[#D97706]">{p.passo}</span>
+                <span className="font-display font-bold text-3xl text-[#D97706]">{String(idx + 1).padStart(2, '0')}</span>
                 <h3 className="font-display font-bold text-lg text-slate-900">{p.titulo}</h3>
                 <p className="text-slate-600 text-xs leading-relaxed">{p.descricao}</p>
               </div>

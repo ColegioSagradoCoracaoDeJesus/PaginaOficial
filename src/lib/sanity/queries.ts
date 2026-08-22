@@ -1,5 +1,4 @@
 import { client, projectId } from './client'
-import { urlForImage } from './image'
 
 export interface SiteSettings {
   title: string
@@ -133,9 +132,8 @@ export const DEFAULT_SITE_SETTINGS: SiteSettings = {
   linkMapaEmbed: 'https://maps.google.com/maps?q=Rua+Doutor+Augusto+Duprat,+374+-+Cidade+Nova,+Rio+Grande+-+RS,+96211-058&t=&z=16&ie=UTF8&iwloc=&output=embed',
   horarioAtendimento: 'Segunda a Sexta, das 07h30 às 17h30',
   redesSociais: {
-    instagram: 'https://instagram.com/colegiosagradocoracao',
-    facebook: 'https://facebook.com/colegiosagradocoracao',
-    youtube: 'https://youtube.com/@colegiosagradocoracao',
+    instagram: 'https://instagram.com/colegiosagradorg',
+    facebook: 'https://facebook.com/colegiosagradorg',
   },
 }
 
@@ -147,27 +145,31 @@ export const DEFAULT_NOTICIAS: Noticia[] = [
     data: '2026-08-10',
     categoria: '70 Anos',
     resumo: 'Com vasta programação cultural, celebrações religiosas e encontros de ex-alunos, a instituição marca sete décadas de compromisso com a formação humana integral.',
-    imageUrl: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1200&auto=format&fit=crop',
+    imageUrl: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=1200&auto=format&fit=crop',
     destaque: true,
   },
   {
+    // Fonte: post real do Instagram @colegiosagradorg (instagram.com/p/DQU3_5hEY0H),
+    // publicado em 27/10/2025. Sem foto própria hospedada ainda — fica sem imagem
+    // (mostra o card de fallback da marca) em vez de usar uma foto de banco de
+    // imagens que não é do evento real.
     _id: 'n2',
-    titulo: '[EXEMPLO] Título da Notícia Pedagógica a Preencher',
-    slug: { current: 'titulo-noticia-pedagogica' },
-    data: new Date().toISOString().split('T')[0],
+    titulo: 'Turno Inverso tem Oficina de Culinária',
+    slug: { current: 'turno-inverso-oficina-de-culinaria' },
+    data: '2025-10-27',
     categoria: 'Pedagógico',
-    resumo: 'Descreva aqui o evento, projeto ou realização pedagógica do Colégio. Este é um exemplo para preenchimento no Sanity.',
-    imageUrl: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=1200&auto=format&fit=crop',
+    resumo: 'O 2º ano do Ensino Fundamental participou de uma oficina de culinária no turno inverso, colocando a mão na massa para preparar receitas com a equipe pedagógica.',
     destaque: false,
   },
   {
+    // Fonte: post real do Instagram @colegiosagradorg (instagram.com/p/DYxb_NWxxqg),
+    // publicado em 25/05/2026.
     _id: 'n3',
-    titulo: '[EXEMPLO] Ação Pastoral ou Comunitária a Descrever',
-    slug: { current: 'acao-pastoral-comunitaria' },
-    data: new Date().toISOString().split('T')[0],
+    titulo: 'Campanha do Agasalho Arrecada Roupas e Cobertores',
+    slug: { current: 'campanha-do-agasalho' },
+    data: '2026-05-25',
     categoria: 'Pastoral & Espiritualidade',
-    resumo: 'Descreva aqui as ações solidárias, pastorais ou comunitárias realizadas pelo Colégio. Preencha no Sanity com eventos reais.',
-    imageUrl: 'https://images.unsplash.com/photo-1593113598332-cd288d649433?q=80&w=1200&auto=format&fit=crop',
+    resumo: 'O Colégio Sagrado Coração de Jesus é ponto oficial de arrecadação de casacos, moletons, toucas, luvas, cobertores e calças infantis para aquecer quem mais precisa neste inverno.',
     destaque: false,
   },
   {
@@ -199,6 +201,7 @@ export const DEFAULT_DIFERENCIAIS: Diferencial[] = [
   { _id: 'd4', titulo: 'Tecnologia Integrada ao Aprendizado', icone: 'Cpu', textoCurto: 'Plataformas educacionais, laboratórios modernos e ecossistema digital de apoio pedagógico.', ordem: 4 },
   { _id: 'd5', titulo: 'Suporte Socioemocional', icone: 'Users', textoCurto: 'Equipe multidisciplinar de psicologia e orientação pedagógica permanente.', ordem: 5 },
   { _id: 'd6', titulo: 'Segurança e Infraestrutura Completa', icone: 'ShieldCheck', textoCurto: 'Espaços amplos, seguros e bem equipados para o desenvolvimento integral dos alunos.', ordem: 6 },
+  { _id: 'd7', titulo: 'Teatro, Musicalização e Dança', icone: 'Music', textoCurto: 'Atividades artísticas integradas à proposta pedagógica e extracurricular, do Maternal ao Ensino Médio.', ordem: 7 },
 ]
 
 export const DEFAULT_MODALIDADES: ModalidadeEnsino[] = [
@@ -207,23 +210,26 @@ export const DEFAULT_MODALIDADES: ModalidadeEnsino[] = [
     nome: 'Educação Infantil',
     slug: { current: 'educacao-infantil' },
     faixaEtaria: '2 a 5 anos (Maternal ao Infantil V)',
-    resumo: 'Ambiente estimulante, seguro e acolhedor onde a criança descobre o mundo através do brincar guiado, da socialização e do desenvolvimento socioemocional.',
+    // Objetivos/metodologia/diferenciais atualizados com base no material oficial
+    // publicado pelo colégio (@colegiosagradorg) sobre a proposta pedagógica da
+    // Educação Infantil — BNCC, corporeidade, inglês desde cedo, inclusão etc.
+    resumo: 'Proposta pedagógica baseada na BNCC, onde a criança descobre o mundo através do brincar guiado, do cuidado, da socialização e do desenvolvimento socioemocional.',
     objetivos: [
-      'Desenvolver a autonomia, coordenação motora e expressão corporal',
-      'Estimular a linguagem oral e o gosto inicial pela leitura e histórias',
-      'Incentivar a convivência harmoniosa, empatia e compartilhamento',
-      'Promover a curiosidade científica e o contato com a natureza'
+      'Desenvolver autonomia, corporeidade e coordenação motora, com aulas de corporeidade semanais',
+      'Estimular a linguagem, a alfabetização inicial e o contato com o inglês desde cedo',
+      'Promover a convivência, a inclusão e o respeito à diversidade em turmas reduzidas',
+      'Trabalhar os 5 Campos de Experiência da BNCC de forma lúdica e integrada'
     ],
-    metodologia: 'Metodologia afetiva e investigativa, onde a criança é protagonista de suas descobertas. Utilizamos jogos pedagógicos, projetos temáticos e vivências ao ar livre.',
+    metodologia: 'Proposta pedagógica baseada na Base Nacional Comum Curricular (BNCC), organizada em 5 Campos de Experiências: Eu, o outro e nós; Corpo, gesto e movimento; Traços, sons, cores e formas; Escuta, fala, pensamento e imaginação; Espaço, tempo, quantidades, relações e transformações. O aprendizado acontece de forma lúdica, respeitando o tempo e o ritmo de cada criança.',
     diferenciais: [
-      'Ambiente seguro, acolhedor e estimulante',
-      'Propostas de aprendizado integradas e lúdicas',
-      'Acompanhamento às necessidades individuais de cada criança',
-      'Espaços apropriados e climatizados'
+      'Aulas de corporeidade e de inglês, uma vez por semana cada',
+      'Salas com turmas reduzidas, mesas individuais e monitores capacitados para inclusão',
+      'Pátio exclusivo para a Educação Infantil e horários de brincadeiras próprios da faixa etária',
+      'Material didático de alta qualidade (FTD) e família presente em cada etapa'
     ],
     projetos: [
-      { nome: 'Passaporte da Leitura', descricao: 'Incentivo diário ao contato com livros infantis com participação da família.' },
-      { nome: 'Horta Pedagógica', descricao: 'Vivência prática sobre sustentabilidade, cultivo e alimentação saudável.' }
+      { nome: 'Aulas de Culinária', descricao: 'Atividades práticas de culinária como parte da vivência pedagógica das crianças.' },
+      { nome: 'Passeios Temáticos', descricao: 'Passeios com contato direto com a natureza e animais, ampliando o aprendizado fora da sala de aula.' }
     ],
     imageUrl: 'https://images.unsplash.com/photo-1587654780291-39c9404d746b?q=80&w=1200&auto=format&fit=crop',
   },
@@ -243,12 +249,12 @@ export const DEFAULT_MODALIDADES: ModalidadeEnsino[] = [
     diferenciais: [
       'Atividades de raciocínio lógico e resolução de problemas',
       'Programa bilíngue com imersão em inglês',
-      'Projetos práticos e interdisciplinares',
+      'Teatro e musicalização como atividades extracurriculares',
       'Acompanhamento e reforço personalizado'
     ],
     projetos: [
-      { nome: 'Jovens Escritores', descricao: 'Produção e autoria de livros pelos próprios alunos com noite de autógrafos.' },
-      { nome: 'Clube de Matemática Divertida', descricao: 'Jogos de tabuleiro e desafios lógicos estimulantes.' }
+      { nome: 'Teatro', descricao: 'Atividade extracurricular de teatro, com turmas organizadas por série, desenvolvendo comunicação, criatividade, autoestima e expressão corporal.' },
+      { nome: 'Musicalização', descricao: 'Atividade extracurricular de musicalização, integrada à vivência pedagógica dos alunos.' }
     ],
     imageUrl: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=1200&auto=format&fit=crop',
   },
@@ -266,14 +272,14 @@ export const DEFAULT_MODALIDADES: ModalidadeEnsino[] = [
     ],
     metodologia: 'Metodologias ativas, uso de laboratórios de ciências e informática, aulas de campo e projetos desafiadores.',
     diferenciais: [
-      'Projetos interdisciplinares e desafiadores',
+      'Teatro e musicalização como atividades extracurriculares',
       'Acompanhamento de orientação vocacional',
       'Atividades esportivas e culturais',
       'Plataforma digital com recursos educacionais'
     ],
     projetos: [
-      { nome: 'Simulação da ONU Jr.', descricao: 'Debates geopolíticos onde os alunos representam nações globais.' },
-      { nome: 'Feira de Inovação e Sustentabilidade', descricao: 'Criação de soluções tecnológicas com foco ecológico.' }
+      { nome: 'Teatro', descricao: 'Atividade extracurricular de teatro, com turmas organizadas por série, desenvolvendo comunicação, criatividade, autoestima e expressão corporal.' },
+      { nome: 'Musicalização', descricao: 'Atividade extracurricular de musicalização, integrada à vivência pedagógica dos alunos.' }
     ],
     imageUrl: 'https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=1200&auto=format&fit=crop',
   },
@@ -282,21 +288,25 @@ export const DEFAULT_MODALIDADES: ModalidadeEnsino[] = [
     nome: 'Ensino Médio',
     slug: { current: 'ensino-medio' },
     faixaEtaria: '1ª à 3ª série (15 a 17 anos)',
-    resumo: 'Formação integral com foco no aprofundamento dos conhecimentos e no desenvolvimento de habilidades para o futuro, aliada à formação cidadã e projeto de vida.',
+    // Objetivos/metodologia/diferenciais atualizados com base no material oficial
+    // publicado pelo colégio (@colegiosagradorg) sobre a preparação para o ENEM,
+    // o Ensino Bilíngue e o Grêmio Estudantil.
+    resumo: 'Formação integral com preparação real para o ENEM desde o 1º ano, aliada à formação cidadã, ao protagonismo estudantil e ao projeto de vida.',
     objetivos: [
-      'Consolidar a capacidade analítica, argumentativa e pensamento crítico',
-      'Aprofundar conhecimentos nas diferentes áreas do conhecimento',
-      'Construir o Projeto de Vida individual do estudante',
-      'Formar líderes éticos com visão global e responsabilidade social'
+      'Preparar para o ENEM desde o 1º ano, com simulados no formato oficial e avaliação trimestral (provas, trabalhos e simulados)',
+      'Desenvolver autonomia, rotina de estudos e planejamento acadêmico',
+      'Consolidar a base matemática, a leitura crítica e a argumentação',
+      'Estimular o protagonismo estudantil através de projetos, debates e do Grêmio Estudantil'
     ],
-    metodologia: 'Matriz curricular abrangente, aulas desafiadoras, material didático de qualidade, monitoria e orientação acadêmica personalizada.',
+    metodologia: 'Ensino Bilíngue com imersão gradual, laboratórios modernos, material didático completo e equipe de professores especialistas no Ensino Médio, com acompanhamento pedagógico e apoio emocional individualizado.',
     diferenciais: [
-      'Preparação acadêmica sólida e abrangente',
-      'Trabalho com linguagem, interpretação e argumentação',
-      'Recursos e plataformas educacionais de apoio',
-      'Orientação de projetos de vida e desenvolvimento pessoal'
+      'Simulados no formato ENEM desde o 1º ano, com aplicação em duas tardes (Humanas + Redação e Exatas)',
+      'Grêmio Estudantil, projetos e debates que estimulam liderança e trabalho em equipe',
+      'Ensino Bilíngue com evolução real',
+      'Apoio emocional e orientação de rotina de estudos'
     ],
     projetos: [
+      { nome: 'Grêmio Estudantil', descricao: 'Projetos, debates e eventos liderados pelos próprios estudantes, estimulando liderança, responsabilidade e trabalho em equipe.' },
       { nome: 'Mentoria Vestibular Sagrado', descricao: 'Tutoria individualizada para plano de estudo semanal.' },
       { nome: 'Academia de Redação', descricao: 'Treinamento contínuo de estruturas dissertativas de alta pontuação.' }
     ],
@@ -304,32 +314,47 @@ export const DEFAULT_MODALIDADES: ModalidadeEnsino[] = [
   },
 ]
 
+// Datas/fatos confirmados no histórico oficial do Colégio: fundação (1956) e a
+// celebração corrente dos 70 anos. Os demais marcos da linha do tempo real ainda
+// não foram documentados — em vez de inventar datas e eventos, ficam como
+// [EXEMPLO] até serem preenchidos no Sanity com fatos confirmados.
 export const DEFAULT_LINHA_TEMPO: LinhaDoTempoItem[] = [
-  { _id: 'lt1', ano: '1956', titulo: 'Fundação do Colégio', descricao: 'Abertura das primeiras turmas com a missão de oferecer ensino de excelência pautado nos valores do Sagrado Coração.', imageUrl: 'https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=800&auto=format&fit=crop', ordem: 1 },
-  { _id: 'lt2', ano: '1970', titulo: 'Construção da Sede Própria', descricao: 'Inauguração do prédio principal com salas amplas, biblioteca central e área verde integrada.', imageUrl: 'https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=800&auto=format&fit=crop', ordem: 2 },
-  { _id: 'lt3', ano: '1995', titulo: 'Pioneirismo Tecnológico e Ginásio', descricao: 'Implantação do primeiro laboratório de informática e inauguração do Ginásio Poliesportivo coberto.', imageUrl: 'https://images.unsplash.com/photo-1517649763962-0c623266ddc0?q=80&w=800&auto=format&fit=crop', ordem: 3 },
-  { _id: 'lt4', ano: '2012', titulo: 'Ampliação do Auditório e Bilinguismo', descricao: 'Inauguração do Auditório com 450 lugares e implementação do programa de imersão em inglês.', imageUrl: 'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?q=80&w=800&auto=format&fit=crop', ordem: 4 },
-  { _id: 'lt5', ano: '2026', titulo: 'Celebração dos 70 Anos', descricao: 'Sete décadas de história, consolidando tradição pedagógica, tecnologia educacional de ponta e comunidade participativa.', imageUrl: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=800&auto=format&fit=crop', ordem: 5 },
+  { _id: 'lt1', ano: '1956', titulo: 'Fundação da Creche Casa da Criança Sagrado Coração de Jesus', descricao: 'Fundada em 16 de setembro de 1956 pelo Círculo Operário Riograndino, sob liderança do Pe. Luiz de Carvalho, para acolher os filhos dos operários da cidade.', imageUrl: 'https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=800&auto=format&fit=crop', ordem: 1 },
+  { _id: 'lt2', ano: '[EXEMPLO]', titulo: '[EXEMPLO] Marco Histórico a Preencher', descricao: '[EXEMPLO] Descreva aqui um marco histórico real do Colégio (ano, evento, contexto) para preencher no Sanity.', imageUrl: 'https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=800&auto=format&fit=crop', ordem: 2 },
+  { _id: 'lt3', ano: '1998', titulo: 'Transformação em Escola de Ensino Fundamental', descricao: 'O Círculo Operário Riograndino transforma a Creche Casa da Criança Sagrado Coração de Jesus em Escola de Ensino Fundamental.', imageUrl: 'https://images.unsplash.com/photo-1521587760476-6c12a4b040da?q=80&w=800&auto=format&fit=crop', ordem: 3 },
+  { _id: 'lt4', ano: '2008', titulo: 'Autorização do Ensino Médio', descricao: 'O funcionamento do Ensino Médio é autorizado e a instituição passa a se chamar Colégio Sagrado Coração de Jesus.', imageUrl: 'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?q=80&w=800&auto=format&fit=crop', ordem: 4 },
+  { _id: 'lt5', ano: '2026', titulo: 'Celebração dos 70 Anos', descricao: 'Sete décadas de história, consolidando tradição pedagógica, tecnologia educacional de ponta e comunidade participativa.', imageUrl: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=800&auto=format&fit=crop', ordem: 5 },
 ]
 
+// Depoimentos ilustrativos — nenhum depoimento real foi fornecido ainda, então
+// ficam claramente marcados como [EXEMPLO] (nunca com nome, profissão ou turma
+// inventados) até serem substituídos por relatos reais cadastrados no Sanity.
 export const DEFAULT_DEPOIMENTOS: Depoimento70Anos[] = [
-  { _id: 'dep1', nome: 'Dra. Maria Helena Silveira', relacao: 'Ex-aluna (Turma de 1982) e Médica', texto: 'O Sagrado foi a base não apenas da minha formação acadêmica, mas dos princípios éticos que me guiam até hoje na medicina e na vida.', imageUrl: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=400&auto=format&fit=crop' },
-  { _id: 'dep2', nome: 'Carlos Eduardo Oliveira', relacao: 'Pai de alunos (Ensino Fundamental e Médio)', texto: 'Confiar a educação dos meus dois filhos ao Colégio Sagrado Coração foi a melhor escolha. A proximidade da equipe e o acolhimento são únicos.', imageUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop' },
-  { _id: 'dep3', nome: 'Profª. Ana Beatriz Mendes', relacao: 'Docente há 22 anos', texto: 'Lecionar aqui é ver gerações de famílias passarem por nossas salas e se tornarem cidadãos brilhantes, generosos e transformadores.', imageUrl: 'https://images.unsplash.com/photo-1580894732413-8011394c8e76?q=80&w=400&auto=format&fit=crop' },
+  // Depoimento real: quadro oficial "Depoimento de Ex-aluno" publicado pelo
+  // colégio (@colegiosagradorg), assinado com nome completo e @ pelo próprio
+  // depoente. Texto e dados (idade, formação, empresa) são citação direta —
+  // nada além do que está escrito no post foi adicionado.
+  { _id: 'dep1', nome: 'Pietro Piva Vieira', relacao: 'Ex-aluno (do Jardim B à conclusão do Ensino Médio), Engenheiro de Software', texto: 'Estudei no Sagrado desde o Jardim B até a conclusão do Ensino Médio, e posso dizer com orgulho que ela foi fundamental na formação de quem sou hoje, tanto pessoal quanto profissionalmente. Foi aqui que aprendi valores que levo para a vida: a dedicação, a humildade, a curiosidade e o gosto pelo conhecimento. Graças à base sólida que recebi, pude seguir meus sonhos e trilhar uma carreira na área de tecnologia. Hoje, aos 24 anos, sou formado em Sistemas de Informação pela FURG, mestrando em Engenharia de Software na UNIPAMPA e atuo como Engenheiro de Software na Convenia.' },
+  // Depoimento real: comentário público de @_lisi_oliveira_ em post do colégio,
+  // de mãe de aluno que encerrou o ciclo na escola. Trecho resumido do
+  // comentário original (que é bem mais longo).
+  { _id: 'dep2', nome: 'Lisi Oliveira', relacao: 'Mãe de aluno', texto: 'A forma como meu filho sempre foi tratado por TODOS dessa escola foi demais. Era notório a evolução, o crescimento e a independência dele com o passar dos anos. Ele sempre se sentiu em casa no Sagrado, e isso enchia nossos corações de alegria e tranquilidade.', imageUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop' },
+  { _id: 'dep3', nome: '[EXEMPLO] Nome do Depoente 3', relacao: '[EXEMPLO] Vínculo com o Colégio (ex-aluno, pai/mãe, professor...)', texto: '[EXEMPLO] Texto do depoimento a preencher no Sanity com um relato real.', imageUrl: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=400&auto=format&fit=crop' },
 ]
 
+// Capacidades, itens e nomes específicos (ex.: contagem exata de lugares,
+// especificações técnicas) ainda não foram confirmados pelo Colégio — os campos
+// abaixo descrevem apenas o que consta no histórico oficial (ginásio poliesportivo
+// e auditório existem), sem números ou nomes inventados. Ajuste no Sanity com os
+// dados reais de cada espaço.
 export const DEFAULT_ESPACOS: EspacoLocacao[] = [
   {
     _id: 'e1',
-    nome: 'Ginásio Poliesportivo Sagrado',
-    capacidade: 'Até 1.200 pessoas (arquibancadas e quadra)',
-    descricao: 'Espaço multieventos coberto com piso esportivo oficial, tabela de basquete profissional, redes de vôlei/futsal, sonorização e vestiários completos.',
+    nome: 'Ginásio Poliesportivo',
+    capacidade: '[EXEMPLO] A confirmar',
+    descricao: 'Espaço coberto para eventos esportivos e comunitários. [EXEMPLO] Detalhe aqui a estrutura real do ginásio no Sanity.',
     itensDisponiveis: [
-      'Quadra poliesportiva com marcação oficial',
-      'Arquibancada coberta para 800 espectadores',
-      'Sistema de som e microfones sem fio',
-      'Vestiários masculino, feminino e adaptados',
-      'Iluminação em LED de alta potência'
+      '[EXEMPLO] Liste aqui os equipamentos e recursos reais disponíveis no ginásio.',
     ],
     usosPossiveis: [
       'Torneios e campeonatos esportivos',
@@ -337,21 +362,16 @@ export const DEFAULT_ESPACOS: EspacoLocacao[] = [
       'Feiras comunitárias e exposições',
       'Apresentações culturais e musicais'
     ],
-    condicoesGerais: 'Disponível para locação aos finais de semana e noites em dias úteis mediante agendamento prévio com 15 dias de antecedência. É necessário cumprir o regulamento interno de preservação do piso.',
+    condicoesGerais: '[EXEMPLO] Descreva aqui as condições reais de locação (antecedência, regras de uso) no Sanity.',
     imageUrl: 'https://images.unsplash.com/photo-1504450758481-7338eba7524a?q=80&w=1200&auto=format&fit=crop',
   },
   {
     _id: 'e2',
-    nome: 'Auditório Principal Ir. Tereza',
-    capacidade: 'Até 450 pessoas em poltronas estofadas',
-    descricao: 'Ambiente climatizado com acústica profissional, palco elevado, camarim privado, projetor 4K e mesa de controle multimídia.',
+    nome: 'Auditório Principal',
+    capacidade: '[EXEMPLO] A confirmar',
+    descricao: 'Espaço para eventos institucionais, palestras e apresentações. [EXEMPLO] Detalhe aqui a estrutura real do auditório no Sanity.',
     itensDisponiveis: [
-      '450 poltronas reclináveis estofadas com prancheta',
-      'Palco modular iluminado com varanda técnica',
-      'Projetor de alta definição e telão retrátil de 200"',
-      'Mesa de som de 24 canais e microfones',
-      'Camarim climatizado com banheiro privativo',
-      'Foyer para recepção e coffee break'
+      '[EXEMPLO] Liste aqui os equipamentos e recursos reais disponíveis no auditório.',
     ],
     usosPossiveis: [
       'Palestras, simpósios e congressos',
@@ -359,47 +379,58 @@ export const DEFAULT_ESPACOS: EspacoLocacao[] = [
       'Reuniões corporativas e convenções',
       'Lançamentos de livros e exibições'
     ],
-    condicoesGerais: 'Locação com acompanhamento técnico de som e iluminação incluído. Reservas abertas para instituições, empresas e organizadores de eventos.',
+    condicoesGerais: '[EXEMPLO] Descreva aqui as condições reais de locação (acompanhamento técnico, reservas) no Sanity.',
     imageUrl: 'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?q=80&w=1200&auto=format&fit=crop',
   },
 ]
 
+// Ambientes confirmados pelo histórico oficial do Colégio (biblioteca, laboratório
+// de ciências e informática, sala de arte, auditório e ginásio poliesportivo).
+// Nenhuma metragem, capacidade ou especificação técnica é afirmada aqui — nada
+// disso consta no documento oficial disponível, então fica para preenchimento
+// real no Sanity em vez de um número inventado.
 export const DEFAULT_ESTRUTURA: AmbienteEstrutura[] = [
   {
     _id: 'est1',
-    ambiente: 'Salas de Aula Climatizadas',
-    descricao: 'Ambientes amplos, iluminados, equipados com lousas digitais, projetores e mobiliário ergonômico.',
-    fotos: [{ url: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=800&auto=format&fit=crop', alt: 'Sala de aula moderna' }]
+    ambiente: 'Salas de Aula',
+    descricao: 'Ambientes preparados para o dia a dia pedagógico dos alunos.',
+    fotos: [{ url: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=800&auto=format&fit=crop', alt: 'Sala de aula' }]
   },
   {
     _id: 'est2',
-    ambiente: 'Biblioteca Interativa',
-    descricao: 'Acervo com mais de 15.000 títulos, salas de estudo individual e em grupo, e cantinhos de leitura infantil.',
+    ambiente: 'Biblioteca',
+    descricao: 'Rico acervo pedagógico, científico e literário à disposição dos alunos.',
     fotos: [{ url: 'https://images.unsplash.com/photo-1521587760476-6c12a4b040da?q=80&w=800&auto=format&fit=crop', alt: 'Biblioteca do colégio' }]
   },
   {
     _id: 'est3',
-    ambiente: 'Laboratórios de Ciências e Informática',
-    descricao: 'Bancadas equipadas para experimentos de Física, Química e Biologia, além de computadores e recursos tecnológicos para o aprendizado.',
+    ambiente: 'Laboratório de Ciências e Informática',
+    descricao: 'Espaço equipado para atividades práticas de ciências e para o uso de recursos de informática.',
     fotos: [{ url: 'https://images.unsplash.com/photo-1532094349884-543bc11b234d?q=80&w=800&auto=format&fit=crop', alt: 'Laboratório de ciências' }]
   },
   {
     _id: 'est4',
-    ambiente: 'Complexo Esportivo e Ginásio',
-    descricao: 'Quadras externas e ginásio coberto preparados para modalidades coletivas e treinamentos.',
-    fotos: [{ url: 'https://images.unsplash.com/photo-1546519638-68e109498ffc?q=80&w=800&auto=format&fit=crop', alt: 'Ginásio do colégio' }]
+    ambiente: 'Sala de Arte',
+    descricao: '[EXEMPLO] Descreva aqui os recursos reais da sala de arte para preencher no Sanity.',
+    fotos: []
   },
   {
     _id: 'est5',
-    ambiente: 'Auditório Principal',
-    descricao: 'Estrutura completa com 450 lugares para palestras, teatro, concertos e formaturas.',
-    fotos: [{ url: 'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?q=80&w=800&auto=format&fit=crop', alt: 'Auditório principal' }]
+    ambiente: 'Ginásio Poliesportivo',
+    descricao: 'Quadra de esportes coberta para modalidades coletivas e atividades físicas.',
+    fotos: [{ url: 'https://images.unsplash.com/photo-1546519638-68e109498ffc?q=80&w=800&auto=format&fit=crop', alt: 'Ginásio do colégio' }]
   },
   {
     _id: 'est6',
-    ambiente: 'Pátios Arborizados e Parque Infantil',
-    descricao: 'Áreas de convivência ao ar livre cercadas por jardins e brinquedos seguros para o recreio.',
-    fotos: [{ url: 'https://images.unsplash.com/photo-1587654780291-39c9404d746b?q=80&w=800&auto=format&fit=crop', alt: 'Parque infantil' }]
+    ambiente: 'Auditório',
+    descricao: 'Espaço para palestras, apresentações e eventos institucionais.',
+    fotos: [{ url: 'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?q=80&w=800&auto=format&fit=crop', alt: 'Auditório principal' }]
+  },
+  {
+    _id: 'est7',
+    ambiente: 'Área de Lazer e Recreação',
+    descricao: 'Ampla área de lazer e espaço para atividades recreativas dos alunos.',
+    fotos: [{ url: 'https://images.unsplash.com/photo-1587654780291-39c9404d746b?q=80&w=800&auto=format&fit=crop', alt: 'Área de recreação' }]
   },
 ]
 
@@ -440,7 +471,17 @@ export async function getSiteSettings(): Promise<SiteSettings> {
   if (!isSanityConfigured) return DEFAULT_SITE_SETTINGS
   try {
     const res = await client.fetch(`*[_type == "siteSettings"][0]`)
-    return res || DEFAULT_SITE_SETTINGS
+    if (!res) return DEFAULT_SITE_SETTINGS
+    // Mescla campo a campo com os padrões: um documento existente no Sanity
+    // porém com campos ainda não preenchidos (ex.: telefones vazio) não pode
+    // deixar a página sem esse dado — components como o Footer fazem
+    // settings.telefones.map(...) sem optional chaining.
+    return {
+      ...DEFAULT_SITE_SETTINGS,
+      ...res,
+      telefones: res.telefones?.length ? res.telefones : DEFAULT_SITE_SETTINGS.telefones,
+      redesSociais: { ...DEFAULT_SITE_SETTINGS.redesSociais, ...res.redesSociais },
+    }
   } catch (err) {
     return DEFAULT_SITE_SETTINGS
   }
@@ -450,7 +491,8 @@ export async function getNoticias(): Promise<Noticia[]> {
   if (!isSanityConfigured) return DEFAULT_NOTICIAS
   try {
     const res = await client.fetch(`*[_type == "noticia"] | order(data desc) {
-      _id, titulo, slug, data, categoria, resumo, imagemCapa, destaque
+      _id, titulo, slug, data, categoria, resumo, imagemCapa, destaque,
+      "imageUrl": imagemCapa.asset->url
     }`)
     return res && res.length > 0 ? res : DEFAULT_NOTICIAS
   } catch (err) {
@@ -464,7 +506,10 @@ export async function getNoticiaBySlug(slug: string): Promise<Noticia | null> {
     return found || DEFAULT_NOTICIAS[0]
   }
   try {
-    const res = await client.fetch(`*[_type == "noticia" && slug.current == $slug][0]`, { slug })
+    const res = await client.fetch(`*[_type == "noticia" && slug.current == $slug][0] {
+      ...,
+      "imageUrl": imagemCapa.asset->url
+    }`, { slug })
     return res || DEFAULT_NOTICIAS.find(n => n.slug.current === slug) || DEFAULT_NOTICIAS[0]
   } catch (err) {
     return DEFAULT_NOTICIAS.find(n => n.slug.current === slug) || DEFAULT_NOTICIAS[0]
@@ -484,7 +529,10 @@ export async function getDiferenciais(): Promise<Diferencial[]> {
 export async function getModalidades(): Promise<ModalidadeEnsino[]> {
   if (!isSanityConfigured) return DEFAULT_MODALIDADES
   try {
-    const res = await client.fetch(`*[_type == "modalidadeEnsino"]`)
+    const res = await client.fetch(`*[_type == "modalidadeEnsino"] {
+      ...,
+      "imageUrl": fotos[0].asset->url
+    }`)
     return res && res.length > 0 ? res : DEFAULT_MODALIDADES
   } catch (err) {
     return DEFAULT_MODALIDADES
@@ -494,7 +542,10 @@ export async function getModalidades(): Promise<ModalidadeEnsino[]> {
 export async function getEspacosLocacao(): Promise<EspacoLocacao[]> {
   if (!isSanityConfigured) return DEFAULT_ESPACOS
   try {
-    const res = await client.fetch(`*[_type == "espacoLocacao"]`)
+    const res = await client.fetch(`*[_type == "espacoLocacao"] {
+      ...,
+      "imageUrl": fotos[0].asset->url
+    }`)
     return res && res.length > 0 ? res : DEFAULT_ESPACOS
   } catch (err) {
     return DEFAULT_ESPACOS
@@ -504,7 +555,10 @@ export async function getEspacosLocacao(): Promise<EspacoLocacao[]> {
 export async function getLinhaDoTempo(): Promise<LinhaDoTempoItem[]> {
   if (!isSanityConfigured) return DEFAULT_LINHA_TEMPO
   try {
-    const res = await client.fetch(`*[_type == "linhaDoTempoItem"] | order(ordem asc)`)
+    const res = await client.fetch(`*[_type == "linhaDoTempoItem"] | order(ordem asc) {
+      ...,
+      "imageUrl": imagem.asset->url
+    }`)
     return res && res.length > 0 ? res : DEFAULT_LINHA_TEMPO
   } catch (err) {
     return DEFAULT_LINHA_TEMPO
@@ -514,7 +568,10 @@ export async function getLinhaDoTempo(): Promise<LinhaDoTempoItem[]> {
 export async function getDepoimentos(): Promise<Depoimento70Anos[]> {
   if (!isSanityConfigured) return DEFAULT_DEPOIMENTOS
   try {
-    const res = await client.fetch(`*[_type == "depoimento70anos"]`)
+    const res = await client.fetch(`*[_type == "depoimento70anos"] {
+      ...,
+      "imageUrl": foto.asset->url
+    }`)
     return res && res.length > 0 ? res : DEFAULT_DEPOIMENTOS
   } catch (err) {
     return DEFAULT_DEPOIMENTOS
@@ -524,7 +581,10 @@ export async function getDepoimentos(): Promise<Depoimento70Anos[]> {
 export async function getEstrutura(): Promise<AmbienteEstrutura[]> {
   if (!isSanityConfigured) return DEFAULT_ESTRUTURA
   try {
-    const res = await client.fetch(`*[_type == "paginaEstrutura"] | order(ordem asc)`)
+    const res = await client.fetch(`*[_type == "paginaEstrutura"] | order(ordem asc) {
+      ...,
+      "fotos": fotos[]{ "url": asset->url, alt, legenda }
+    }`)
 
     if (!Array.isArray(res) || res.length === 0) {
       return DEFAULT_ESTRUTURA
@@ -548,7 +608,7 @@ export async function getGaleriasMes(): Promise<GaleriaMes[]> {
       ano: 2026,
       descricao: 'Registros marcantes da celebração com alunos, educadores, ex-alunos e famílias no ginásio do Colégio.',
       fotos: [
-        { url: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=800&auto=format&fit=crop', alt: 'Abertura oficial dos 70 anos', descricao: 'Solenidade de Abertura dos 70 Anos' },
+        { url: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=800&auto=format&fit=crop', alt: 'Abertura oficial dos 70 anos', descricao: 'Solenidade de Abertura dos 70 Anos' },
         { url: 'https://images.unsplash.com/photo-1511632765486-a01980e01a18?q=80&w=800&auto=format&fit=crop', alt: 'Apresentação do coral infantil', descricao: 'Coral de Alunos do Ensino Fundamental' },
         { url: 'https://images.unsplash.com/photo-1543269865-cbf427effbad?q=80&w=800&auto=format&fit=crop', alt: 'Encontro das turmas de ex-alunos', descricao: 'Reencontro de Turmas Históricas' },
         { url: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=800&auto=format&fit=crop', alt: 'Bolo comemorativo de 70 anos', descricao: 'Momento Parabéns com a comunidade escolar' },
@@ -570,7 +630,10 @@ export async function getGaleriasMes(): Promise<GaleriaMes[]> {
 
   if (!isSanityConfigured) return fallbackGalerias
   try {
-    const res = await client.fetch(`*[_type == "galeriaMes"] | order(ano desc, mes desc)`)
+    const res = await client.fetch(`*[_type == "galeriaMes"] | order(ano desc, mes desc) {
+      ...,
+      "fotos": fotos[]{ "url": asset->url, alt, descricao }
+    }`)
     return res && res.length > 0 ? res : fallbackGalerias
   } catch (err) {
     return fallbackGalerias
@@ -591,20 +654,341 @@ export async function getParceiros(): Promise<Parceiro[]> {
       website,
       ordem,
       ativo,
-      logo { asset -> { _ref } }
+      logo { asset -> { url } }
     }`)
 
     if (!Array.isArray(res)) return DEFAULT_PARCEIROS
 
     const parceirosComImagem = res.map((parceiro: any) => ({
       ...parceiro,
-      logoUrl: parceiro.logo?.asset?._ref
-        ? urlForImage({ asset: { _ref: parceiro.logo.asset._ref } })?.url() || undefined
-        : undefined,
+      logoUrl: parceiro.logo?.asset?.url || undefined,
     }))
 
     return parceirosComImagem.length > 0 ? parceirosComImagem : DEFAULT_PARCEIROS
   } catch (err) {
     return DEFAULT_PARCEIROS
+  }
+}
+
+// ---------------------------------------------------------------------------
+// PÁGINAS SINGULARES (Nossa História, Matrículas, Tecnologia Educacional,
+// Vivencie o Sagrado, 70 Anos) — cada uma é um único documento no Sanity que
+// alimenta textos/imagens/listas editáveis da página. Seguem o mesmo padrão de
+// merge-com-padrão de getSiteSettings: um documento existente, mas com algum
+// campo ainda não preenchido, não deixa a página com um buraco — o campo
+// específico cai no valor padrão (o mesmo conteúdo que já estava fixo no código).
+// ---------------------------------------------------------------------------
+
+export interface PaginaHistoria {
+  tituloBanner: string
+  subtituloBanner: string
+  tituloSecao: string
+  textoInstitucional1: string
+  textoInstitucional2: string
+  imagemDestaqueUrl?: string
+  filosofiaTexto1: string
+  filosofiaTexto2: string
+  missao: string
+  visao: string
+  valoresIntroducao: string
+  valoresLista: string[]
+  principiosEducacionais: Array<{ titulo: string; descricao: string }>
+  fotosHistoricas: Array<{ url?: string; alt: string; descricao?: string }>
+}
+
+export const DEFAULT_PAGINA_HISTORIA: PaginaHistoria = {
+  tituloBanner: 'Nossa História e Propósito em Rio Grande - RS',
+  subtituloBanner: 'Há sete décadas, o Colégio Sagrado Coração de Jesus atua em Rio Grande - RS formando cidadãos conscientes, éticos e preparados para transformar a sociedade com responsabilidade, acolhimento e excelência.',
+  tituloSecao: 'Uma História que Começa com o Cuidado por Rio Grande',
+  textoInstitucional1: 'Nossa trajetória começa em 14 de setembro de 1944, com a fundação do Círculo Operário Riograndino, sob a proteção de São José Operário e Nossa Senhora Medianeira. Atento às necessidades das famílias trabalhadoras da cidade e sob a liderança do Pe. Luiz de Carvalho, o Círculo fundou, em 16 de setembro de 1956, a Creche Casa da Criança Sagrado Coração de Jesus — criada para acolher os filhos dos operários enquanto os pais trabalhavam.',
+  textoInstitucional2: 'Em 1998, a creche se transformou em Escola de Ensino Fundamental. Em 2008, o Ensino Médio foi autorizado e a instituição passou a se chamar Colégio Sagrado Coração de Jesus. Hoje seguimos com a mesma essência acolhedora do início, oferecendo Recreação, Educação Infantil, Ensino Fundamental e Ensino Médio às famílias de Rio Grande - RS.',
+  imagemDestaqueUrl: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=1200&auto=format&fit=crop',
+  filosofiaTexto1: 'Educar pessoas descobridoras, reflexivas, criativas, críticas e humanistas, que, compreendendo-se como sujeitos transformadores do meio, sejam capazes de promover mudanças significativas na sociedade.',
+  // Missão e Visão institucionais ainda não foram confirmadas em nenhum documento
+  // oficial disponível — ficam como [EXEMPLO] em vez de um texto genérico
+  // apresentado como se fosse a declaração oficial do Colégio.
+  filosofiaTexto2: '[EXEMPLO] Complemente aqui a filosofia do Colégio com texto oficial, se houver, para preencher no Sanity.',
+  missao: '[EXEMPLO] Descreva aqui a missão institucional oficial do Colégio para preencher no Sanity.',
+  visao: '[EXEMPLO] Descreva aqui a visão institucional oficial do Colégio para preencher no Sanity.',
+  valoresIntroducao: 'Os princípios que guiam nossa convivência dentro e fora da sala de aula:',
+  valoresLista: ['[EXEMPLO] Preencha os valores institucionais reais no Sanity'],
+  // Os 5 itens abaixo são os "Objetivos do Colégio" tal como registrados no
+  // documento institucional oficial (Filosofia e Objetivos do Colégio) — não
+  // paráfrase nem conteúdo inventado.
+  principiosEducacionais: [
+    { titulo: 'Autoconfiança e Autenticidade', descricao: 'Oportunizar ao aluno desenvolver a autoconfiança, a liberdade e a autenticidade no ser e no agir.' },
+    { titulo: 'Capacidade de Aprendizagem', descricao: 'Desenvolver a capacidade de aprendizagem, tendo em vista a aquisição de conhecimentos e habilidades, bem como a formação de atitudes e valores.' },
+    { titulo: 'Educação Participativa', descricao: 'Elaborar estratégias globais em conjunto, condizentes com a educação participativa, para oportunizar ao educando/comunidade ser sujeito do próprio desenvolvimento.' },
+    { titulo: 'Família e Vida Social', descricao: 'Fortalecer os vínculos da família, os laços de solidariedade humana e a tolerância recíproca em que se assenta a vida social.' },
+    { titulo: 'Liderança', descricao: 'Auxiliar o educando a desenvolver suas potencialidades de liderança.' },
+  ],
+  fotosHistoricas: [
+    { url: 'https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=800&auto=format&fit=crop', alt: 'Primeiras turmas em 1956', descricao: 'Fundação da Creche Casa da Criança Sagrado Coração de Jesus, em 1956' },
+    { url: 'https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=800&auto=format&fit=crop', alt: 'Prédio histórico do Colégio', descricao: '[EXEMPLO] Legenda a confirmar no Sanity' },
+    { url: 'https://images.unsplash.com/photo-1521587760476-6c12a4b040da?q=80&w=800&auto=format&fit=crop', alt: 'Ginásio Poliesportivo do Colégio', descricao: '[EXEMPLO] Legenda a confirmar no Sanity' },
+    { url: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=800&auto=format&fit=crop', alt: 'Fachada atual no ano do Jubileu', descricao: 'Fachada atual preparada para as celebrações dos 70 anos' },
+  ],
+}
+
+export async function getPaginaHistoria(): Promise<PaginaHistoria> {
+  if (!isSanityConfigured) return DEFAULT_PAGINA_HISTORIA
+  try {
+    const res = await client.fetch(`*[_type == "paginaHistoria"][0] {
+      ...,
+      "imagemDestaqueUrl": imagemDestaque.asset->url,
+      "fotosHistoricas": fotosHistoricas[]{ "url": asset->url, alt, descricao }
+    }`)
+    if (!res) return DEFAULT_PAGINA_HISTORIA
+    return {
+      ...DEFAULT_PAGINA_HISTORIA,
+      ...res,
+      imagemDestaqueUrl: res.imagemDestaqueUrl || DEFAULT_PAGINA_HISTORIA.imagemDestaqueUrl,
+      valoresLista: res.valoresLista?.length ? res.valoresLista : DEFAULT_PAGINA_HISTORIA.valoresLista,
+      principiosEducacionais: res.principiosEducacionais?.length ? res.principiosEducacionais : DEFAULT_PAGINA_HISTORIA.principiosEducacionais,
+      fotosHistoricas: res.fotosHistoricas?.length
+        ? res.fotosHistoricas.map((f: { url?: string; alt?: string; descricao?: string }) => ({ ...f, alt: f.alt || 'Foto histórica do Colégio Sagrado' }))
+        : DEFAULT_PAGINA_HISTORIA.fotosHistoricas,
+    }
+  } catch (err) {
+    return DEFAULT_PAGINA_HISTORIA
+  }
+}
+
+export interface PaginaMatriculas {
+  tituloBanner: string
+  subtituloBanner: string
+  etiquetaBanner: string
+  passos: Array<{ titulo: string; descricao: string }>
+  documentosNecessarios: string[]
+  faq: Array<{ pergunta: string; resposta: string }>
+}
+
+export const DEFAULT_PAGINA_MATRICULAS: PaginaMatriculas = {
+  tituloBanner: 'Matrículas & Rematrículas 2027',
+  subtituloBanner: 'Garanta a vaga do seu filho para 2027 em uma instituição com 70 anos de tradição, inovação e acolhimento humano em Rio Grande - RS.',
+  etiquetaBanner: 'Ano Letivo 2027 — Vagas Abertas',
+  passos: [
+    { titulo: 'Agende uma Visita Guiada', descricao: 'Conheça nossa estrutura física, proposta pedagógica e tire dúvidas com a equipe de coordenação.' },
+    { titulo: 'Entrevista Pedagógica & Apresentação', descricao: 'Conversa acolhedora com os pais e apresentação das diretrizes de convivência do Sagrado.' },
+    { titulo: 'Entrega de Documentos', descricao: 'Apresentação da documentação do aluno e dos responsáveis na Secretaria do Colégio.' },
+    { titulo: 'Assinatura & Boas-Vindas', descricao: 'Assinatura do contrato de prestação de serviços educacionais e integração da família no Diário Escola.' },
+  ],
+  documentosNecessarios: [
+    'Certidão de Nascimento do Aluno (cópia simples)',
+    'RG e CPF do Aluno (se houver)',
+    'RG, CPF e Comprovante de Residência dos Responsáveis Financeiros',
+    'Declaração de Transferência ou Histórico Escolar da escola de origem',
+    'Carteira de Vacinação atualizada (para Educação Infantil e Fundamental I)',
+    'Declaração de Quitação de Débitos da escola anterior',
+  ],
+  faq: [
+    { pergunta: 'Qual é o horário de atendimento da Secretaria para matrículas?', resposta: 'A Secretaria atende presencialmente e por telefone de segunda a sexta-feira, das 07h30 às 17h30 sem fechar para o almoço.' },
+    { pergunta: 'O Colégio oferece período integral ou turmas de contraturno?', resposta: 'Sim! Possuímos programas de permanência estendida e atividades extracurriculares no contraturno escolar para Educação Infantil e Ensino Fundamental.' },
+    { pergunta: 'Como funciona a rematrícula de alunos veteranos para 2027?', resposta: 'Alunos veteranos possuem prioridade de renovação de vaga através do portal de rematrículas com condições especiais no período oficial de campanha 2027.' },
+  ],
+}
+
+export async function getPaginaMatriculas(): Promise<PaginaMatriculas> {
+  if (!isSanityConfigured) return DEFAULT_PAGINA_MATRICULAS
+  try {
+    const res = await client.fetch(`*[_type == "paginaMatriculas"][0]`)
+    if (!res) return DEFAULT_PAGINA_MATRICULAS
+    return {
+      ...DEFAULT_PAGINA_MATRICULAS,
+      ...res,
+      passos: res.passos?.length ? res.passos : DEFAULT_PAGINA_MATRICULAS.passos,
+      documentosNecessarios: res.documentosNecessarios?.length ? res.documentosNecessarios : DEFAULT_PAGINA_MATRICULAS.documentosNecessarios,
+      faq: res.faq?.length ? res.faq : DEFAULT_PAGINA_MATRICULAS.faq,
+    }
+  } catch (err) {
+    return DEFAULT_PAGINA_MATRICULAS
+  }
+}
+
+export interface PaginaTecnologia {
+  titulo: string
+  subtitulo: string
+  plataformas: Array<{
+    nome: string
+    publicoAlvo?: string
+    descricao: string
+    recursos: string[]
+    iconeTipo?: string
+    linkWeb?: string
+    linkAppStore?: string
+    linkPlayStore?: string
+    ordem?: number
+    ativo?: boolean
+  }>
+  avisoTransparencia: string
+  textoSuporteWhats: string
+}
+
+// Este é o schema/formato real já usado pelo documento cadastrado no Sanity
+// (5 apps: Plataforma Iônica + Diário Escola separado por público — pais e
+// professores, Fundamental e Infantil — cada um com link próprio de Web/App
+// Store/Play Store). O fallback abaixo só entra em cena se o Sanity não tiver
+// nenhum documento deste tipo.
+export const DEFAULT_PAGINA_TECNOLOGIA: PaginaTecnologia = {
+  titulo: 'Recursos e Plataformas Educacionais',
+  subtitulo: 'Ferramentas e plataformas de apoio ao processo pedagógico e comunicação entre Escola e Famílias.',
+  plataformas: [
+    {
+      nome: 'Diário Escola',
+      publicoAlvo: 'Pais e Responsáveis',
+      descricao: 'Plataforma de comunicação e acompanhamento de rotina escolar para Educação Infantil e Ensino Fundamental.',
+      recursos: [
+        'Agenda diária de atividades e comunicados oficiais',
+        'Registro de frequência, tarefas de casa e alimentação',
+        'Canal direto com a coordenação pedagógica e professores',
+      ],
+      iconeTipo: 'Smartphone',
+      linkWeb: 'https://diarioescola.com.br',
+      ordem: 1,
+      ativo: true,
+    },
+    {
+      nome: 'Plataforma Iônica (FTD Educação)',
+      publicoAlvo: 'Alunos, Pais e Professores',
+      descricao: 'Ambiente virtual de aprendizagem utilizado do Ensino Fundamental ao Ensino Médio com materiais didáticos digitais e recursos educacionais.',
+      recursos: [
+        'Livros digitais interativos e acervo multimídia 24/7',
+        'Trilhas de exercícios adaptativos e recursos interativos',
+        'Relatórios individuais de desempenho em tempo real',
+      ],
+      iconeTipo: 'Laptop',
+      linkWeb: 'https://p21-ionica.com.br',
+      ordem: 2,
+      ativo: true,
+    },
+  ],
+  avisoTransparencia: 'O Colégio Sagrado Coração de Jesus utiliza os sistemas e materiais didáticos de parceiros educacionais (FTD Educação e Diário Escola) para apoio pedagógico e comunicação com pais, alunos e professores.',
+  textoSuporteWhats: 'Dúvidas com usuário, primeiro acesso ou redefinição de senha? Fale diretamente com a Secretaria pelo WhatsApp oficial.',
+}
+
+export async function getPaginaTecnologia(): Promise<PaginaTecnologia> {
+  if (!isSanityConfigured) return DEFAULT_PAGINA_TECNOLOGIA
+  try {
+    const res = await client.fetch(`*[_type == "paginaTecnologia"][0]`)
+    if (!res) return DEFAULT_PAGINA_TECNOLOGIA
+    const plataformasAtivas = (res.plataformas || [])
+      .filter((p: { ativo?: boolean }) => p.ativo !== false)
+      .sort((a: { ordem?: number }, b: { ordem?: number }) => (a.ordem ?? 0) - (b.ordem ?? 0))
+    return {
+      ...DEFAULT_PAGINA_TECNOLOGIA,
+      ...res,
+      plataformas: plataformasAtivas.length ? plataformasAtivas : DEFAULT_PAGINA_TECNOLOGIA.plataformas,
+    }
+  } catch (err) {
+    return DEFAULT_PAGINA_TECNOLOGIA
+  }
+}
+
+export interface PaginaVivencie {
+  tituloBanner: string
+  subtituloBanner: string
+  tituloIntroducao: string
+  textoIntroducao1: string
+  textoIntroducao2: string
+  imagemIntroducaoUrl?: string
+  pilares: Array<{ titulo: string; descricao: string }>
+}
+
+export const DEFAULT_PAGINA_VIVENCIE: PaginaVivencie = {
+  tituloBanner: 'Vivencie o Sagrado',
+  subtituloBanner: 'Mais do que salas de aula: um espaço de convivência, desenvolvimento de virtudes e memórias inesquecíveis para toda a vida.',
+  tituloIntroducao: 'Um Ambiente Onde Cada Aluno se Sente em Casa',
+  textoIntroducao1: 'No Colégio Sagrado Coração de Jesus, o aprendizado vai além dos livros. Acreditamos que o conhecimento floresce em um ambiente seguro, acolhedor e repleto de afeto.',
+  textoIntroducao2: 'Nossa rotina é planejada para equilibrar rigor acadêmico, práticas esportivas, manifestações artísticas e momentos de pastoral que conectam a juventude a valores elevados.',
+  imagemIntroducaoUrl: 'https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=1000&auto=format&fit=crop',
+  pilares: [
+    { titulo: 'Pastoral & Espiritualidade', descricao: 'Ações de solidariedade, encontros de reflexão, celebrações eucarísticas e voluntariado que aquecem o coração e desenvolvem a empatia.' },
+    { titulo: 'Projetos de Convivência', descricao: 'Rodas de conversa socioemocionais, mediação de conflitos e assembleias de alunos para fortalecer o sentimento de pertencimento.' },
+    { titulo: 'Cultura, Arte & Esportes', descricao: 'Teatro, musicalização e dança integrados à rotina pedagógica, desenvolvendo comunicação, criatividade, autoestima e expressão corporal — além de eventos ao longo do ano como Feira de Ciências, Feira do Livro (que envolve até a Educação Infantil e o Maternal) e datas temáticas como Semana da Criança, Páscoa e Amigo Doce.' },
+    { titulo: 'Rotina e Conforto', descricao: '[EXEMPLO] Descreva aqui a rotina e a estrutura de conforto reais do Colégio para preencher no Sanity.' },
+  ],
+}
+
+export async function getPaginaVivencie(): Promise<PaginaVivencie> {
+  if (!isSanityConfigured) return DEFAULT_PAGINA_VIVENCIE
+  try {
+    const res = await client.fetch(`*[_type == "paginaVivencie"][0] {
+      ...,
+      "imagemIntroducaoUrl": imagemIntroducao.asset->url
+    }`)
+    if (!res) return DEFAULT_PAGINA_VIVENCIE
+    return {
+      ...DEFAULT_PAGINA_VIVENCIE,
+      ...res,
+      imagemIntroducaoUrl: res.imagemIntroducaoUrl || DEFAULT_PAGINA_VIVENCIE.imagemIntroducaoUrl,
+      pilares: res.pilares?.length ? res.pilares : DEFAULT_PAGINA_VIVENCIE.pilares,
+    }
+  } catch (err) {
+    return DEFAULT_PAGINA_VIVENCIE
+  }
+}
+
+export interface PaginaSetentaAnos {
+  etiquetaBanner: string
+  tituloBanner: string
+  subtituloBanner: string
+  curiosidades: Array<{ ano: string; texto: string }>
+  programacao: Array<{ data: string; horario: string; titulo: string; local: string; descricao: string }>
+}
+
+export const DEFAULT_PAGINA_SETENTA_ANOS: PaginaSetentaAnos = {
+  etiquetaBanner: '1956 — 2026 | Jubileu de Vinho',
+  tituloBanner: '70 Anos Formando Gerações com Excelência, Acolhimento e Valores',
+  subtituloBanner: 'Sete décadas construindo memórias, transformando vidas e reafirmando o compromisso com uma educação integral de verdade.',
+  // Nenhuma curiosidade histórica real foi confirmada ainda — em vez de inventar
+  // números e episódios, os 4 espaços ficam como [EXEMPLO] até serem preenchidos
+  // no Sanity com fatos reais e verificáveis.
+  curiosidades: [
+    { ano: '[EXEMPLO]', texto: '[EXEMPLO] Adicione aqui uma curiosidade histórica real do Colégio (fato verificável) para preencher no Sanity.' },
+    { ano: '[EXEMPLO]', texto: '[EXEMPLO] Adicione aqui uma curiosidade histórica real do Colégio (fato verificável) para preencher no Sanity.' },
+    { ano: '[EXEMPLO]', texto: '[EXEMPLO] Adicione aqui uma curiosidade histórica real do Colégio (fato verificável) para preencher no Sanity.' },
+    { ano: '[EXEMPLO]', texto: '[EXEMPLO] Adicione aqui uma curiosidade histórica real do Colégio (fato verificável) para preencher no Sanity.' },
+  ],
+  // Datas, horários e locais dos eventos comemorativos ainda não foram confirmados
+  // pelo Colégio — publicar isso como se fosse a programação real arriscaria levar
+  // alguém a um evento que não existe. Fica como [EXEMPLO] até a confirmação oficial.
+  programacao: [
+    {
+      data: '[EXEMPLO] Data a definir',
+      horario: '[EXEMPLO]',
+      titulo: '[EXEMPLO] Evento Comemorativo a Definir',
+      local: '[EXEMPLO] Local a definir',
+      descricao: '[EXEMPLO] Descreva aqui um evento real da programação dos 70 anos para preencher no Sanity.',
+    },
+    {
+      data: '[EXEMPLO] Data a definir',
+      horario: '[EXEMPLO]',
+      titulo: '[EXEMPLO] Evento Comemorativo a Definir',
+      local: '[EXEMPLO] Local a definir',
+      descricao: '[EXEMPLO] Descreva aqui um evento real da programação dos 70 anos para preencher no Sanity.',
+    },
+    {
+      data: '[EXEMPLO] Data a definir',
+      horario: '[EXEMPLO]',
+      titulo: '[EXEMPLO] Evento Comemorativo a Definir',
+      local: '[EXEMPLO] Local a definir',
+      descricao: '[EXEMPLO] Descreva aqui um evento real da programação dos 70 anos para preencher no Sanity.',
+    },
+  ],
+}
+
+export async function getPaginaSetentaAnos(): Promise<PaginaSetentaAnos> {
+  if (!isSanityConfigured) return DEFAULT_PAGINA_SETENTA_ANOS
+  try {
+    const res = await client.fetch(`*[_type == "paginaSetentaAnos"][0]`)
+    if (!res) return DEFAULT_PAGINA_SETENTA_ANOS
+    return {
+      ...DEFAULT_PAGINA_SETENTA_ANOS,
+      ...res,
+      curiosidades: res.curiosidades?.length ? res.curiosidades : DEFAULT_PAGINA_SETENTA_ANOS.curiosidades,
+      programacao: res.programacao?.length ? res.programacao : DEFAULT_PAGINA_SETENTA_ANOS.programacao,
+    }
+  } catch (err) {
+    return DEFAULT_PAGINA_SETENTA_ANOS
   }
 }

@@ -1,6 +1,13 @@
 import type { Metadata } from 'next'
 import { Lora, Inter } from 'next/font/google'
+import Script from 'next/script'
 import './globals.css'
+
+// Só carrega o Google Analytics quando um ID real (G-XXXXXXX) estiver
+// configurado em NEXT_PUBLIC_GA_ID — o placeholder do .env.local.example
+// (G-XXXXXXXXXX) é ignorado de propósito para não mandar dados de teste.
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID
+const isGaConfigured = Boolean(GA_ID && GA_ID !== 'G-XXXXXXXXXX')
 
 const lora = Lora({
   subsets: ['latin'],
@@ -60,7 +67,7 @@ export const metadata: Metadata = {
     description: 'Educação de qualidade, tradição, acolhimento e formação integral para crianças, jovens e famílias de Rio Grande - RS.',
     images: [
       {
-        url: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1200&auto=format&fit=crop',
+        url: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=1200&auto=format&fit=crop',
         width: 1200,
         height: 630,
         alt: 'Colégio Sagrado Coração de Jesus em Rio Grande - RS',
@@ -95,9 +102,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     telephone: '+55-53-3232-5531',
     email: 'secretariacolegiosagrado@gmail.com',
     sameAs: [
-      'https://instagram.com/colegiosagradocoracao',
-      'https://facebook.com/colegiosagradocoracao',
-      'https://youtube.com/@colegiosagradocoracao',
+      'https://instagram.com/colegiosagradorg',
+      'https://facebook.com/colegiosagradorg',
     ],
     areaServed: 'Rio Grande, RS',
     knowsAbout: [
@@ -118,6 +124,22 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className="font-sans antialiased bg-white text-slate-900">
+        {isGaConfigured && (
+          <>
+            <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} strategy="afterInteractive" />
+            <Script id="google-analytics" strategy="afterInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                // Consent Mode: começa negado por padrão (LGPD) — o AvisoCookies.tsx
+                // libera ('granted') somente quando a pessoa aceita os cookies.
+                gtag('consent', 'default', { analytics_storage: 'denied' });
+                gtag('js', new Date());
+                gtag('config', '${GA_ID}');
+              `}
+            </Script>
+          </>
+        )}
         {children}
       </body>
     </html>

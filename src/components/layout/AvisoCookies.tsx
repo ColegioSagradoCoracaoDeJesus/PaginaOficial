@@ -1,9 +1,20 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { ShieldCheck } from 'lucide-react'
 import { Botao } from '../ui/Botao'
+
+type GtagWindow = Window & {
+  gtag?: (command: string, action: string, params: { analytics_storage: string }) => void
+}
+
+const updateAnalyticsConsent = (granted: boolean) => {
+  if (typeof window === 'undefined') return
+  ;(window as GtagWindow).gtag?.('consent', 'update', {
+    analytics_storage: granted ? 'granted' : 'denied',
+  })
+}
 
 export const AvisoCookies: React.FC = () => {
   const [showBanner, setShowBanner] = useState<boolean>(() => {
@@ -11,19 +22,20 @@ export const AvisoCookies: React.FC = () => {
     return !window.localStorage.getItem('sagrado_cookie_consent')
   })
 
+  // Visitante que já aceitou em uma visita anterior: o script do GA4 sempre
+  // inicia com analytics_storage 'denied' (padrão exigido pela LGPD) — sem
+  // isso, quem já tinha aceitado ficaria com analytics desligado a cada nova
+  // visita, já que só o clique em "Aceitar" atualizava o consentimento.
+  useEffect(() => {
+    if (window.localStorage.getItem('sagrado_cookie_consent') === 'accepted') {
+      updateAnalyticsConsent(true)
+    }
+  }, [])
+
   const handleAccept = () => {
     window.localStorage.setItem('sagrado_cookie_consent', 'accepted')
     setShowBanner(false)
-
-    if (process.env.NEXT_PUBLIC_GA_ID && typeof window !== 'undefined') {
-      const gtagWindow = window as Window & {
-        gtag?: (command: string, action: string, params: { analytics_storage: string }) => void
-      }
-
-      gtagWindow.gtag?.('consent', 'update', {
-        analytics_storage: 'granted',
-      })
-    }
+    updateAnalyticsConsent(true)
   }
 
   const handleReject = () => {

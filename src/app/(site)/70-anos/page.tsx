@@ -6,7 +6,7 @@ import { Etiqueta } from '@/components/ui/Etiqueta'
 import { Botao } from '@/components/ui/Botao'
 import { ItemLinhaDoTempo } from '@/components/conteudo/ItemLinhaDoTempo'
 import { BlocoCTA } from '@/components/conteudo/BlocoCTA'
-import { getLinhaDoTempo, getDepoimentos } from '@/lib/sanity/queries'
+import { getLinhaDoTempo, getDepoimentos, getPaginaSetentaAnos } from '@/lib/sanity/queries'
 
 export const metadata = {
   title: '70 Anos do Colégio Sagrado Coração de Jesus | Jubileu de Vinho',
@@ -14,42 +14,9 @@ export const metadata = {
 }
 
 export default async function SetentaAnosPage() {
-  const linhaTempo = await getLinhaDoTempo()
-  const depoimentos = await getDepoimentos()
-
-  const programacao70Anos = [
-    {
-      data: '15 de Setembro de 2026',
-      horario: '19h00',
-      titulo: 'Missa em Ação de Graças pelos 70 Anos',
-      local: 'Auditório Principal Ir. Tereza',
-      descricao: 'Celebração eucarística comemorativa presidida com participação do coral dos alunos.',
-      ingresso: 'Entrada Franca mediante confirmação prévia.',
-    },
-    {
-      data: '24 de Outubro de 2026',
-      horario: '14h00 às 20h00',
-      titulo: 'Grande Encontro dos Ex-Alunos & Feira Cultural 70 Anos',
-      local: 'Ginásio Poliesportivo e Pátios do Colégio',
-      descricao: 'Reencontro de turmas históricas, exposição de fotos antigas, música ao vivo e espaço gastronômico.',
-      ingresso: 'Convite individual disponível na Secretaria ou via WhatsApp.',
-    },
-    {
-      data: '20 de Novembro de 2026',
-      horario: '20h00',
-      titulo: 'Jantar Solene de Gala dos 70 Anos',
-      local: 'Salão de Eventos Principal',
-      descricao: 'Noite de homenagens a educadores históricos, ex-diretores e famílias fundadoras.',
-      ingresso: 'Mesa reserva na Secretaria. (Consulte disponibilidade).',
-    },
-  ]
-
-  const curiosidades = [
-    { ano: '1956', texto: 'A primeira turma contava com apenas 28 alunos e funcionava em um casarão adaptado.' },
-    { ano: '1974', texto: 'O Colégio formou seu primeiro time feminino de basquete, sagrando-se campeão municipal no ano seguinte.' },
-    { ano: '1998', texto: 'Inauguração da cápsula do tempo no jardim central, que será aberta durante os festejos dos 70 anos.' },
-    { ano: '2026', texto: 'Mais de 15.000 alunos já passaram pelas salas de aula do Sagrado ao longo de sete décadas.' },
-  ]
+  const [linhaTempo, depoimentos, pagina] = await Promise.all([getLinhaDoTempo(), getDepoimentos(), getPaginaSetentaAnos()])
+  const programacao70Anos = pagina.programacao
+  const curiosidades = pagina.curiosidades
 
   return (
     <div>
@@ -62,15 +29,15 @@ export default async function SetentaAnosPage() {
         <div className="max-w-[1280px] mx-auto text-center relative z-10 space-y-6">
           <div className="inline-flex items-center gap-2 bg-[#B8860B] text-white px-4 py-1.5 rounded-full font-bold text-xs sm:text-sm tracking-wider uppercase shadow-md">
             <Award className="w-4 h-4" />
-            <span>1956 — 2026 | Jubileu de Vinho</span>
+            <span>{pagina.etiquetaBanner}</span>
           </div>
 
           <h1 className="font-display text-hero font-bold text-white max-w-4xl mx-auto leading-tight">
-            70 Anos Formando Gerações com Excelência, Acolhimento e Valores
+            {pagina.tituloBanner}
           </h1>
 
           <p className="text-amber-100 text-base sm:text-xl max-w-2xl mx-auto font-sans leading-relaxed">
-            Sete décadas construindo memórias, transformando vidas e reafirmando o compromisso com uma educação integral de verdade.
+            {pagina.subtituloBanner}
           </p>
         </div>
       </section>

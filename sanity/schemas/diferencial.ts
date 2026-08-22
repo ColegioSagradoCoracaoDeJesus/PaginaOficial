@@ -15,7 +15,7 @@ export default defineType({
       name: 'icone',
       title: 'Identificador do Ícone',
       type: 'string',
-      description: 'Ex: BookOpen, Award, Heart, Cpu, Globe, Users, ShieldCheck, Dumbbell',
+      description: 'Ex: BookOpen, Award, Heart, Cpu, Globe, Users, ShieldCheck, Dumbbell, Music',
     }),
     defineField({
       name: 'textoCurto',

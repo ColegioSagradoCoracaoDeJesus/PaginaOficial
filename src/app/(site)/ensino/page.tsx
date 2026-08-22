@@ -43,7 +43,7 @@ export default async function EnsinoPage() {
         {modalidades.map((m, index) => (
           <section
             key={m._id}
-            id={m.slug.current}
+            id={m.slug?.current || m._id}
             className={`p-8 sm:p-10 rounded-lg border border-slate-200 bg-white shadow-sm ${
               index % 2 === 1 ? 'border-l-4 border-l-[#B8860B]' : 'border-l-4 border-l-brand'
             }`}
@@ -77,7 +77,7 @@ export default async function EnsinoPage() {
                     <span>Objetivos Pedagógicos</span>
                   </h3>
                   <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-slate-700">
-                    {m.objetivos.map((obj, idx) => (
+                    {(m.objetivos || []).map((obj, idx) => (
                       <li key={idx} className="flex items-start gap-2 bg-slate-50 p-2.5 rounded border border-slate-100">
                         <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                         <span>{obj}</span>
